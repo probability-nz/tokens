@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/html';
+import type { Meta, StoryObj } from '@storybook/react';
 import { d12 } from '../assets/d12';
 import { createAssetStory } from './createAssetStory';
 
@@ -11,7 +11,7 @@ const meta: Meta = {
 # ${d12.name}
 
 ## Properties
-- **Scale**: ${d12.scale.join(' × ')}
+- **Scale**: ${d12.scale?.join(' × ') ?? 'N/A'}
 - **Faces**: ${d12.faces?.length || 'N/A'} faces
 - **Format**: GLTF with textures
         `

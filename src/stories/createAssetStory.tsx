@@ -4,7 +4,6 @@ import { Canvas } from '@react-three/fiber';
 import { Stage, Gltf, OrbitControls } from '@react-three/drei';
 import { Suspense } from 'react';
 import prettyStringify from 'json-stringify-pretty-compact';
-import { dissoc } from 'ramda';
 
 export function createAssetMeta(asset: any, assetName: string, displayName: string): Meta {
   return {
@@ -70,7 +69,7 @@ export function createAssetStory(asset: any, assetName: string): StoryObj {
               borderRadius: '4px', 
               border: '1px solid grey'
             }}>
-              {prettyStringify(dissoc('src', asset))}
+              {prettyStringify((({ src, ...rest }: any) => rest)(asset))}
             </pre>
           </div>
         </div>

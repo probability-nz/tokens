@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/html';
+import type { Meta, StoryObj } from '@storybook/react';
 import { pawn } from '../assets/pawn';
 import { createAssetStory } from './createAssetStory';
 
@@ -11,7 +11,7 @@ const meta: Meta = {
 # ${pawn.name}
 
 ## Properties
-- **Scale**: ${pawn.scale.join(' × ')}
+- **Scale**: ${pawn.scale?.join(' × ') ?? 'N/A'}
 - **Format**: GLTF with textures
         `
       }
