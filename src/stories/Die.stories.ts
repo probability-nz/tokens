@@ -22,4 +22,4 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default: StoryObj = createAssetStory(die, 'die');
+export const Default: StoryObj = createAssetStory(die);

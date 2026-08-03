@@ -42,7 +42,7 @@ function Scene({ asset, rotation }: { asset: any; rotation: [number, number, num
   );
 }
 
-export function createAssetStory(asset: any, assetName: string): StoryObj {
+export function createAssetStory(asset: any): StoryObj {
   const faceOptions = ['None', ...((asset.faces ?? []).map((f: any) => f.name))];
   return {
     argTypes: {
@@ -59,10 +59,6 @@ export function createAssetStory(asset: any, assetName: string): StoryObj {
           <Scene asset={asset} rotation={rotation} />
           <div>
             <h2>{asset.name}</h2>
-            <p>
-              To use this asset, add{' '}
-              <code>{`{ "template": "@garbo-succus/tokens/${assetName}" }`}</code> to your game.
-            </p>
             <h4>Defaults:</h4>
             <pre style={{ 
               padding: '10px', 

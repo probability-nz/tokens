@@ -21,4 +21,4 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default: StoryObj = createAssetStory(pawn, 'pawn');
+export const Default: StoryObj = createAssetStory(pawn);
