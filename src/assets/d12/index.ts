@@ -7,20 +7,19 @@ export const d12 = {
   name: "D12 Dice",
   src,
   scale: [0.016, 0.016, 0.016], //Scaled to fit inside a 16mm^3 cube
-  rotation: [90, 0, 30], //Default Rotation
+  rotation: [100.7, -30, 20.8], // Default rotation: face 1 up
   faces: [
-      { name: "1", rotation: [90, 0, 30] },
-      { name: "2", rotation: [-3, -90, 0] },
-      { name: "3", rotation: [0, 60, 0] },
-      { name: "4", rotation: [30, 0, 0] },
-      { name: "5", rotation: [0, -60, 0] },
-      { name: "6", rotation: [-30, 0, 0] },
-      { name: "7", rotation: [-90, 30, 0] },
-      { name: "8", rotation: [-90, -30, 0] },
-      { name: "9", rotation: [0, 120, 0] },
-      { name: "10", rotation: [-150, 0, 0] },
-      { name: "11", rotation: [0, -120, 0] },
-      { name: "12", rotation: [150, 0, 0] },
-    ], 
-
+    { name: "1", rotation: [100.7, -30, 20.8] },
+    { name: "2", rotation: [100.7, 30, -20.6] },
+    { name: "3", rotation: [0, 54.8, -58.3] },
+    { name: "4", rotation: [31.7, -0.4, 0.2] },
+    { name: "5", rotation: [180, 54.1, -121.7] },
+    { name: "6", rotation: [-148.3, -0.2, -179.9] },
+    { name: "7", rotation: [-81.4, 30.6, -16.6] },
+    { name: "8", rotation: [-79.2, -30, 20.9] },
+    { name: "9", rotation: [0, 52.2, -121.7] },
+    { name: "10", rotation: [-148.3, -1.9, 1.2] },
+    { name: "11", rotation: [0, -89.7, 121.7] },
+    { name: "12", rotation: [31.7, 1.3, 179.2] },
+  ],
 } as PieceTemplate;
