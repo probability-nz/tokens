@@ -18,7 +18,7 @@ for (const name of texturedPieces) {
   const source = join(directory, "source");
   const normalSource = join(source, name === "die" ? "die_normals.png" : `${name}_normal.png`);
   const diffuseSource = join(source, `${name}_diffuse.png`);
-  const normalName = `${name}_normal.png`;
+  const normalName = `${name}_normal.webp`;
   const previewName = `${name}_preview.webp`;
   const diffuseName = `${name}_diffuse.avif`;
 
@@ -36,8 +36,8 @@ for (const name of texturedPieces) {
   ], { stdio: "inherit" });
   convert(normalSource, join(directory, normalName), [
     "-depth", "8",
-    "-define", "png:compression-level=9",
-    "-define", "png:compression-filter=5",
+    "-define", "webp:lossless=true",
+    "-define", "webp:method=6",
   ]);
 
   const gltf = JSON.parse(await readFile(join(source, `${name}.gltf`), "utf8"));
@@ -70,7 +70,7 @@ for (const name of texturedPieces) {
   gltf.extensionsRequired = ["EXT_texture_webp"];
   gltf.materials = [preferred, preview];
   gltf.textures = [
-    { sampler: 0, source: 0 },
+    { sampler: 0, extensions: { EXT_texture_webp: { source: 0 } } },
     {
       sampler: 0,
       extensions: {
@@ -81,7 +81,7 @@ for (const name of texturedPieces) {
     { sampler: 0, extensions: { EXT_texture_webp: { source: 2 } } },
   ];
   gltf.images = [
-    { mimeType: "image/png", name: `${name} normal`, uri: normalName },
+    { mimeType: "image/webp", name: `${name} normal`, uri: normalName },
     { mimeType: "image/avif", name: `${name} preferred`, uri: diffuseName },
     { mimeType: "image/webp", name: `${name} preview`, uri: previewName },
   ];

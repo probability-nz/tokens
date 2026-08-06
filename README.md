@@ -12,4 +12,4 @@ previews the same output.
 Original authoring files live in each piece's `source` directory. After changing
 one, run `pnpm prepare-assets` with ImageMagick built with AVIF and WebP support,
 then commit the generated glTF and images. Textured pieces author a small WebP
-preview/fallback and an AVIF preferred image; normal maps remain lossless PNG.
+preview/fallback and an AVIF preferred image; normal maps use lossless WebP.
