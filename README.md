@@ -1,15 +1,11 @@
-# Probability tokens
+# Tokens
 
-Reusable glTF pieces for Probability. The public boundary is
-[`catalog.json`](src/assets/catalog.json): a versioned list of relative model
-paths with default scale and rotation in radians. Games store the resolved
-model URL as an ordinary piece `src`; this package has no gameplay API.
+Reusable glTF pieces. Authoring files live in each asset's `source` directory;
+generated assets live beside them. Asset preparation requires ImageMagick with
+AVIF and WebP support.
 
-`pnpm build` validates the catalog and every referenced glTF resource, then
-copies only that reachable asset graph to `dist`. `pnpm build-storybook`
-previews the same output.
+Assets were created by Misha Tsyatsko under contract for Garbo Succus.
 
-Original authoring files live in each piece's `source` directory. After changing
-one, run `pnpm prepare-assets` with ImageMagick built with AVIF and WebP support,
-then commit the generated glTF and images. Textured pieces author a small WebP
-preview/fallback and an AVIF preferred image; normal maps use lossless WebP.
+- `pnpm prepare-assets` rebuilds generated assets.
+- `pnpm build` validates the catalog and writes `dist`.
+- `pnpm build-storybook` previews the published assets.
