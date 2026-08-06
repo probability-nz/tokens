@@ -19,4 +19,18 @@ const meta = {
 
 export default meta;
 
-export const Catalog: StoryObj<typeof meta> = {};
+type Story = StoryObj<typeof meta>;
+
+const story = (name: CatalogPiece['name']): Story => {
+  const piece = catalog.pieces.find((candidate) => candidate.name === name);
+  if (piece === undefined) throw new Error(`Missing ${name} from the catalog`);
+  return { args: { piece } };
+};
+
+export const Pawn = story('Pawn');
+export const ClassicDie = { ...story('Classic die'), name: 'Classic die' };
+export const D4 = { ...story('D4'), name: 'D4' };
+export const D6 = { ...story('D6'), name: 'D6' };
+export const D8 = { ...story('D8'), name: 'D8' };
+export const D12 = { ...story('D12'), name: 'D12' };
+export const D20 = { ...story('D20'), name: 'D20' };
