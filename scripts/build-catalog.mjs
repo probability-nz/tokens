@@ -62,18 +62,39 @@ const files = new Set([catalogPath]);
 for (const [index, piece] of catalog.pieces.entries()) {
   if (
     !record(piece) ||
-    !onlyKeys(piece, ['name', 'rotation', 'scale', 'src']) ||
+    !onlyKeys(piece, ['faces', 'name', 'rotation', 'scale', 'src']) ||
     typeof piece.name !== 'string' ||
     piece.name.trim() === '' ||
     names.has(piece.name)
   ) {
     throw new Error(`pieces[${index}].name must be unique and non-empty`);
   }
+  if (!Array.isArray(piece.faces))
+    throw new Error(`pieces[${index}].faces must be an array`);
   const gltfPath = relativeFile(piece.src, `pieces[${index}].src`, '.gltf');
   if (sources.has(gltfPath))
     throw new Error(`pieces[${index}].src must be unique`);
   tuple(piece.scale, `pieces[${index}].scale`, true);
   tuple(piece.rotation, `pieces[${index}].rotation`);
+  const faceNames = new Set();
+  for (const [faceIndex, face] of piece.faces.entries()) {
+    if (
+      !record(face) ||
+      !onlyKeys(face, ['name', 'rotation']) ||
+      typeof face.name !== 'string' ||
+      face.name.trim() === '' ||
+      faceNames.has(face.name)
+    ) {
+      throw new Error(
+        `pieces[${index}].faces[${faceIndex}].name must be unique and non-empty`,
+      );
+    }
+    tuple(
+      face.rotation,
+      `pieces[${index}].faces[${faceIndex}].rotation`,
+    );
+    faceNames.add(face.name);
+  }
   names.add(piece.name);
   sources.add(gltfPath);
   files.add(gltfPath);
