@@ -1,29 +1,21 @@
 {
   "name": "@probability-nz/tokens",
   "version": "0.0.0",
+  "private": true,
   "license": "CC-BY-4.0",
   "author": "Garbo Succus <hello@garbo.succus.games> (https://garbo.succus.games)",
   "packageManager": "pnpm@11.18.0",
   "type": "module",
-  "files": ["dist"],
-  "exports": {
-    "./catalog.json": "./dist/catalog.json"
-  },
   "scripts": {
     "prepare-assets": "node scripts/prepare-assets.mjs",
-    "build": "tsc --noEmit && node scripts/build-catalog.mjs",
-    "prestorybook": "node scripts/build-catalog.mjs",
-    "storybook": "storybook dev -p 6006",
-    "prebuild-storybook": "node scripts/build-catalog.mjs",
-    "build-storybook": "storybook build"
+    "build": "tsc && node scripts/build-catalog.mjs",
+    "dev": "pnpm build && storybook dev -p 6006",
+    "build-storybook": "pnpm build && storybook build"
   },
   "homepage": "https://probability-nz.github.io/tokens",
   "repository": "https://github.com/probability-nz/tokens",
   "devDependencies": {
-    "@storybook/addon-docs": "^10.5.5",
-    "@storybook/react": "^10.5.5",
     "@storybook/react-vite": "^10.5.5",
-    "@types/node": "^26.1.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@types/three": "^0.185.3",

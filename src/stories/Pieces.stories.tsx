@@ -1,16 +1,21 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { catalog, type CatalogPiece } from "../catalog";
-import { Asset } from "./createAssetStory";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { catalog, type CatalogPiece } from '../catalog';
+import { PiecePreview } from './PiecePreview';
 
 const meta = {
-  title: "Pieces",
-  component: Asset,
-  args: { piece: catalog.pieces[0], view: "Perspective" },
+  title: 'Pieces',
+  component: PiecePreview,
+  args: { piece: catalog.pieces[0], view: 'Perspective' },
   argTypes: {
-    piece: { control: "select", mapping: Object.fromEntries(catalog.pieces.map((piece) => [piece.name, piece])) },
-    view: { control: "inline-radio", options: ["Perspective", "Top"] },
+    piece: {
+      control: 'select',
+      mapping: Object.fromEntries(
+        catalog.pieces.map((piece) => [piece.name, piece]),
+      ),
+    },
+    view: { control: 'inline-radio', options: ['Perspective', 'Top'] },
   },
-} satisfies Meta<{ piece: CatalogPiece; view: "Perspective" | "Top" }>;
+} satisfies Meta<{ piece: CatalogPiece; view: 'Perspective' | 'Top' }>;
 
 export default meta;
 
