@@ -14,6 +14,7 @@ const TEXTURE_BOUNDS = '2048x2048>';
 const PREVIEW_BOUNDS = '128x128>';
 
 const assetError = (name, message) => new Error(`${name}: ${message}`);
+const prettyJson = (value) => `${JSON.stringify(value, null, 2)}\n`;
 const fileName = (resource, name, label) => {
   const uri = resource?.uri;
   if (typeof uri !== 'string' || uri === '' || basename(uri) !== uri) {
@@ -70,7 +71,7 @@ for (const piece of catalog.pieces) {
       const uri = fileName(image, name, `images[${index}]`);
       await copyFile(join(sourceDirectory, uri), join(directory, uri));
     }
-    await writeFile(modelPath, JSON.stringify(gltf));
+    await writeFile(modelPath, prettyJson(gltf));
     continue;
   }
   if (
@@ -180,5 +181,5 @@ for (const piece of catalog.pieces) {
   gltf.materials = [preferred, preview];
   gltf.textures = textures;
   gltf.images = images;
-  await writeFile(modelPath, JSON.stringify(gltf));
+  await writeFile(modelPath, prettyJson(gltf));
 }
