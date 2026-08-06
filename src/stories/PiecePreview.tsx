@@ -1,7 +1,22 @@
 import { Center, Gltf, OrbitControls } from '@react-three/drei';
 import { Canvas, useThree } from '@react-three/fiber';
-import { Suspense, useLayoutEffect } from 'react';
+import { Suspense, use, useLayoutEffect } from 'react';
 import type { CatalogPiece } from '../catalog';
+import { preferredGltfSource } from './preferred-gltf';
+
+export type PreviewQuality = 'High' | 'Preview';
+
+function PreviewModel({
+  piece,
+  quality,
+}: {
+  piece: CatalogPiece;
+  quality: PreviewQuality;
+}) {
+  const source =
+    quality === 'High' ? use(preferredGltfSource(piece.src)) : piece.src;
+  return <Gltf src={source} castShadow />;
+}
 
 function CameraController({ view }: { view: 'Perspective' | 'Top' }) {
   const { camera, invalidate } = useThree();
@@ -25,9 +40,11 @@ function CameraController({ view }: { view: 'Perspective' | 'Top' }) {
 
 export function PiecePreview({
   piece,
+  quality,
   view,
 }: {
   piece: CatalogPiece;
+  quality: PreviewQuality;
   view: 'Perspective' | 'Top';
 }) {
   const topView = view === 'Top';
@@ -45,7 +62,7 @@ export function PiecePreview({
         <directionalLight position={[3, 5, 2]} intensity={3} castShadow />
         <Center top cacheKey={piece.src}>
           <group rotation={[rotationX, rotationY, rotationZ]}>
-            <Gltf src={piece.src} castShadow />
+            <PreviewModel piece={piece} quality={quality} />
           </group>
         </Center>
         <gridHelper

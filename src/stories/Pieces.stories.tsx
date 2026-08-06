@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { catalog, type CatalogPiece } from '../catalog';
-import { PiecePreview } from './PiecePreview';
+import { PiecePreview, type PreviewQuality } from './PiecePreview';
 
 const meta = {
   title: 'Pieces',
   component: PiecePreview,
-  args: { piece: catalog.pieces[0], view: 'Perspective' },
+  args: { piece: catalog.pieces[0], quality: 'High', view: 'Perspective' },
   argTypes: {
     piece: {
       control: 'select',
@@ -13,9 +13,14 @@ const meta = {
         catalog.pieces.map((piece) => [piece.name, piece]),
       ),
     },
+    quality: { control: 'inline-radio', options: ['High', 'Preview'] },
     view: { control: 'inline-radio', options: ['Perspective', 'Top'] },
   },
-} satisfies Meta<{ piece: CatalogPiece; view: 'Perspective' | 'Top' }>;
+} satisfies Meta<{
+  piece: CatalogPiece;
+  quality: PreviewQuality;
+  view: 'Perspective' | 'Top';
+}>;
 
 export default meta;
 
