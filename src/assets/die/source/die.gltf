@@ -7,9 +7,7 @@
   "scenes": [
     {
       "name": "Scene",
-      "nodes": [
-        0
-      ]
+      "nodes": [0]
     }
   ],
   "nodes": [
@@ -21,7 +19,7 @@
   "materials": [
     {
       "doubleSided": true,
-      "name": "die preferred",
+      "name": "Material.004",
       "normalTexture": {
         "index": 0,
         "texCoord": 0
@@ -33,55 +31,9 @@
         },
         "metallicFactor": 0,
         "roughnessFactor": 0.4,
-        "baseColorFactor": [
-          1,
-          1,
-          1,
-          1
-        ]
+        "baseColorFactor": [1, 1, 1, 1]
       },
-      "emissiveFactor": [
-        0,
-        0,
-        0
-      ],
-      "alphaMode": "OPAQUE",
-      "extensions": {
-        "MSFT_lod": {
-          "ids": [
-            1
-          ]
-        }
-      },
-      "extras": {
-        "MSFT_screencoverage": [
-          0,
-          0
-        ]
-      }
-    },
-    {
-      "doubleSided": true,
-      "name": "die preview",
-      "pbrMetallicRoughness": {
-        "baseColorTexture": {
-          "index": 2,
-          "texCoord": 0
-        },
-        "metallicFactor": 0,
-        "roughnessFactor": 0.4,
-        "baseColorFactor": [
-          1,
-          1,
-          1,
-          1
-        ]
-      },
-      "emissiveFactor": [
-        0,
-        0,
-        0
-      ],
+      "emissiveFactor": [0, 0, 0],
       "alphaMode": "OPAQUE"
     }
   ],
@@ -105,47 +57,23 @@
   "textures": [
     {
       "sampler": 0,
-      "extensions": {
-        "EXT_texture_webp": {
-          "source": 0
-        }
-      }
+      "source": 0
     },
     {
       "sampler": 0,
-      "extensions": {
-        "EXT_texture_avif": {
-          "source": 1
-        },
-        "EXT_texture_webp": {
-          "source": 2
-        }
-      }
-    },
-    {
-      "sampler": 0,
-      "extensions": {
-        "EXT_texture_webp": {
-          "source": 2
-        }
-      }
+      "source": 1
     }
   ],
   "images": [
     {
-      "mimeType": "image/webp",
-      "name": "die normal",
-      "uri": "die_normal.webp"
+      "mimeType": "image/png",
+      "name": "Dice_Normals",
+      "uri": "die_normals.png"
     },
     {
-      "mimeType": "image/avif",
-      "name": "die preferred",
-      "uri": "die_diffuse.avif"
-    },
-    {
-      "mimeType": "image/webp",
-      "name": "die preview",
-      "uri": "die_preview.webp"
+      "mimeType": "image/png",
+      "name": "Dice_Diffuse",
+      "uri": "die_diffuse.png"
     }
   ],
   "accessors": [
@@ -153,16 +81,8 @@
       "bufferView": 0,
       "componentType": 5126,
       "count": 96,
-      "max": [
-        0.5,
-        0.5,
-        0.5
-      ],
-      "min": [
-        -0.5,
-        -0.5,
-        -0.5
-      ],
+      "max": [0.5, 0.5, 0.5],
+      "min": [-0.5, -0.5, -0.5],
       "type": "VEC3",
       "byteOffset": 0
     },
@@ -231,13 +151,5 @@
       "byteLength": 3720,
       "uri": "die.bin"
     }
-  ],
-  "extensionsUsed": [
-    "EXT_texture_avif",
-    "EXT_texture_webp",
-    "MSFT_lod"
-  ],
-  "extensionsRequired": [
-    "EXT_texture_webp"
   ]
 }
