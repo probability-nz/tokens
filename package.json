@@ -1,37 +1,39 @@
 {
-  "name": "@garbo-succus/assets",
+  "name": "@probability-nz/tokens",
   "version": "0.0.0",
   "license": "CC-BY-4.0",
   "author": "Garbo Succus <hello@garbo.succus.games> (https://garbo.succus.games)",
   "packageManager": "pnpm@11.18.0",
   "type": "module",
-  "main": "dist/assets.js",
+  "files": ["dist"],
+  "exports": {
+    "./catalog.json": "./dist/catalog.json"
+  },
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare-assets": "node scripts/prepare-assets.mjs",
+    "build": "tsc --noEmit && node scripts/build-catalog.mjs",
+    "prestorybook": "node scripts/build-catalog.mjs",
     "storybook": "storybook dev -p 6006",
+    "prebuild-storybook": "node scripts/build-catalog.mjs",
     "build-storybook": "storybook build"
   },
-  "homepage": "https://garbo-succus.github.io/tokens",
+  "homepage": "https://probability-nz.github.io/tokens",
+  "repository": "https://github.com/probability-nz/tokens",
   "devDependencies": {
     "@storybook/addon-docs": "^10.5.5",
     "@storybook/react": "^10.5.5",
     "@storybook/react-vite": "^10.5.5",
     "@types/node": "^26.1.2",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "@types/three": "^0.185.3",
-    "json-stringify-pretty-compact": "^4.0.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.7.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "storybook": "^10.5.5",
     "three": "^0.185.1",
     "typescript": "^7.0.2",
     "vite": "^8.2.0"
-  },
-  "dependencies": {
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.7.0",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
-    "ramda": "^0.32.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
   }
 }
