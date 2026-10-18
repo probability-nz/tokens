@@ -1,7 +1,7 @@
 # Blank original dice
 
 Blank variants of the actual `probability-nz/tokens` catalog models used by
-Play's Create tab: Classic die, D4, D6, D8, D12 and D20. No new shapes are generated.
+Play's Create tab: D4, D6, D8, D12 and D20. No new shapes are generated.
 
 Mesh buffers (including positions, vertex normals, UVs and indices), nodes,
 accessors, dimensions, samplers and material roughness are preserved exactly.
@@ -32,6 +32,6 @@ preservation against the original assets in this repository and preservation of 
 
 Run `pnpm dev` and open Assets / Blank Dice / Full Set in Storybook.
 The model-only WebGL preview loads the real glTF materials and normal maps.
-Drag any model to orbit all six together; scroll over any model to zoom all six.
+Drag any model to orbit all five together; scroll over any model to zoom all five.
 The catalog appends blank variants after all existing pieces, retaining their
 original scale, rotation and outcome metadata.

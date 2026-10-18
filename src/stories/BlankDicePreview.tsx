@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-const names = ['die', 'd4', 'd6', 'd8', 'd12', 'd20'];
+const names = ['d4', 'd6', 'd8', 'd12', 'd20'];
 
 type LinkedViews = { controls: Set<OrbitControls>; syncing: boolean };
 

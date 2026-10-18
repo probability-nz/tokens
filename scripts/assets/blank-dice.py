@@ -14,7 +14,7 @@ from scipy.sparse.linalg import cg
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = Path(sys.argv[1]).expanduser() if len(sys.argv) > 1 else ROOT
 OUT = ROOT / 'src/assets/blank-dice'
-NAMES = ('die', 'd4', 'd6', 'd8', 'd12', 'd20')
+NAMES = ('d4', 'd6', 'd8', 'd12', 'd20')
 
 
 def blank(name):
