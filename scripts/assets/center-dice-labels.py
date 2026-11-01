@@ -2,7 +2,7 @@
 
 Run before prepare-assets.mjs. Original maps, UVs, meshes and face ordering stay
 intact; centered/ contains reproducible maps derived from the original artwork.
-D4 uses corner labels, and the classic die uses pips, so neither is processed.
+D4 retains corner labels with shared anchors; the classic pip die is unchanged.
 """
 
 import importlib.util
@@ -17,7 +17,7 @@ from scipy import ndimage
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "src/assets"
-NAMES = ("d6", "d8", "d12", "d20")
+NAMES = ("d4", "d6", "d8", "d12", "d20")
 spec = importlib.util.spec_from_file_location(
     "align", Path(__file__).with_name("align-dice.py")
 )
@@ -42,8 +42,8 @@ def hull(points):
     return np.array(half(points)[:-1] + half(points[::-1])[:-1])
 
 
-def face_uvs(name):
-    folder = ASSETS / name / ("regular" if name == "d12" else "source")
+def face_uvs(name, with_frames=False):
+    folder = ASSETS / name / ("regular" if name in ("d4", "d12") else "source")
     path = folder / f"{name}.gltf"
     doc, positions, groups = align.geometry(path)
     buffers = [(folder / b["uri"]).read_bytes() for b in doc["buffers"]]
@@ -83,7 +83,16 @@ def face_uvs(name):
         triangles = uv[indices[selected]]
         # An area-weighted UV centroid maps exactly to the planar face centre.
         centre = np.average(triangles.mean(axis=1), axis=0, weights=area[selected])
-        faces.append((centre, hull(triangles.reshape(-1, 2)), group["normal"]))
+        face = (centre, hull(triangles.reshape(-1, 2)), group["normal"])
+        if with_frames:
+            uv_points = triangles.reshape(-1, 2)
+            frame = np.linalg.lstsq(
+                np.c_[uv_points, np.ones(len(uv_points))],
+                tri[selected].reshape(-1, 3),
+                rcond=None,
+            )[0]
+            face = (*face, frame)
+        faces.append(face)
     return folder, faces
 
 
@@ -118,40 +127,121 @@ def label_mask(image, threshold=100):
     return keep[components]
 
 
+def label_jobs(name, faces, diffuse, entry):
+    labels = Image.fromarray(label_mask(diffuse))
+    jobs = []
+    for centre, polygon, face_normal, frame in faces:
+        box, inside, target = face_region(centre, polygon, diffuse.size, 1.06)
+        _, safe, _ = face_region(centre, polygon, diffuse.size, 1.0)
+        ink = np.asarray(labels.crop(box)) & inside
+        if not ink.any():
+            raise ValueError(f"{name}: no label on face")
+        components, count = ndimage.label(ink)
+        sizes = np.bincount(components.ravel())
+        sizes[0] = 0
+        parts = [ink]
+        if name == "d4":
+            parts = [
+                components == index
+                for index in range(1, count + 1)
+                if sizes[index] > 20
+            ]
+            if len(parts) != 3:
+                raise ValueError(
+                    "Each D4 face must contain three complete corner labels"
+                )
+        for part in parts:
+            y, x = np.nonzero(part)
+            destination = target
+            basis = None
+            if name == "d4":
+                mean_uv = (
+                    np.array([x.mean(), y.mean()]) + box[:2] + 0.5
+                ) / diffuse.size
+                corner = polygon[np.argmin(np.linalg.norm(polygon - mean_uv, axis=1))]
+                centre_world = np.r_[centre, 1] @ frame
+                up = np.r_[corner, 1] @ frame - centre_world
+                up /= np.linalg.norm(up)
+                basis = np.array([np.cross(up, face_normal), -up]).T
+                destination = (
+                    (centre + 0.46 * (corner - centre)) * diffuse.size - 0.5 - box[:2]
+                )
+            else:
+                pose = max(
+                    entry["faces"],
+                    key=lambda f: (align.matrix(f["rotation"]) @ face_normal)[1],
+                )
+                basis = align.matrix(pose["rotation"]).T[:, [0, 2]]
+                # A 6/9 dot remains alongside the digit but must not pull the
+                # numeral itself off centre. Keep all substantial digit components.
+                body = part & (sizes[components] >= sizes.max() * 0.1)
+                y, x = np.nonzero(body)
+            # Measure in the actual face/corner reading frame, not in the
+            # arbitrarily rotated UV atlas. Move ink and engraving together.
+            projection = np.diag(1 / np.array(diffuse.size)) @ frame[:2] @ basis
+            points = np.c_[x, y] @ projection
+            source = ((points.min(axis=0) + points.max(axis=0)) / 2) @ np.linalg.inv(
+                projection
+            )
+            height = np.ptp(points, axis=0)[1]
+            scale = 1.0
+            jobs.append(
+                dict(
+                    box=box,
+                    inside=inside,
+                    safe=safe,
+                    ink=part,
+                    source=source,
+                    destination=destination,
+                    scale=scale,
+                    height=height,
+                )
+            )
+    common_height = (
+        np.median([job["height"] for job in jobs])
+        * {
+            "d4": 0.90,
+            "d6": 1.0,
+            "d8": 0.88,
+            "d12": 0.90,
+            "d20": 0.90,
+        }[name]
+    )
+    for job in jobs:
+        job["scale"] = common_height / job["height"]
+    return jobs
+
+
 def center(name):
-    folder, faces = face_uvs(name)
+    folder, faces = face_uvs(name, True)
     diffuse = Image.open(folder / f"{name}_diffuse.png").convert("RGB")
     normal = Image.open(folder / f"{name}_normal.png").convert("RGB")
-    # Use the freshly baked D12 map, not its potentially stale published copy.
-    blank_folder = folder if name == "d12" else ASSETS / "blank-dice"
+    # Use freshly baked regular maps, not potentially stale published copies.
+    blank_folder = folder if name in ("d4", "d12") else ASSETS / "blank-dice"
     blank = Image.open(blank_folder / f"{name}-blank-normal.png").convert("RGB")
     assert normal.size == blank.size
     # D20 source albedo is double the normal-map resolution. Work at the shared
     # resolution so ink and engraving receive exactly the same integer shift.
     diffuse = diffuse.resize(normal.size, Image.Resampling.LANCZOS)
     output_color, output_normal = diffuse.copy(), normal.copy()
-    labels = Image.fromarray(label_mask(diffuse))
     engraving_labels = Image.fromarray(label_mask(diffuse, 180))
     entry = next(
         e
         for e in json.loads((ASSETS / "catalog.json").read_text())["pieces"]
         if e["name"] == name.upper()
     )
-    report = []
-    for centre, polygon, face_normal in faces:
-        box, inside, target = face_region(centre, polygon, diffuse.size, 1.06)
-        _, safe, _ = face_region(centre, polygon, diffuse.size, 1.0)
+    for job in label_jobs(name, faces, diffuse, entry):
+        box, inside, safe, ink = (job[key] for key in ("box", "inside", "safe", "ink"))
+        source, destination, scale = (
+            job[key] for key in ("source", "destination", "scale")
+        )
         color = np.array(diffuse.crop(box))
         original = np.array(normal.crop(box))
         base = np.array(blank.crop(box))
-        ink = np.asarray(labels.crop(box)) & inside
-        yy, xx = np.nonzero(ink)
-        if not len(xx):
-            raise ValueError(f"{name}: no label on face")
-        source = np.array([(xx.min() + xx.max()) / 2, (yy.min() + yy.max()) / 2])
-        shift = np.rint(target - source).astype(int)
         radius = max(3, round(diffuse.width / 160))
         engraving = np.asarray(engraving_labels.crop(box)) & inside
+        if name == "d4":
+            engraving &= ndimage.binary_dilation(ink, iterations=3)
         horizontal = engraving.copy()
         for offset in range(1, radius + 1):
             horizontal[:, offset:] |= engraving[:, :-offset]
@@ -160,10 +250,6 @@ def center(name):
         for offset in range(1, radius + 1):
             mask[offset:] |= horizontal[:-offset]
             mask[:-offset] |= horizontal[offset:]
-        # Uniform reductions leave room for the tallest/widest label on each
-        # triangular die, including the engraving around multi-digit labels.
-        scale = {"d8": 0.88, "d20": 0.94}.get(name, 1.0)
-        destination = source + shift if scale == 1 else target
         offset = (source - destination / scale)[::-1]
 
         def transform(values, order=1):
@@ -181,7 +267,7 @@ def center(name):
         moved = transform(mask.astype(float)) > 0
         if not safe[moved].all():
             raise ValueError(
-                f"{name}: shifted engraving reaches face border: source={source}, target={target}, shift={shift}, centre={centre}"
+                f"{name}: shifted engraving reaches face border {box} source {source} target {destination} scale {scale}"
             )
         new_color = np.array(output_color.crop(box))
         new_normal = np.array(output_normal.crop(box)).astype("float64")
@@ -204,15 +290,11 @@ def center(name):
         output_normal.paste(
             Image.fromarray(np.rint(new_normal).clip(0, 255).astype("uint8")), box[:2]
         )
-        label = max(
-            entry["faces"], key=lambda f: (align.matrix(f["rotation"]) @ face_normal)[1]
-        )["name"]
-        report.append({"face": label, "shiftPixels": shift.tolist(), "scale": scale})
     out = ASSETS / name / "centered"
     out.mkdir(exist_ok=True)
     output_color.save(out / f"{name}_diffuse.png")
     output_normal.save(out / f"{name}_normal.png")
-    print(name, json.dumps(sorted(report, key=lambda r: int(r["face"]))))
+    print(name, "aligned labels in their reading frames")
 
 
 if __name__ == "__main__":

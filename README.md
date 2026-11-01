@@ -46,15 +46,19 @@ resting planes, regular D4 geometry, and identical numbered/blank model buffers.
 
 ## Centered numeral artwork
 
-Preparation centers each complete D6/D8/D12/D20 label on its geometric face
-centroid. Digits and disambiguation dots move together, along with the engraved
-normal-map detail. Face numbers, rotations, meshes and UVs are unchanged.
-D8 labels use 88% of their original size and D20 labels use 94% so all labels
-clear the bevel after centering. D4 retains its corner-label convention.
+Preparation measures numerals in their final reading orientation, so rotated UV
+islands and 6/9 dots cannot displace the numeral itself. D4's three labels on each
+face use identical corner spacing. Lettering uses a common physical height per
+die. Digits and disambiguation dots move together with their engraved normal-map
+detail; face order, rotations, meshes and UVs are unchanged. Per-die clearance
+factors leave room around the tallest/widest labels and their engraving.
 
-`centered/` maps are generated from the preserved `source/` (or D12 `regular/`)
-maps by `scripts/assets/center-dice-labels.py`, using NumPy, Pillow and SciPy.
-The existing blank normal maps provide the clean surface beneath relocated
-engravings. The build runs this step automatically for the selected dice;
-repeated builds never re-center an already processed image. Tests measure every
-label's centre and verify that every digit/dot component survives.
+`centered/` maps are generated from preserved `source/` or `regular/` maps by
+`scripts/assets/center-dice-labels.py`, using NumPy, Pillow and SciPy. Freshly baked
+regular blank normals (D4/D12) or original blank normals provide clean surfaces
+beneath relocated engravings. Preparation runs this step automatically; repeated
+builds never re-center an already processed image.
+
+Tests cover the published AVIFs as well as the PNG masters, physical reading-frame
+anchors, equal lettering heights, complete digit/dot components, residual engraving,
+and rebuilding regular dice without stale published blank maps.

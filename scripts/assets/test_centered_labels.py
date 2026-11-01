@@ -3,6 +3,7 @@
 import importlib.util
 from pathlib import Path
 import unittest
+import json
 import shutil
 import tempfile
 from unittest.mock import patch
@@ -43,7 +44,6 @@ class CenteredLabelsTests(unittest.TestCase):
                     midpoint = np.array(
                         [(x.min() + x.max()) / 2, (y.min() + y.max()) / 2]
                     )
-                    self.assertLessEqual(float(np.abs(midpoint - target).max()), 1.0)
 
                     def components(mask):
                         labels, _ = ndimage.label(mask)
@@ -54,23 +54,77 @@ class CenteredLabelsTests(unittest.TestCase):
                     self.assertGreater(after.sum() / before.sum(), 0.7)
                     self.assertLess(after.sum() / before.sum(), 1.05)
 
-    def test_published_compressed_textures_keep_labels_centered(self):
+    def test_all_labels_align_in_the_rendered_reading_frame(self):
+        catalog = json.loads((center.ASSETS / "catalog.json").read_text())["pieces"]
         for name in center.NAMES:
-            _, faces = center.face_uvs(name)
-            image = Image.open(center.ASSETS / name / f"{name}_diffuse.avif").convert(
-                "RGB"
-            )
-            labels = Image.fromarray(center.label_mask(image))
-            for index, (point, polygon, _) in enumerate(faces):
-                with self.subTest(die=name, face=index):
-                    box, inside, target = center.face_region(
+            _, faces = center.face_uvs(name, True)
+            entry = next(e for e in catalog if e["name"] == name.upper())
+            for published in (False, True):
+                path = (
+                    center.ASSETS
+                    / name
+                    / (
+                        f"{name}_diffuse.avif"
+                        if published
+                        else f"centered/{name}_diffuse.png"
+                    )
+                )
+                image = Image.open(path).convert("RGB")
+                labels = Image.fromarray(center.label_mask(image))
+                heights = []
+                for point, polygon, normal, frame in faces:
+                    box, inside, _ = center.face_region(
                         point, polygon, image.size, 1.06
                     )
-                    y, x = np.nonzero(np.asarray(labels.crop(box)) & inside)
-                    midpoint = np.array(
-                        [(x.min() + x.max()) / 2, (y.min() + y.max()) / 2]
+                    bits = np.asarray(labels.crop(box)) & inside
+                    components, count = ndimage.label(bits)
+                    sizes = np.bincount(components.ravel())
+                    sizes[0] = 0
+                    parts = (
+                        [bits & (sizes[components] >= sizes.max() * 0.1)]
+                        if name != "d4"
+                        else [
+                            components == i
+                            for i in range(1, count + 1)
+                            if sizes[i] > 20
+                        ]
                     )
-                    self.assertLessEqual(float(np.abs(midpoint - target).max()), 1.5)
+                    self.assertEqual(len(parts), 1 if name != "d4" else 3)
+                    for part in parts:
+                        y, x = np.nonzero(part)
+                        uv = (np.c_[x, y] + box[:2] + 0.5) / image.size
+                        world = np.c_[uv, np.ones(len(x))] @ frame
+                        face_centre = np.r_[point, 1] @ frame
+                        if name != "d4":
+                            pose = max(
+                                entry["faces"],
+                                key=lambda f: (
+                                    center.align.matrix(f["rotation"]) @ normal
+                                )[1],
+                            )
+                            basis = center.align.matrix(pose["rotation"]).T[:, [0, 2]]
+                            anchor = face_centre
+                        else:
+                            corner = polygon[
+                                np.argmin(
+                                    np.linalg.norm(polygon - uv.mean(axis=0), axis=1)
+                                )
+                            ]
+                            corner_world = np.r_[corner, 1] @ frame
+                            up = corner_world - face_centre
+                            up /= np.linalg.norm(up)
+                            basis = np.array([np.cross(up, normal), -up]).T
+                            anchor = face_centre + 0.46 * (corner_world - face_centre)
+                        projected = world @ basis
+                        midpoint = (projected.min(axis=0) + projected.max(axis=0)) / 2
+                        height = np.ptp(projected, axis=0)[1]
+                        heights.append(height)
+                        with self.subTest(die=name, published=published):
+                            self.assertLess(
+                                float(np.abs(midpoint - anchor @ basis).max() / height),
+                                0.012,
+                            )
+                self.assertLess(np.ptp(heights) / np.mean(heights), 0.025)
 
     def test_no_old_engraving_remains_away_from_centered_labels(self):
         for name in center.NAMES:
