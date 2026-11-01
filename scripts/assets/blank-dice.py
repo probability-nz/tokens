@@ -18,6 +18,9 @@ NAMES = ('d4', 'd6', 'd8', 'd12', 'd20')
 
 
 def blank(name):
+    if name in ('d4', 'd12'):
+        # These variants are baked together with their regular numbered mesh.
+        return
     folder = SOURCE / 'src/assets' / name / 'source'
     doc = json.loads((folder / f'{name}.gltf').read_text())
     material = doc['materials'][0]
@@ -97,3 +100,6 @@ def blank(name):
 if __name__ == '__main__':
     for name in NAMES:
         blank(name)
+    import subprocess
+    subprocess.run([sys.executable, str(ROOT / 'scripts/assets/sync-regular-blanks.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'scripts/assets/align-dice.py')], check=True)

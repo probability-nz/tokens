@@ -1,7 +1,8 @@
 {
   "asset": {
-    "generator": "Khronos glTF Blender I/O v3.2.43",
-    "version": "2.0"
+    "generator": "Khronos glTF Blender I/O v5.0.21",
+    "version": "2.0",
+    "copyright": "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."
   },
   "scene": 0,
   "scenes": [
@@ -15,17 +16,11 @@
   "nodes": [
     {
       "mesh": 0,
-      "name": "d12",
-      "scale": [
-        -0.10000002384185791,
-        -0.10000002384185791,
-        -0.10000002384185791
-      ]
+      "name": "Regular D12"
     }
   ],
   "materials": [
     {
-      "doubleSided": true,
       "name": "d12 preferred",
       "normalTexture": {
         "index": 0
@@ -52,7 +47,6 @@
       }
     },
     {
-      "doubleSided": true,
       "name": "d12 preview",
       "pbrMetallicRoughness": {
         "baseColorTexture": {
@@ -65,15 +59,16 @@
   ],
   "meshes": [
     {
-      "name": "d12",
+      "name": "Regular D12",
       "primitives": [
         {
           "attributes": {
             "POSITION": 0,
             "NORMAL": 1,
-            "TEXCOORD_0": 2
+            "TEXCOORD_0": 2,
+            "TANGENT": 3
           },
-          "indices": 3,
+          "indices": 4,
           "material": 0
         }
       ]
@@ -129,58 +124,74 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 240,
+      "count": 1040,
       "max": [
-        8.058023452758789,
-        8.05404281616211,
-        8.056665420532227
+        0.8037377595901489,
+        0.8037377595901489,
+        0.8037377595901489
       ],
       "min": [
-        -8.067716598510742,
-        -8.060837745666504,
-        -8.056665420532227
+        -0.8037377595901489,
+        -0.8037377595901489,
+        -0.8037377595901489
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 240,
+      "count": 1040,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 240,
+      "count": 1040,
       "type": "VEC2"
     },
     {
       "bufferView": 3,
+      "componentType": 5126,
+      "count": 1040,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 4,
       "componentType": 5123,
-      "count": 828,
+      "count": 3348,
       "type": "SCALAR"
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 2880,
-      "byteOffset": 0
+      "byteLength": 12480,
+      "byteOffset": 0,
+      "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 2880,
-      "byteOffset": 2880
+      "byteLength": 12480,
+      "byteOffset": 12480,
+      "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 1920,
-      "byteOffset": 5760
+      "byteLength": 8320,
+      "byteOffset": 24960,
+      "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 1656,
-      "byteOffset": 7680
+      "byteLength": 16640,
+      "byteOffset": 33280,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 6696,
+      "byteOffset": 49920,
+      "target": 34963
     }
   ],
   "samplers": [
@@ -191,7 +202,7 @@
   ],
   "buffers": [
     {
-      "byteLength": 9336,
+      "byteLength": 56616,
       "uri": "d12.bin"
     }
   ],
@@ -202,5 +213,107 @@
   ],
   "extensionsRequired": [
     "EXT_texture_webp"
-  ]
+  ],
+  "extras": {
+    "probability": {
+      "faces": [
+        {
+          "name": "1",
+          "rotation": [
+            1.758620940128886,
+            -0.523891027194325,
+            0.3630924418948429
+          ]
+        },
+        {
+          "name": "2",
+          "rotation": [
+            1.7603920261966182,
+            0.5233051657503858,
+            -0.3666346152671964
+          ]
+        },
+        {
+          "name": "3",
+          "rotation": [
+            -3.141592653589793,
+            1.5692347985241122,
+            2.124370685691939
+          ]
+        },
+        {
+          "name": "4",
+          "rotation": [
+            0.5535749041336437,
+            0.0013283151366583143,
+            -0.0008209444772689498
+          ]
+        },
+        {
+          "name": "5",
+          "rotation": [
+            -3.141592653589793,
+            0.9409162678060903,
+            -2.1243706856919418
+          ]
+        },
+        {
+          "name": "6",
+          "rotation": [
+            -2.5880177494561494,
+            -0.0013283151366583036,
+            -3.1407717091125242
+          ]
+        },
+        {
+          "name": "7",
+          "rotation": [
+            -1.3829717134609072,
+            0.5238910271943251,
+            -0.363092441894843
+          ]
+        },
+        {
+          "name": "8",
+          "rotation": [
+            -1.3812006273931752,
+            -0.5233051657503859,
+            0.3666346152671964
+          ]
+        },
+        {
+          "name": "9",
+          "rotation": [
+            0,
+            0.9440393243477858,
+            -2.1243706856919418
+          ]
+        },
+        {
+          "name": "10",
+          "rotation": [
+            -2.5880177494561494,
+            -0.001328315136658272,
+            0.0008209444772689286
+          ]
+        },
+        {
+          "name": "11",
+          "rotation": [
+            0,
+            -0.94091626780609,
+            2.1243706856919418
+          ]
+        },
+        {
+          "name": "12",
+          "rotation": [
+            0.5535749041336435,
+            0.0013283151366582859,
+            3.1407717091125242
+          ]
+        }
+      ]
+    }
+  }
 }

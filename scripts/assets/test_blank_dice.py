@@ -24,7 +24,7 @@ class BlankDiceTests(unittest.TestCase):
         self.assertEqual({p.stem for p in ASSETS.glob('*.gltf')}, {f'{n}-blank' for n in NAMES})
         for name in NAMES:
             with self.subTest(name=name):
-                folder = SOURCE / name / 'source'
+                folder = SOURCE / name / ('regular' if name in ('d4', 'd12') else 'source')
                 source = json.loads((folder / f'{name}.gltf').read_text())
                 blank = json.loads((ASSETS / f'{name}-blank.gltf').read_text())
                 for key in ('meshes','nodes','accessors','bufferViews','scenes','samplers'):
@@ -36,6 +36,9 @@ class BlankDiceTests(unittest.TestCase):
                 self.assertEqual(material['pbrMetallicRoughness']['baseColorFactor'], [1,1,1,1])
                 self.assertEqual(material['pbrMetallicRoughness']['roughnessFactor'], source['materials'][0]['pbrMetallicRoughness']['roughnessFactor'])
                 self.assertIn('normalTexture', material)
+                original_sampler = source['textures'][source['materials'][0]['normalTexture']['index']].get('sampler')
+                blank_sampler = blank['textures'][material['normalTexture']['index']].get('sampler')
+                self.assertEqual(blank_sampler, original_sampler)
                 with Image.open(ASSETS / blank['images'][0]['uri']) as texture:
                     if name in ('d4','d8','d12','d20'):
                         self.assertGreater(len(texture.getcolors(texture.width*texture.height)), 100) # baked bevel shading remains

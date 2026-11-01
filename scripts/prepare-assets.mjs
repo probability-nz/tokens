@@ -46,9 +46,15 @@ if (!Array.isArray(catalog.pieces)) {
   throw new Error('catalog.json must contain a pieces array');
 }
 for (const piece of catalog.pieces) {
+  if (process.argv.length > 2 && !process.argv.slice(2).includes(piece.name))
+    continue;
+  if (piece.name.endsWith(' (blank)')) continue; // Generated separately from the matching numbered geometry.
   const modelPath = join(assets, piece.src);
   const directory = dirname(modelPath);
-  const sourceDirectory = join(directory, 'source');
+  const sourceDirectory = join(
+    directory,
+    ['D4', 'D12'].includes(piece.name) ? 'regular' : 'source',
+  );
   const modelFile = basename(modelPath);
   const name = basename(modelFile, extname(modelFile));
   const gltf = JSON.parse(
@@ -95,10 +101,14 @@ for (const piece of catalog.pieces) {
 
   const conversions = [
     convert(diffuseSource, join(directory, diffuseName), TEXTURE_BOUNDS, [
-      '-define', 'heic:speed=6', '-quality', '85',
+      '-define',
+      'heic:speed=6',
+      '-quality',
+      '85',
     ]),
     convert(diffuseSource, join(directory, previewName), PREVIEW_BOUNDS, [
-      '-quality', '55',
+      '-quality',
+      '55',
     ]),
   ];
   if (normal !== undefined) {
@@ -108,9 +118,12 @@ for (const piece of catalog.pieces) {
         join(directory, normalName),
         TEXTURE_BOUNDS,
         [
-          '-depth', '8',
-          '-define', 'webp:lossless=true',
-          '-define', 'webp:method=6',
+          '-depth',
+          '8',
+          '-define',
+          'webp:lossless=true',
+          '-define',
+          'webp:method=6',
         ],
       ),
     );
@@ -137,7 +150,9 @@ for (const piece of catalog.pieces) {
     };
     textures.push(webpTexture(normal.sampler, images.length));
     images.push({
-      mimeType: 'image/webp', name: `${name} normal`, uri: normalName,
+      mimeType: 'image/webp',
+      name: `${name} normal`,
+      uri: normalName,
     });
   }
   const preferredImage = images.length;
@@ -159,9 +174,7 @@ for (const piece of catalog.pieces) {
     ...baseColorInfo,
     index: textures.length,
   };
-  textures.push(
-    webpTexture(diffuse.sampler, previewImage),
-  );
+  textures.push(webpTexture(diffuse.sampler, previewImage));
   images.push(
     { mimeType: 'image/avif', name: `${name} preferred`, uri: diffuseName },
     { mimeType: 'image/webp', name: `${name} preview`, uri: previewName },
@@ -183,3 +196,6 @@ for (const piece of catalog.pieces) {
   gltf.images = images;
   await writeFile(modelPath, prettyJson(gltf));
 }
+
+await run('python3', [join(root, 'scripts/assets/sync-regular-blanks.py')]);
+await run('python3', [join(root, 'scripts/assets/align-dice.py')]);
