@@ -102,8 +102,8 @@ def face_region(centre, polygon, size, inset=0.96):
     return tuple(map(int, box)), np.asarray(mask) > 0, centre - minimum
 
 
-def label_mask(image):
-    dark = np.asarray(image).max(axis=2) < 100
+def label_mask(image, threshold=100):
+    dark = np.asarray(image).max(axis=2) < threshold
     components, _ = ndimage.label(dark)
     sizes = np.bincount(components.ravel())
     keep = (sizes > 2) & (sizes < dark.size * 0.04)
@@ -122,15 +122,16 @@ def center(name):
     folder, faces = face_uvs(name)
     diffuse = Image.open(folder / f"{name}_diffuse.png").convert("RGB")
     normal = Image.open(folder / f"{name}_normal.png").convert("RGB")
-    blank = Image.open(ASSETS / "blank-dice" / f"{name}-blank-normal.png").convert(
-        "RGB"
-    )
+    # Use the freshly baked D12 map, not its potentially stale published copy.
+    blank_folder = folder if name == "d12" else ASSETS / "blank-dice"
+    blank = Image.open(blank_folder / f"{name}-blank-normal.png").convert("RGB")
     assert normal.size == blank.size
     # D20 source albedo is double the normal-map resolution. Work at the shared
     # resolution so ink and engraving receive exactly the same integer shift.
     diffuse = diffuse.resize(normal.size, Image.Resampling.LANCZOS)
     output_color, output_normal = diffuse.copy(), normal.copy()
     labels = Image.fromarray(label_mask(diffuse))
+    engraving_labels = Image.fromarray(label_mask(diffuse, 180))
     entry = next(
         e
         for e in json.loads((ASSETS / "catalog.json").read_text())["pieces"]
@@ -150,10 +151,11 @@ def center(name):
         source = np.array([(xx.min() + xx.max()) / 2, (yy.min() + yy.max()) / 2])
         shift = np.rint(target - source).astype(int)
         radius = max(3, round(diffuse.width / 160))
-        horizontal = ink.copy()
+        engraving = np.asarray(engraving_labels.crop(box)) & inside
+        horizontal = engraving.copy()
         for offset in range(1, radius + 1):
-            horizontal[:, offset:] |= ink[:, :-offset]
-            horizontal[:, :-offset] |= ink[:, offset:]
+            horizontal[:, offset:] |= engraving[:, :-offset]
+            horizontal[:, :-offset] |= engraving[:, offset:]
         mask = horizontal.copy()
         for offset in range(1, radius + 1):
             mask[offset:] |= horizontal[:-offset]

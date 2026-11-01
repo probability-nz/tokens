@@ -41,7 +41,7 @@ python3 -m unittest discover -s scripts/assets
 node scripts/build-catalog.mjs
 ```
 
-The tests require NumPy, Pillow and SciPy, and cover all catalog outcomes, stable bounds,
+The tests require NumPy, Pillow 11.3+ with AVIF support, and SciPy, and cover all catalog outcomes, stable bounds,
 resting planes, regular D4 geometry, and identical numbered/blank model buffers.
 
 ## Centered numeral artwork
