@@ -41,5 +41,20 @@ python3 -m unittest discover -s scripts/assets
 node scripts/build-catalog.mjs
 ```
 
-The tests require NumPy and Pillow, and cover all catalog outcomes, stable bounds,
+The tests require NumPy, Pillow and SciPy, and cover all catalog outcomes, stable bounds,
 resting planes, regular D4 geometry, and identical numbered/blank model buffers.
+
+## Centered numeral artwork
+
+Preparation centers each complete D6/D8/D12/D20 label on its geometric face
+centroid. Digits and disambiguation dots move together, along with the engraved
+normal-map detail. Face numbers, rotations, meshes and UVs are unchanged.
+D8 labels use 88% of their original size and D20 labels use 94% so all labels
+clear the bevel after centering. D4 retains its corner-label convention.
+
+`centered/` maps are generated from the preserved `source/` (or D12 `regular/`)
+maps by `scripts/assets/center-dice-labels.py`, using NumPy, Pillow and SciPy.
+The existing blank normal maps provide the clean surface beneath relocated
+engravings. The build runs this step automatically for the selected dice;
+repeated builds never re-center an already processed image. Tests measure every
+label's centre and verify that every digit/dot component survives.

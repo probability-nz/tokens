@@ -51,6 +51,8 @@ for (const piece of catalog.pieces) {
   if (piece.name.endsWith(' (blank)')) continue; // Generated separately from the matching numbered geometry.
   const modelPath = join(assets, piece.src);
   const directory = dirname(modelPath);
+  const centered = ['D6', 'D8', 'D12', 'D20'].includes(piece.name);
+  if (centered) await run('python3', [join(root, 'scripts/assets/center-dice-labels.py'), piece.name.toLowerCase()]);
   const sourceDirectory = join(
     directory,
     ['D4', 'D12'].includes(piece.name) ? 'regular' : 'source',
@@ -97,7 +99,8 @@ for (const piece of catalog.pieces) {
   const diffuseName = `${name}_diffuse.avif`;
   const normalName = `${name}_normal.webp`;
   const previewName = `${name}_preview.webp`;
-  const diffuseSource = join(sourceDirectory, diffuse.uri);
+  const textureDirectory = centered ? join(directory, 'centered') : sourceDirectory;
+  const diffuseSource = join(textureDirectory, diffuse.uri);
 
   const conversions = [
     convert(diffuseSource, join(directory, diffuseName), TEXTURE_BOUNDS, [
@@ -114,7 +117,7 @@ for (const piece of catalog.pieces) {
   if (normal !== undefined) {
     conversions.push(
       convert(
-        join(sourceDirectory, normal.uri),
+        join(textureDirectory, normal.uri),
         join(directory, normalName),
         TEXTURE_BOUNDS,
         [
