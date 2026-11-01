@@ -200,5 +200,5 @@ for (const piece of catalog.pieces) {
   await writeFile(modelPath, prettyJson(gltf));
 }
 
-await run('python3', [join(root, 'scripts/assets/sync-regular-blanks.py')]);
+await run('python3', [join(root, 'scripts/assets/sync-blank-dice.py')]);
 await run('python3', [join(root, 'scripts/assets/align-dice.py')]);

@@ -1,8 +1,6 @@
 """Remove printed/engraved markings from original token maps, without changing meshes.
 Requires Pillow, NumPy and SciPy. Usage: python3 scripts/assets/blank-dice.py [tokens checkout]
 """
-import base64
-import copy
 import json
 from pathlib import Path
 import sys
@@ -78,22 +76,6 @@ def blank(name):
         values[yy,xx,channel] = solution
     normal = Image.fromarray(np.clip(np.rint(values),0,255).astype('uint8'))
     normal.save(OUT / f'{name}-blank-normal.png')
-    # Keep the original mesh, indices, normals, UVs, samplers and material settings.
-    # Only the albedo/map references change. UVs still serve the original bevels.
-    original_normal = copy.deepcopy(material['normalTexture'])
-    original_normal['index'] = 0
-    sampler = doc['textures'][material['normalTexture']['index']].get('sampler')
-    material['normalTexture'] = original_normal
-    material['pbrMetallicRoughness'].pop('baseColorTexture')
-    material['pbrMetallicRoughness']['baseColorFactor'] = [1,1,1,1]
-    doc['textures'] = [{'source': 0, **({'sampler': sampler} if sampler is not None else {})}]
-    doc['images'] = [{'uri': f'{name}-blank-normal.png', 'mimeType': 'image/png'}]
-    for buffer in doc['buffers']:
-        data = (folder / buffer['uri']).read_bytes()
-        buffer['uri'] = 'data:application/octet-stream;base64,' + base64.b64encode(data).decode()
-    doc['asset']['copyright'] = 'Garbo Succus; source assets by Misha Tsyatsko. CC BY 4.0. Number/pip maps removed; original geometry and bevel shading retained.'
-    doc['asset']['extras'] = {'source': 'https://github.com/probability-nz/tokens', 'commit': 'b2559ef7924965d3440478e6b2c54aae79944763'}
-    (OUT / f'{name}-blank.gltf').write_text(json.dumps(doc, indent=2) + '\n')
     print(name, 'blanked pixels:', np.count_nonzero(np.asarray(mask)), flush=True)
 
 
@@ -101,5 +83,5 @@ if __name__ == '__main__':
     for name in NAMES:
         blank(name)
     import subprocess
-    subprocess.run([sys.executable, str(ROOT / 'scripts/assets/sync-regular-blanks.py')], check=True)
+    subprocess.run([sys.executable, str(ROOT / 'scripts/assets/sync-blank-dice.py')], check=True)
     subprocess.run([sys.executable, str(ROOT / 'scripts/assets/align-dice.py')], check=True)

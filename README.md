@@ -29,6 +29,9 @@ node scripts/prepare-assets.mjs D4 D12
 
 The optional names limit image conversion; omitting them rebuilds all numbered
 assets. Preparation also synchronizes blank geometry and generates face metadata.
+All blank glTFs share their numbered variant's published `.bin`, including
+positions, normals, UVs, tangents and indices. `sync-blank-dice.py` is the single
+blank-model generator; only white materials and blank normal maps differ.
 D8/D12/D20 outcomes are fitted to the mesh planes and the whole solid's normal
 symmetries, preserving the original number mapping and a stable footprint.
 `authored-dice-poses.json` retains the original hints for identifying numbered
