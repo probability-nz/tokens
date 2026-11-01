@@ -147,6 +147,78 @@ class CenteredLabelsTests(unittest.TestCase):
                 residual = np.abs(normal - blank).max(axis=2)
                 self.assertLessEqual(int(residual[~near].max()), 2)
 
+    def test_engraving_tracks_print_edges_and_points_into_the_die(self):
+        # Check the actual saved maps, independent of the generation helper.
+        for name in center.NAMES:
+            for published in (False, True):
+                folder = center.ASSETS / name
+                color = Image.open(
+                    folder
+                    / (
+                        f"{name}_diffuse.avif"
+                        if published
+                        else f"centered/{name}_diffuse.png"
+                    )
+                ).convert("RGB")
+                normal = Image.open(
+                    folder
+                    / (
+                        f"{name}_normal.webp"
+                        if published
+                        else f"centered/{name}_normal.png"
+                    )
+                ).convert("RGB")
+                blank = (
+                    Image.open(
+                        center.ASSETS / "blank-dice" / f"{name}-blank-normal.png"
+                    )
+                    .convert("RGB")
+                    .resize(normal.size, Image.Resampling.LANCZOS)
+                )
+                ink = center.label_mask(
+                    color.resize(normal.size, Image.Resampling.LANCZOS)
+                )
+                inward_y, inward_x = np.gradient(
+                    ndimage.gaussian_filter(ink.astype(float), 1)
+                )
+                residual = np.asarray(normal).astype(float) - np.asarray(blank)
+                edge = (inward_x * inward_x + inward_y * inward_y) > 0.02
+                # Inset glyphs tilt toward their centre: +U follows image X,
+                # but tangent +V opposes image rows. Reversed signs emboss them.
+                dot = residual[..., 0] * inward_x - residual[..., 1] * inward_y
+                with self.subTest(die=name, published=published):
+                    self.assertGreater(np.mean(dot[edge] > 0), 0.97)
+                    near_edge = ndimage.maximum_filter(edge, size=9)
+                    changed = np.linalg.norm(residual, axis=-1) > 8
+                    self.assertLess(np.mean(changed[~near_edge]), 0.0001)
+
+    def test_face_boundaries_have_white_filtering_padding(self):
+        for name in center.NAMES:
+            _, faces = center.face_uvs(name)
+            for published in (False, True):
+                image = Image.open(
+                    center.ASSETS
+                    / name
+                    / (
+                        f"{name}_diffuse.avif"
+                        if published
+                        else f"centered/{name}_diffuse.png"
+                    )
+                ).convert("RGB")
+                pixels = np.asarray(image)
+                for _, polygon, _ in faces:
+                    for a, b in zip(polygon, np.roll(polygon, -1, axis=0)):
+                        for t in np.linspace(0, 1, 25):
+                            x, y = np.rint(
+                                ((1 - t) * a + t * b) * image.size - 0.5
+                            ).astype(int)
+                            patch = pixels[
+                                max(0, y - 1) : min(image.height, y + 2),
+                                max(0, x - 1) : min(image.width, x + 2),
+                            ]
+                            with self.subTest(die=name, published=published):
+                                self.assertGreater(int(patch.min()), 240)
+
     def test_d12_rebuild_does_not_depend_on_published_blank_copy(self):
         original = center.ASSETS
         with tempfile.TemporaryDirectory() as directory:

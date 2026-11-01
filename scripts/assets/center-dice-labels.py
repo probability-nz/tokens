@@ -1,4 +1,4 @@
-"""Center existing numeral artwork and engraving on each planar die face.
+"""Center numeral artwork and rebuild matching engraving on each planar die face.
 
 Run before prepare-assets.mjs. Original maps, UVs, meshes and face ordering stay
 intact; centered/ contains reproducible maps derived from the original artwork.
@@ -177,7 +177,7 @@ def label_jobs(name, faces, diffuse, entry):
                 body = part & (sizes[components] >= sizes.max() * 0.1)
                 y, x = np.nonzero(body)
             # Measure in the actual face/corner reading frame, not in the
-            # arbitrarily rotated UV atlas. Move ink and engraving together.
+            # arbitrarily rotated UV atlas. Engraving is derived from the final ink.
             projection = np.diag(1 / np.array(diffuse.size)) @ frame[:2] @ basis
             points = np.c_[x, y] @ projection
             source = ((points.min(axis=0) + points.max(axis=0)) / 2) @ np.linalg.inv(
@@ -212,6 +212,36 @@ def label_jobs(name, faces, diffuse, entry):
     return jobs
 
 
+def engraving_normal(color, blank):
+    """Derive an inset lip from the final ink, so geometry and print cannot drift.
+
+    Image rows run downwards; tangent-space +Y runs upwards. Negative height
+    inside the ink gives an engraving, with the opposite signs for X/Y slopes.
+    """
+    ink = label_mask(color)
+    distance = ndimage.distance_transform_edt(ink) - ndimage.distance_transform_edt(
+        ~ink
+    )
+    radius = max(1.5, color.width / 800)
+    t = np.clip((distance + radius) / (2 * radius), 0, 1)
+    height = -radius * 0.9 * t * t * (3 - 2 * t)
+    dy, dx = np.gradient(height)
+    base = np.asarray(blank).astype(float) / 127.5 - 1
+    # Encoded neutral normals use 128, so remove their half-step bias.
+    base[..., :2] = (np.asarray(blank)[..., :2].astype(float) - 128) / 127
+    z = np.maximum(base[..., 2], 0.05)
+    normal = np.stack(
+        (base[..., 0] / z - dx, base[..., 1] / z + dy, np.ones_like(dx)), axis=-1
+    )
+    normal /= np.linalg.norm(normal, axis=-1, keepdims=True)
+    encoded = np.rint((normal + 1) * 127.5).clip(0, 255).astype("uint8")
+    # Preserve the exact blank pixels outside the lip, including baked bevels.
+    changed = (dx != 0) | (dy != 0)
+    output = np.array(blank)
+    output[changed] = encoded[changed]
+    return Image.fromarray(output)
+
+
 def center(name):
     folder, faces = face_uvs(name, True)
     diffuse = Image.open(folder / f"{name}_diffuse.png").convert("RGB")
@@ -221,9 +251,9 @@ def center(name):
     blank = Image.open(blank_folder / f"{name}-blank-normal.png").convert("RGB")
     assert normal.size == blank.size
     # D20 source albedo is double the normal-map resolution. Work at the shared
-    # resolution so ink and engraving receive exactly the same integer shift.
+    # resolution so ink and generated engraving use identical texel coordinates.
     diffuse = diffuse.resize(normal.size, Image.Resampling.LANCZOS)
-    output_color, output_normal = diffuse.copy(), normal.copy()
+    output_color = diffuse.copy()
     engraving_labels = Image.fromarray(label_mask(diffuse, 180))
     entry = next(
         e
@@ -236,8 +266,6 @@ def center(name):
             job[key] for key in ("source", "destination", "scale")
         )
         color = np.array(diffuse.crop(box))
-        original = np.array(normal.crop(box))
-        base = np.array(blank.crop(box))
         radius = max(3, round(diffuse.width / 160))
         engraving = np.asarray(engraving_labels.crop(box)) & inside
         if name == "d4":
@@ -270,30 +298,29 @@ def center(name):
                 f"{name}: shifted engraving reaches face border {box} source {source} target {destination} scale {scale}"
             )
         new_color = np.array(output_color.crop(box))
-        new_normal = np.array(output_normal.crop(box)).astype("float64")
         new_color[mask] = 255
-        new_normal[mask] = base[mask]
         for channel in range(3):
             ink_channel = (255 - color[:, :, channel].astype(float)) * mask
             shifted_ink = transform(ink_channel)
             new_color[:, :, channel][moved] = (
                 np.rint(255 - shifted_ink[moved]).clip(0, 255).astype("uint8")
             )
-            residual = (
-                original[:, :, channel].astype(float) - base[:, :, channel]
-            ) * mask
-            shifted_normal = transform(residual)
-            new_normal[:, :, channel][moved] = (
-                base[:, :, channel][moved] + shifted_normal[moved]
-            )
         output_color.paste(Image.fromarray(new_color), box[:2])
-        output_normal.paste(
-            Image.fromarray(np.rint(new_normal).clip(0, 255).astype("uint8")), box[:2]
-        )
     out = ASSETS / name / "centered"
     out.mkdir(exist_ok=True)
+    # Atlas backgrounds are not physical face borders. Black outside each
+    # island bleeds into face/bevel pixels through filtering and coarse mips.
+    # Keep the complete antialiased artwork, with white padding everywhere else.
+    keep = ndimage.binary_dilation(label_mask(output_color, 180), iterations=2)
+    clean = np.array(output_color)
+    clean[~keep] = 255
+    output_color = Image.fromarray(clean)
     output_color.save(out / f"{name}_diffuse.png")
-    output_normal.save(out / f"{name}_normal.png")
+    if name in ("d4", "d12"):
+        # Their analytic mesh normals already describe flat faces and round bevels.
+        # Rebaked old face-edge shading would make the regular faces look inset.
+        blank = Image.new("RGB", normal.size, (128, 128, 255))
+    engraving_normal(output_color, blank).save(out / f"{name}_normal.png")
     print(name, "aligned labels in their reading frames")
 
 

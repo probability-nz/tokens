@@ -52,16 +52,19 @@ resting planes, regular D4 geometry, and identical numbered/blank model buffers.
 Preparation measures numerals in their final reading orientation, so rotated UV
 islands and 6/9 dots cannot displace the numeral itself. D4's three labels on each
 face use identical corner spacing. Lettering uses a common physical height per
-die. Digits and disambiguation dots move together with their engraved normal-map
-detail; face order, rotations, meshes and UVs are unchanged. Per-die clearance
+die. Digits and disambiguation dots move together. Engraved normal-map detail is
+regenerated from the final ink so old print/engraving offsets cannot survive.
+Face order, rotations, meshes and UV coordinates are unchanged. Per-die clearance
 factors leave room around the tallest/widest labels and their engraving.
 
 `centered/` maps are generated from preserved `source/` or `regular/` maps by
-`scripts/assets/center-dice-labels.py`, using NumPy, Pillow and SciPy. Freshly baked
-regular blank normals (D4/D12) or original blank normals provide clean surfaces
-beneath relocated engravings. Preparation runs this step automatically; repeated
+`scripts/assets/center-dice-labels.py`, using NumPy, Pillow and SciPy. The regular D4/D12 use their analytic mesh normals with neutral blank maps,
+so the old baked face edges cannot make the faces appear inset. Other dice keep
+their original blank bevel maps beneath the new engraving. Atlas padding is
+white to prevent black island borders bleeding into faces at coarse mip levels. Preparation runs this step automatically; repeated
 builds never re-center an already processed image.
 
 Tests cover the published AVIFs as well as the PNG masters, physical reading-frame
 anchors, equal lettering heights, complete digit/dot components, residual engraving,
+engraving registration/direction, white filtering gutters, flat regular blank maps,
 and rebuilding regular dice without stale published blank maps.

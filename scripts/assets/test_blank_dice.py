@@ -80,7 +80,14 @@ class BlankDiceTests(unittest.TestCase):
                 ].get("sampler")
                 self.assertEqual(blank_sampler, original_sampler)
                 with Image.open(ASSETS / blank["images"][0]["uri"]) as texture:
-                    if name in ("d4", "d8", "d12", "d20"):
+                    if name in ("d4", "d12"):
+                        self.assertEqual(
+                            texture.convert("RGB").getcolors(
+                                texture.width * texture.height
+                            ),
+                            [(texture.width * texture.height, (128, 128, 255))],
+                        )
+                    elif name in ("d8", "d20"):
                         self.assertGreater(
                             len(texture.getcolors(texture.width * texture.height)), 100
                         )  # baked bevel shading remains
