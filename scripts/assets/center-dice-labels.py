@@ -16,7 +16,12 @@ from PIL import Image, ImageDraw
 from scipy import ndimage
 
 sys.path.insert(0, str(Path(__file__).parent))
-from dice_style import ENGRAVING_ROUNDING_MM, ENGRAVING_SMOOTHING_MM, ENGRAVING_DEPTH_MM
+from dice_style import (
+    ENGRAVING_ROUNDING_MM,
+    ENGRAVING_SMOOTHING_MM,
+    ENGRAVING_DEPTH_MM,
+    PIP_DEPTH_MM,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "src/assets"
@@ -130,7 +135,7 @@ def label_mask(image, threshold=100):
     return keep[components]
 
 
-def engraving_normal(color, blank, texels_per_mm=None):
+def engraving_normal(color, blank, texels_per_mm=None, *, spherical_pips=False):
     """Derive rounded recessed strokes from the final ink without print/normal drift.
 
     The exported Blender bitangent opposes increasing atlas rows (verified
@@ -139,11 +144,34 @@ def engraving_normal(color, blank, texels_per_mm=None):
     """
     ink = label_mask(color)
     density = color.width / 16 if texels_per_mm is None else texels_per_mm
-    # Distance grows inward from the antialiased ink boundary. A rounded scoop
-    # continues curving through the stroke instead of ending at a flat lip.
-    distance = np.maximum(ndimage.distance_transform_edt(ink) - 0.5, 0)
-    radius = ENGRAVING_ROUNDING_MM * density
-    height = -ENGRAVING_DEPTH_MM * density * np.tanh(distance / radius)
+    if spherical_pips:
+        # A circular pip is a spherical cap, not a wide numeral stroke. Fit
+        # each printed disc so its entire floor curves continuously to centre.
+        height = np.zeros(ink.shape, dtype=float)
+        components, _ = ndimage.label(ink)
+        for label, region in enumerate(ndimage.find_objects(components), 1):
+            if region is None:
+                continue
+            mask = components[region] == label
+            y, x = np.nonzero(mask)
+            cx, cy = x.mean(), y.mean()
+            aperture = np.sqrt(mask.sum() / np.pi)
+            depth = min(PIP_DEPTH_MM * density, aperture * 0.8)
+            sphere_radius = (aperture**2 + depth**2) / (2 * depth)
+            yy, xx = np.indices(mask.shape)
+            radial_squared = (xx - cx) ** 2 + (yy - cy) ** 2
+            bowl = (
+                sphere_radius
+                - depth
+                - np.sqrt(np.maximum(sphere_radius**2 - radial_squared, 0))
+            )
+            height[region] = np.minimum(bowl, 0)
+    else:
+        # Distance grows inward from the antialiased ink boundary. A rounded scoop
+        # continues curving through the stroke instead of ending at a flat lip.
+        distance = np.maximum(ndimage.distance_transform_edt(ink) - 0.5, 0)
+        radius = ENGRAVING_ROUNDING_MM * density
+        height = -ENGRAVING_DEPTH_MM * density * np.tanh(distance / radius)
     # Round the rim and medial-axis joins, avoiding staircase highlights and
     # sharp creases where two sides of a narrow numeral stroke meet.
     height = ndimage.gaussian_filter(
@@ -207,9 +235,9 @@ def center(name):
             for _, _, _, frame in faces
         ]
     )
-    engraving_normal(output_color, blank, texels_per_mm).save(
-        out / f"{name}_normal.png"
-    )
+    engraving_normal(
+        output_color, blank, texels_per_mm, spherical_pips=name == "die"
+    ).save(out / f"{name}_normal.png")
     print(name, "aligned labels in their reading frames")
 
 

@@ -98,7 +98,9 @@ and https://superretro.com.au/products/polyhedral-7-die-set-opaque-ivoryblack.
 Engraving normals are regenerated after this fitting, with a 0.18 mm virtual
 depth, a 0.25 mm rounded inward profile, and 0.04 mm rim smoothing converted
 through each model's UV texel density. The groove curves across the numeral
-stroke instead of producing a narrow lip around a flat bottom.
+stroke instead of producing a narrow lip around a flat bottom. Classic round pips
+use fitted spherical-cap bowls with 0.35 mm virtual depth so their broad floors
+curve continuously, rather than reusing the numeral-stroke profile.
 Mesh normals remain analytic and tangent frames are rebuilt for the new meshes;
 blank models retain the shared neutral normal texel.
 

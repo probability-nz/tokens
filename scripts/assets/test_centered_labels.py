@@ -39,6 +39,29 @@ class CenteredLabelsTests(unittest.TestCase):
         self.assertLess(np.max(np.abs(np.diff(x[245:267]))), 0.08)
         np.testing.assert_array_equal(normal[256, 200], [128, 128, 255])
 
+    def test_pip_floor_is_spherical_instead_of_flat(self):
+        y, x = np.indices((512, 512))
+        disk = (x - 256) ** 2 + (y - 256) ** 2 <= 50**2
+        color = np.full((512, 512, 3), 255, dtype=np.uint8)
+        color[disk] = 0
+        normal = np.asarray(
+            center.engraving_normal(
+                Image.fromarray(color),
+                Image.new("RGB", (512, 512), (128, 128, 255)),
+                100,
+                spherical_pips=True,
+            )
+        ).astype(float)
+        # A ball-cut floor tilts progressively farther from the centre, in
+        # both axes. The former stroke profile had an almost flat broad floor.
+        nx = (normal[256, :, 0] - 127.5) / 127.5
+        self.assertLess(abs(nx[256]), 0.01)
+        self.assertGreater(nx[246], 0.15)
+        self.assertGreater(nx[226], nx[246] * 2.5)
+        self.assertAlmostEqual(nx[226], -nx[286], delta=0.01)
+        self.assertAlmostEqual(normal[226, 256, 1], 255 - normal[256, 226, 0], delta=1)
+        np.testing.assert_array_equal(normal[256, 190], [128, 128, 255])
+
     def test_every_label_is_centered_and_keeps_its_components(self):
         for name in center.NAMES:
             folder, faces = center.face_uvs(name)
