@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw
 from scipy import ndimage
 
 sys.path.insert(0, str(Path(__file__).parent))
-from dice_style import ENGRAVING_HALF_WIDTH_MM, ENGRAVING_DEPTH_MM
+from dice_style import ENGRAVING_ROUNDING_MM, ENGRAVING_SMOOTHING_MM, ENGRAVING_DEPTH_MM
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "src/assets"
@@ -131,25 +131,24 @@ def label_mask(image, threshold=100):
 
 
 def engraving_normal(color, blank, texels_per_mm=None):
-    """Derive an inset lip from the final ink, so geometry and print cannot drift.
+    """Derive rounded recessed strokes from the final ink without print/normal drift.
 
-    Image rows run downwards; tangent-space +Y runs upwards. Negative height
-    inside the ink gives an engraving, with the opposite signs for X/Y slopes.
+    The exported Blender bitangent opposes increasing atlas rows (verified
+    against the mesh in test_paint_uvs). Negative height inside the ink gives
+    a recess, with opposite signs for X/Y slopes.
     """
     ink = label_mask(color)
-    distance = ndimage.distance_transform_edt(ink) - ndimage.distance_transform_edt(
-        ~ink
+    density = color.width / 16 if texels_per_mm is None else texels_per_mm
+    # Distance grows inward from the antialiased ink boundary. A rounded scoop
+    # continues curving through the stroke instead of ending at a flat lip.
+    distance = np.maximum(ndimage.distance_transform_edt(ink) - 0.5, 0)
+    radius = ENGRAVING_ROUNDING_MM * density
+    height = -ENGRAVING_DEPTH_MM * density * np.tanh(distance / radius)
+    # Round the rim and medial-axis joins, avoiding staircase highlights and
+    # sharp creases where two sides of a narrow numeral stroke meet.
+    height = ndimage.gaussian_filter(
+        height, max(0.75, ENGRAVING_SMOOTHING_MM * density), truncate=3
     )
-    radius = (
-        max(1.5, color.width / 800)
-        if texels_per_mm is None
-        else max(1.5, ENGRAVING_HALF_WIDTH_MM * texels_per_mm)
-    )
-    depth = (
-        radius * 0.9 if texels_per_mm is None else ENGRAVING_DEPTH_MM * texels_per_mm
-    )
-    t = np.clip((distance + radius) / (2 * radius), 0, 1)
-    height = -depth * t * t * (3 - 2 * t)
     dy, dx = np.gradient(height)
     base = np.asarray(blank).astype(float) / 127.5 - 1
     # Encoded neutral normals use 128, so remove their half-step bias.
@@ -160,7 +159,7 @@ def engraving_normal(color, blank, texels_per_mm=None):
     )
     normal /= np.linalg.norm(normal, axis=-1, keepdims=True)
     encoded = np.rint((normal + 1) * 127.5).clip(0, 255).astype("uint8")
-    # Preserve the exact blank pixels outside the lip, including baked bevels.
+    # Preserve exact neutral pixels outside the groove and its smoothed rim.
     changed = (dx != 0) | (dy != 0)
     output = np.array(blank)
     output[changed] = encoded[changed]

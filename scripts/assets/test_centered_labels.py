@@ -19,6 +19,26 @@ spec.loader.exec_module(center)
 
 
 class CenteredLabelsTests(unittest.TestCase):
+    def test_rounded_groove_has_curved_sides_and_a_smooth_recessed_floor(self):
+        # A 0.6 mm stroke at 100 px/mm: sample well inside the old 0.08 mm
+        # rim to catch a regression back to a flat-bottomed outline.
+        pixels = np.full((512, 512, 3), 255, dtype=np.uint8)
+        pixels[180:332, 226:286] = 0
+        normal = np.asarray(
+            center.engraving_normal(
+                Image.fromarray(pixels),
+                Image.new("RGB", (512, 512), (128, 128, 255)),
+                100,
+            )
+        ).astype(float)
+        x = (normal[256, :, 0] - 127.5) / 127.5
+        self.assertGreater(x[238], 0.25)
+        self.assertLess(x[273], -0.25)
+        self.assertGreater(x[238], x[249])
+        self.assertLess(abs(x[255]), 0.06)
+        self.assertLess(np.max(np.abs(np.diff(x[245:267]))), 0.08)
+        np.testing.assert_array_equal(normal[256, 200], [128, 128, 255])
+
     def test_every_label_is_centered_and_keeps_its_components(self):
         for name in center.NAMES:
             folder, faces = center.face_uvs(name)
@@ -192,7 +212,7 @@ class CenteredLabelsTests(unittest.TestCase):
                     self.assertGreater(np.mean(dot[edge] > 0), 0.97)
                     near_edge = ndimage.maximum_filter(edge, size=9)
                     changed = np.linalg.norm(residual, axis=-1) > 8
-                    self.assertLess(np.mean(changed[~near_edge]), 0.0001)
+                    self.assertLess(np.mean(changed[~(near_edge | ink)]), 0.0001)
 
     def test_face_boundaries_have_white_filtering_padding(self):
         for name in ("die", *center.NAMES):

@@ -66,6 +66,29 @@ class PaintUVTests(unittest.TestCase):
                 ids = read(
                     p["indices"], 1, {5123: "<u2", 5125: "<u4"}[a["componentType"]]
                 ).reshape(-1, 3)
+                # Validate the actual exported basis, not just a presumed
+                # green-channel convention: these Blender frames have +B
+                # opposing increasing atlas rows. Generated recess normals
+                # therefore use +dy in green and -dx in red.
+                checked = 0
+                for tri in ids:
+                    if (
+                        np.max(np.linalg.norm(normals[tri] - normals[tri[0]], axis=1))
+                        > 1e-6
+                    ):
+                        continue
+                    duv = uv[tri[1:]] - uv[tri[0]]
+                    frame = np.linalg.solve(duv, xyz[tri[1:]] - xyz[tri[0]])
+                    tangent = tangents[tri[0]]
+                    bitangent = np.cross(normals[tri[0]], tangent[:3]) * tangent[3]
+                    self.assertGreater(
+                        np.dot(tangent[:3], frame[0]) / np.linalg.norm(frame[0]), 0.999
+                    )
+                    self.assertLess(
+                        np.dot(bitangent, frame[1]) / np.linalg.norm(frame[1]), -0.999
+                    )
+                    checked += 1
+                self.assertGreater(checked, 0)
                 columns = layout["columns"]
                 tiles = np.floor(uv * columns).astype(int)
                 slots = tiles[:, 1] * columns + tiles[:, 0]

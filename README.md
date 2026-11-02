@@ -95,8 +95,10 @@ These are visual targets, not exact measurements or the proprietary Chessex font
 References: https://gnomishbazaar.com/products/chessex-opaque-white-black-polyhedral-7-die-set-chx25401
 and https://superretro.com.au/products/polyhedral-7-die-set-opaque-ivoryblack.
 
-Engraving normals are regenerated after this fitting, with a 0.05 mm virtual
-depth and 0.08 mm lip half-width converted through each model's UV texel density.
+Engraving normals are regenerated after this fitting, with a 0.18 mm virtual
+depth, a 0.25 mm rounded inward profile, and 0.04 mm rim smoothing converted
+through each model's UV texel density. The groove curves across the numeral
+stroke instead of producing a narrow lip around a flat bottom.
 Mesh normals remain analytic and tangent frames are rebuilt for the new meshes;
 blank models retain the shared neutral normal texel.
 
