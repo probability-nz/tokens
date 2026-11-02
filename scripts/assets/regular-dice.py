@@ -13,6 +13,9 @@ import struct
 import numpy as np
 from itertools import combinations
 
+sys.path.insert(0, str(Path(__file__).parent))
+from dice_style import HEIGHT_MM, FILLET_MM
+
 ROOT = Path(__file__).resolve().parents[2]
 NAME = sys.argv[sys.argv.index("--") + 1] if "--" in sys.argv else "d4"
 assert NAME in ("die", "d4", "d6", "d8", "d10", "d12", "d20")
@@ -23,7 +26,7 @@ catalog = json.loads((ROOT / "src/assets/catalog.json").read_text())
 entry = next(e for e in catalog["pieces"] if e["src"] == f"{NAME}/{NAME}.gltf")
 assert max(entry["scale"]) == min(entry["scale"])
 # One physical fillet radius for every numbered/blank die, at catalog scale.
-BEVEL = 0.0012 / entry["scale"][0]
+BEVEL = FILLET_MM / (entry["scale"][0] * 1000)
 SEGMENTS = 1 if NAME in ("d10", "d12", "d20") else 2
 
 
@@ -156,6 +159,13 @@ else:
         [i for i, v in enumerate(vertices) if abs(dot(n, v) - inradius) < 1e-8]
         for n in face_normals
     ]
+# Size the sharp support planes before constructing the physical-radius fillet.
+# A rounded tetrahedron's height is 4r - 2b; all other dice have opposite planes.
+height = HEIGHT_MM[NAME] / (entry["scale"][0] * 1000)
+target_inradius = (height + 2 * BEVEL) / 4 if NAME == "d4" else height / 2
+resize = target_inradius / inradius
+vertices = [mul(v, resize) for v in vertices]
+inradius = target_inradius
 inner = [mul(v, 1 - BEVEL / inradius) for v in vertices]
 edges = [
     (a, b)
@@ -328,6 +338,9 @@ if NAME != "d10":
 if NAME == "d4":
     source.scale.z *= math.sqrt(8) / 3
     source.location.z += 0.225 * math.sqrt(8) / 3
+if source is not None:
+    source.scale *= resize
+    source.location *= resize
 mesh = bpy.data.meshes.new(f"Regular {NAME.upper()}")
 coords = [(x, -z, y) for x, y, z in positions]
 mesh.from_pydata(coords, [], [indices[i : i + 3] for i in range(0, len(indices), 3)])

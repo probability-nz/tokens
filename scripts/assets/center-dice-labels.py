@@ -15,6 +15,15 @@ import numpy as np
 from PIL import Image, ImageDraw
 from scipy import ndimage
 
+sys.path.insert(0, str(Path(__file__).parent))
+from dice_style import (
+    LABEL_CLEARANCE_MM,
+    LABEL_MAX_HEIGHT_MM,
+    LABEL_FACE_FRACTION,
+    ENGRAVING_HALF_WIDTH_MM,
+    ENGRAVING_DEPTH_MM,
+)
+
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "src/assets"
 NAMES = ("d4", "d6", "d8", "d10", "d12", "d20")
@@ -144,7 +153,7 @@ def label_jobs(name, faces, diffuse, entry):
             parts = [
                 components == index
                 for index in range(1, count + 1)
-                if sizes[index] > 20
+                if sizes[index] > max(20, sizes.max() * 0.05)
             ]
             if len(parts) != 3:
                 raise ValueError(
@@ -184,6 +193,31 @@ def label_jobs(name, faces, diffuse, entry):
                 projection
             )
             height = np.ptp(points, axis=0)[1]
+            # Fit the complete ink (including 6/9 dots) inside the physical
+            # polygon, with the same clearance on every die. The numeral body
+            # remains the centering anchor even when it has a side dot.
+            millimetres_per_unit = entry["scale"][0] * 1000
+            polygon_frame = (polygon * diffuse.size - 0.5 - box[:2]) @ projection
+            destination_frame = destination @ projection
+            ink_y, ink_x = np.nonzero(part)
+            ink_frame = (np.c_[ink_x, ink_y] - source) @ projection
+            maximum_scale = float("inf")
+            for edge, end in zip(polygon_frame, np.roll(polygon_frame, -1, axis=0)):
+                direction = end - edge
+                inward = np.array([-direction[1], direction[0]])
+                inward /= np.linalg.norm(inward)
+                if np.dot(inward, polygon_frame.mean(axis=0) - edge) < 0:
+                    inward *= -1
+                available = (
+                    np.dot(inward, destination_frame - edge)
+                    - LABEL_CLEARANCE_MM / millimetres_per_unit
+                )
+                reach = -np.min(ink_frame @ inward)
+                if reach > 0:
+                    maximum_scale = min(maximum_scale, available / reach)
+            if maximum_scale <= 0:
+                raise ValueError(f"{name}: label anchor is too close to its face edge")
+            face_height = np.ptp(polygon_frame, axis=0)[1]
             scale = 1.0
             jobs.append(
                 dict(
@@ -195,25 +229,23 @@ def label_jobs(name, faces, diffuse, entry):
                     destination=destination,
                     scale=scale,
                     height=height,
+                    maximum_height=maximum_scale * height,
+                    face_height=face_height,
                 )
             )
-    common_height = (
-        np.median([job["height"] for job in jobs])
-        * {
-            "d4": 0.90,
-            "d6": 1.0,
-            "d8": 0.88,
-            "d10": 0.90,
-            "d12": 0.90,
-            "d20": 0.90,
-        }[name]
+    units_per_mm = 1 / (entry["scale"][0] * 1000)
+    common_height = min(
+        (4.0 if name == "d4" else LABEL_MAX_HEIGHT_MM) * units_per_mm,
+        min(job["face_height"] for job in jobs)
+        * (0.27 if name == "d4" else LABEL_FACE_FRACTION),
+        min(job["maximum_height"] for job in jobs),
     )
     for job in jobs:
         job["scale"] = common_height / job["height"]
     return jobs
 
 
-def engraving_normal(color, blank):
+def engraving_normal(color, blank, texels_per_mm=None):
     """Derive an inset lip from the final ink, so geometry and print cannot drift.
 
     Image rows run downwards; tangent-space +Y runs upwards. Negative height
@@ -223,9 +255,16 @@ def engraving_normal(color, blank):
     distance = ndimage.distance_transform_edt(ink) - ndimage.distance_transform_edt(
         ~ink
     )
-    radius = max(1.5, color.width / 800)
+    radius = (
+        max(1.5, color.width / 800)
+        if texels_per_mm is None
+        else max(1.5, ENGRAVING_HALF_WIDTH_MM * texels_per_mm)
+    )
+    depth = (
+        radius * 0.9 if texels_per_mm is None else ENGRAVING_DEPTH_MM * texels_per_mm
+    )
     t = np.clip((distance + radius) / (2 * radius), 0, 1)
-    height = -radius * 0.9 * t * t * (3 - 2 * t)
+    height = -depth * t * t * (3 - 2 * t)
     dy, dx = np.gradient(height)
     base = np.asarray(blank).astype(float) / 127.5 - 1
     # Encoded neutral normals use 128, so remove their half-step bias.
@@ -254,6 +293,18 @@ def center(name):
     # D20 source albedo is double the normal-map resolution. Work at the shared
     # resolution so ink and generated engraving use identical texel coordinates.
     diffuse = diffuse.resize(normal.size, Image.Resampling.LANCZOS)
+    if name == "d4":
+        # The imported tetrahedron can project tiny fragments of neighbouring
+        # bevel ink. Keep the twelve substantial corner digits, not those flecks.
+        components, _ = ndimage.label(label_mask(diffuse))
+        sizes = np.bincount(components.ravel())
+        sizes[0] = 0
+        keep = ndimage.binary_dilation(
+            sizes[components] > sizes.max() * 0.05, iterations=3
+        )
+        clean = np.array(diffuse)
+        clean[~keep] = 255
+        diffuse = Image.fromarray(clean)
     output_color = diffuse.copy()
     engraving_labels = Image.fromarray(label_mask(diffuse, 180))
     entry = next(
@@ -321,7 +372,16 @@ def center(name):
         # Analytic mesh normals describe flat faces and the shared round bevels.
         # Rebaked old face-edge shading would make the regular faces look inset.
         blank = Image.new("RGB", normal.size, (128, 128, 255))
-    engraving_normal(output_color, blank).save(out / f"{name}_normal.png")
+    # One physical engraving profile, accounting for each atlas's texel density.
+    texels_per_mm = np.median(
+        [
+            output_color.width / (np.linalg.norm(frame[0]) * entry["scale"][0] * 1000)
+            for _, _, _, frame in faces
+        ]
+    )
+    engraving_normal(output_color, blank, texels_per_mm).save(
+        out / f"{name}_normal.png"
+    )
     print(name, "aligned labels in their reading frames")
 
 

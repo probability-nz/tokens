@@ -43,8 +43,11 @@ def euler(m):
     def clean(a):
         for b in [i * math.pi / 6 for i in range(-6, 7)]:
             if abs(a - b) < 1e-7:
-                return b if b else 0
-        return float(a)
+                return math.pi if abs(b) == math.pi else (b if b else 0)
+        # Plane fitting and summation order can vary in the last few binary
+        # bits. Canonical precision prevents those bits from changing UV bakes
+        # on every regeneration; this is far below float32 mesh precision.
+        return round(float(a), 14)
 
     return [clean(a) for a in (x, y, z)]
 

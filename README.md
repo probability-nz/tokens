@@ -29,7 +29,7 @@ Original artwork remains in `source`; reproducible bake outputs are in `regular`
 Rebuild with Blender 5, Pillow, NumPy and SciPy available:
 
 ```sh
-for die in die d4 d6 d8 d10 d12 d20; do
+for die in die d4 d6 d8 d12 d20 d10; do
   blender -b --python-exit-code 1 --python scripts/assets/regular-dice.py -- "$die"
 done
 node scripts/prepare-assets.mjs
@@ -67,6 +67,18 @@ The tests require NumPy, Pillow 11.3+ with AVIF support, and SciPy, and cover al
 resting planes, regular geometry, the shared physical fillet radius, and identical
 numbered/blank model buffers.
 
+## Coordinated physical sizes
+
+`dice_style.py` defines the common style in millimetres. Nominal size is measured
+vertically from a resting face: Classic/D4/D6/D8/D10 are 16 mm, D12 is 18 mm,
+and D20 is 20 mm. These are deliberate design targets inspired by commercial
+16/18/20 mm sets (https://www.hddice.com/), not exact Chessex measurements.
+Different shapes naturally have different footprints at those heights.
+
+The generator resizes support planes before constructing the 1.2 mm fillet;
+scaling a finished rounded mesh would incorrectly change the physical radius.
+Numbered and blank variants retain identical sizes, poses, geometry and UVs.
+
 ## Centered numeral artwork
 
 Preparation measures numerals in their final reading orientation, so rotated UV
@@ -74,8 +86,16 @@ islands and 6/9 dots cannot displace the numeral itself. D4's three labels on ea
 face use identical corner spacing. Lettering uses a common physical height per
 die. Digits and disambiguation dots move together. Engraved normal-map detail is
 regenerated from the final ink so old print/engraving offsets cannot survive.
-Face order, rotations, meshes and UV coordinates are unchanged. Per-die clearance
-factors leave room around the tallest/widest labels and their engraving.
+Every label has at least 0.6 mm of clearance inside the flat face polygon.
+A single physical digit height is fitted to the widest label on each die,
+including two-digit values and 6/9 dots. Height is capped at 7 mm and 55% of the
+flat face's reading height; D4 uses its three corner anchors, a 4 mm cap and 27%.
+The glyph shape and stroke proportions are retained when scaling.
+
+Engraving normals are regenerated after this fitting, with a 0.05 mm virtual
+depth and 0.08 mm lip half-width converted through each model's UV texel density.
+Mesh normals remain analytic and tangent frames are rebuilt for the new meshes;
+blank models retain the shared neutral normal texel.
 
 `centered/` maps are generated from the `regular/` bake by
 `scripts/assets/center-dice-labels.py`, using NumPy, Pillow and SciPy. All dice
