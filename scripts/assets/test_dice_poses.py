@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import unittest
 import numpy as np
+from scipy.spatial import cKDTree
 
 spec = importlib.util.spec_from_file_location(
     "align", Path(__file__).with_name("align-dice.py")
@@ -45,12 +46,8 @@ class DicePoseTests(unittest.TestCase):
                 if entry["name"].startswith(("D4", "D12")):
                     for transform in transforms:
                         rotated = points @ transform.T
-                        distances = np.linalg.norm(
-                            rotated[:, None, :]
-                            - (points @ transforms[0].T)[None, :, :],
-                            axis=2,
-                        )
-                        self.assertLess(float(distances.min(axis=1).max()), 2e-7)
+                        distances, _ = cKDTree(points @ transforms[0].T).query(rotated)
+                        self.assertLess(float(distances.max()), 2e-7)
                     # Regular face polygons, no displaced source-mesh origin.
                     for g in groups:
                         corners = g["points"]

@@ -51,11 +51,11 @@ for (const piece of catalog.pieces) {
   if (piece.name.endsWith(' (blank)')) continue; // Generated separately from the matching numbered geometry.
   const modelPath = join(assets, piece.src);
   const directory = dirname(modelPath);
-  const centered = ['D4', 'D6', 'D8', 'D12', 'D20'].includes(piece.name);
-  if (centered) await run('python3', [join(root, 'scripts/assets/center-dice-labels.py'), piece.name.toLowerCase()]);
+  const centered = ['Classic die', 'D4', 'D6', 'D8', 'D12', 'D20'].includes(piece.name);
+  if (centered) await run('python3', [join(root, 'scripts/assets/center-dice-labels.py'), piece.name === 'Classic die' ? 'die' : piece.name.toLowerCase()]);
   const sourceDirectory = join(
     directory,
-    ['D4', 'D12'].includes(piece.name) ? 'regular' : 'source',
+    centered ? 'regular' : 'source',
   );
   const modelFile = basename(modelPath);
   const name = basename(modelFile, extname(modelFile));

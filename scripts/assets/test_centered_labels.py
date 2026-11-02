@@ -127,7 +127,7 @@ class CenteredLabelsTests(unittest.TestCase):
                 self.assertLess(np.ptp(heights) / np.mean(heights), 0.025)
 
     def test_no_old_engraving_remains_away_from_centered_labels(self):
-        for name in center.NAMES:
+        for name in ("die", *center.NAMES):
             with self.subTest(die=name):
                 folder = center.ASSETS / name / "centered"
                 color = Image.open(folder / f"{name}_diffuse.png").convert("RGB")
@@ -135,9 +135,7 @@ class CenteredLabelsTests(unittest.TestCase):
                     int
                 )
                 blank = np.asarray(
-                    Image.open(
-                        center.ASSETS / "blank-dice" / f"{name}-blank-normal.png"
-                    )
+                    Image.open(center.ASSETS / "blank-dice" / "flat-normal.png")
                 ).astype(int)
                 # Allow the engraving lip around the ink plus two antialias pixels.
                 radius = max(3, round(color.width / 160)) + 2
@@ -149,7 +147,7 @@ class CenteredLabelsTests(unittest.TestCase):
 
     def test_engraving_tracks_print_edges_and_points_into_the_die(self):
         # Check the actual saved maps, independent of the generation helper.
-        for name in center.NAMES:
+        for name in ("die", *center.NAMES):
             for published in (False, True):
                 folder = center.ASSETS / name
                 color = Image.open(
@@ -169,9 +167,7 @@ class CenteredLabelsTests(unittest.TestCase):
                     )
                 ).convert("RGB")
                 blank = (
-                    Image.open(
-                        center.ASSETS / "blank-dice" / f"{name}-blank-normal.png"
-                    )
+                    Image.open(center.ASSETS / "blank-dice" / "flat-normal.png")
                     .convert("RGB")
                     .resize(normal.size, Image.Resampling.LANCZOS)
                 )
@@ -193,7 +189,7 @@ class CenteredLabelsTests(unittest.TestCase):
                     self.assertLess(np.mean(changed[~near_edge]), 0.0001)
 
     def test_face_boundaries_have_white_filtering_padding(self):
-        for name in center.NAMES:
+        for name in ("die", *center.NAMES):
             _, faces = center.face_uvs(name)
             for published in (False, True):
                 image = Image.open(
@@ -218,6 +214,23 @@ class CenteredLabelsTests(unittest.TestCase):
                             ]
                             with self.subTest(die=name, published=published):
                                 self.assertGreater(int(patch.min()), 240)
+
+    def test_classic_pip_counts_match_every_roll_outcome(self):
+        entry = next(
+            e
+            for e in json.loads((center.ASSETS / "catalog.json").read_text())["pieces"]
+            if e["name"] == "Classic die"
+        )
+        _, faces = center.face_uvs("die")
+        image = Image.open(center.ASSETS / "die/die_diffuse.avif").convert("RGB")
+        ink = Image.fromarray(center.label_mask(image))
+        for outcome in entry["faces"]:
+            rotation = center.align.matrix(outcome["rotation"])
+            point, polygon, _ = max(faces, key=lambda f: (rotation @ f[2])[1])
+            box, inside, _ = center.face_region(point, polygon, image.size)
+            labels, _ = ndimage.label(np.asarray(ink.crop(box)) & inside)
+            sizes = np.bincount(labels.ravel())[1:]
+            self.assertEqual(int(np.count_nonzero(sizes > 20)), int(outcome["name"]))
 
     def test_d12_rebuild_does_not_depend_on_published_blank_copy(self):
         original = center.ASSETS

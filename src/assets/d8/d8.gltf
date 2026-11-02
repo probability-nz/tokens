@@ -1,7 +1,8 @@
 {
   "asset": {
-    "generator": "Khronos glTF Blender I/O v3.2.43",
-    "version": "2.0"
+    "generator": "Khronos glTF Blender I/O v5.0.21",
+    "version": "2.0",
+    "copyright": "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."
   },
   "scene": 0,
   "scenes": [
@@ -15,17 +16,11 @@
   "nodes": [
     {
       "mesh": 0,
-      "name": "d8",
-      "scale": [
-        1.375,
-        1.375,
-        1.375
-      ]
+      "name": "Regular D8"
     }
   ],
   "materials": [
     {
-      "doubleSided": true,
       "name": "d8 preferred",
       "normalTexture": {
         "index": 0
@@ -52,7 +47,6 @@
       }
     },
     {
-      "doubleSided": true,
       "name": "d8 preview",
       "pbrMetallicRoughness": {
         "baseColorTexture": {
@@ -65,15 +59,16 @@
   ],
   "meshes": [
     {
-      "name": "d8",
+      "name": "Regular D8",
       "primitives": [
         {
           "attributes": {
             "POSITION": 0,
             "NORMAL": 1,
-            "TEXCOORD_0": 2
+            "TEXCOORD_0": 2,
+            "TANGENT": 3
           },
-          "indices": 3,
+          "indices": 4,
           "material": 0
         }
       ]
@@ -129,58 +124,74 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 96,
+      "count": 864,
       "max": [
-        0.49319037795066833,
-        0.682602047920227,
-        0.49319037795066833
+        0.6767455339431763,
+        0.9415296912193298,
+        0.6767455339431763
       ],
       "min": [
-        -0.49319037795066833,
-        -0.682602047920227,
-        -0.49319037795066833
+        -0.6767455339431763,
+        -0.9415296912193298,
+        -0.6767455339431763
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 96,
+      "count": 864,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 96,
+      "count": 864,
       "type": "VEC2"
     },
     {
       "bufferView": 3,
+      "componentType": 5126,
+      "count": 864,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 4,
       "componentType": 5123,
-      "count": 312,
+      "count": 3048,
       "type": "SCALAR"
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 1152,
-      "byteOffset": 0
+      "byteLength": 10368,
+      "byteOffset": 0,
+      "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 1152,
-      "byteOffset": 1152
+      "byteLength": 10368,
+      "byteOffset": 10368,
+      "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 768,
-      "byteOffset": 2304
+      "byteLength": 6912,
+      "byteOffset": 20736,
+      "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 624,
-      "byteOffset": 3072
+      "byteLength": 13824,
+      "byteOffset": 27648,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 6096,
+      "byteOffset": 41472,
+      "target": 34963
     }
   ],
   "samplers": [
@@ -191,7 +202,7 @@
   ],
   "buffers": [
     {
-      "byteLength": 3696,
+      "byteLength": 47568,
       "uri": "d8.bin"
     }
   ],
@@ -209,65 +220,65 @@
         {
           "name": "1",
           "rotation": [
-            -0.9505481685414687,
-            0.00141505316608953,
-            0.0019810767409705362
+            -0.9553179633381123,
+            0.0014050268406646923,
+            0.0019870104149507938
           ]
         },
         {
           "name": "2",
           "rotation": [
-            2.191044485048325,
-            -0.0014150531660895155,
-            -0.001981076740970516
+            2.186274690251681,
+            -0.0014050268406646655,
+            -0.001987010414950756
           ]
         },
         {
           "name": "3",
           "rotation": [
             -3.141592653589793,
-            1.5683617759334503,
-            -0.9505467668763444
+            1.5683627474939297,
+            -0.9553165674359662
           ]
         },
         {
           "name": "4",
           "rotation": [
             3.141592653589793,
-            1.5683617759334503,
-            2.191045886713474
+            1.5683627474939297,
+            2.186276086153853
           ]
         },
         {
           "name": "5",
           "rotation": [
-            2.1910444850483244,
-            -0.0014150531660895318,
-            3.139611576848823
+            2.186274690251681,
+            -0.0014050268406646943,
+            3.1396056431748423
           ]
         },
         {
           "name": "6",
           "rotation": [
-            -0.9505481685414686,
-            0.0014150531660894938,
-            -3.139611576848823
+            -0.9553179633381123,
+            0.0014050268406646676,
+            -3.1396056431748427
           ]
         },
         {
           "name": "7",
           "rotation": [
             0,
-            -1.5683617759334503,
-            -2.191045886713474
+            -1.5683627474939297,
+            -2.186276086153853
           ]
         },
         {
           "name": "8",
           "rotation": [
             0,
-            -1.5683617759334503,
-            0.9505467668762937
+            -1.5683627474939297,
+            0.9553165674359155
           ]
         }
       ]

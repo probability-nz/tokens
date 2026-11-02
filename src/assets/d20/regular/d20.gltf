@@ -1,0 +1,162 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v5.0.21",
+    "version": "2.0",
+    "copyright": "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "Regular D20"
+    }
+  ],
+  "materials": [
+    {
+      "name": "D20",
+      "normalTexture": {
+        "index": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.5
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Regular D20",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2,
+            "TANGENT": 3
+          },
+          "indices": 4,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/png",
+      "name": "d20_normal.png",
+      "uri": "d20_normal.png"
+    },
+    {
+      "mimeType": "image/png",
+      "name": "d20_diffuse.001",
+      "uri": "d20_diffuse.png"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 2160,
+      "max": [
+        0.8897005319595337,
+        0.9903024435043335,
+        0.8480021953582764
+      ],
+      "min": [
+        -0.8897005319595337,
+        -0.9903024435043335,
+        -0.8480021953582764
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 2160,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 2160,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 2160,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5123,
+      "count": 7620,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 25920,
+      "byteOffset": 0,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 25920,
+      "byteOffset": 25920,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 17280,
+      "byteOffset": 51840,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 34560,
+      "byteOffset": 69120,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 15240,
+      "byteOffset": 103680,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 118920,
+      "uri": "d20.bin"
+    }
+  ]
+}

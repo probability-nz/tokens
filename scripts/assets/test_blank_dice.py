@@ -1,4 +1,4 @@
-"""Verify originals are preserved; compares the original token meshes with their blank variants."""
+"""Verify numbered and blank dice share the rounded mesh and neutral shading."""
 
 import json
 from pathlib import Path
@@ -24,15 +24,13 @@ class BlankDiceTests(unittest.TestCase):
                 self.assertEqual(blank[key], original[key])
             self.assertTrue((SOURCE / blank["src"]).is_file())
 
-    def test_original_mesh_buffers_and_material_settings_are_preserved(self):
+    def test_rounded_mesh_buffers_and_material_settings_are_shared(self):
         self.assertEqual(
             {p.stem for p in ASSETS.glob("*.gltf")}, {f"{n}-blank" for n in NAMES}
         )
         for name in NAMES:
             with self.subTest(name=name):
-                folder = (
-                    SOURCE / name / ("regular" if name in ("d4", "d12") else "source")
-                )
+                folder = SOURCE / name / "regular"
                 source = json.loads((folder / f"{name}.gltf").read_text())
                 blank = json.loads((ASSETS / f"{name}-blank.gltf").read_text())
                 numbered = json.loads((SOURCE / name / f"{name}.gltf").read_text())
@@ -80,7 +78,7 @@ class BlankDiceTests(unittest.TestCase):
                 ].get("sampler")
                 self.assertEqual(blank_sampler, original_sampler)
                 with Image.open(ASSETS / blank["images"][0]["uri"]) as texture:
-                    if name in ("d4", "d12"):
+                    if name in NAMES:
                         self.assertEqual(
                             texture.convert("RGB").getcolors(
                                 texture.width * texture.height

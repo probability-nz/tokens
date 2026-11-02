@@ -1,5 +1,5 @@
-"""Blender: generate regular D4/D12 meshes and transfer their original artwork.
-Run: blender -b --python-exit-code 1 --python scripts/assets/regular-dice.py -- d4 (or -- d12)
+"""Blender: generate consistently rounded regular dice meshes and transfer their original artwork.
+Run: blender -b --python-exit-code 1 --python scripts/assets/regular-dice.py -- d4 (die, d4, d6, d8, d12 or d20)
 Original source files are retained for reproducible baking (no external assets).
 """
 
@@ -13,11 +13,15 @@ from itertools import combinations
 
 ROOT = Path(__file__).resolve().parents[2]
 NAME = sys.argv[sys.argv.index("--") + 1] if "--" in sys.argv else "d4"
-assert NAME in ("d4", "d12")
+assert NAME in ("die", "d4", "d6", "d8", "d12", "d20")
 OUT = ROOT / f"src/assets/{NAME}/regular"
 OUT.mkdir(exist_ok=True)
 RADIUS = 3 * math.sqrt(2) / 4
-BEVEL = 0.05
+catalog = json.loads((ROOT / "src/assets/catalog.json").read_text())
+entry = next(e for e in catalog["pieces"] if e["src"] == f"{NAME}/{NAME}.gltf")
+assert max(entry["scale"]) == min(entry["scale"])
+# One physical fillet radius for every numbered/blank die, at catalog scale.
+BEVEL = 0.0006 / entry["scale"][0]
 SEGMENTS = 6
 
 
@@ -63,28 +67,71 @@ if NAME == "d4":
     faces = [[i for i in range(4) if i != opposite] for opposite in range(4)]
     inradius = RADIUS / 3
 else:
-    # Exact dodecahedral normals use the golden ratio. Keep the original
-    # supporting-plane distance, replacing uneven source bevels, not the size.
-    phi = (1 + math.sqrt(5)) / 2
-    face_normals = [
-        unit(n)
-        for a in (-1, 1)
-        for b in (-1, 1)
-        for n in [(0, a * phi, b), (a, 0, b * phi), (a * phi, b, 0)]
-    ]
     import importlib.util
 
     spec = importlib.util.spec_from_file_location(
-        "align", Path(__file__).with_name("align-dice.py")
+        "align", ROOT / "scripts/assets/align-dice.py"
     )
     align_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(align_module)
-    _, _, groups = align_module.geometry(ROOT / "src/assets/d12/source/d12.gltf")
+    _, _, groups = align_module.geometry(ROOT / f"src/assets/{NAME}/source/{NAME}.gltf")
     inradius = float(
         np.mean([np.mean(np.array(g["points"]) @ g["normal"]) for g in groups])
     )
+    if NAME in ("die", "d6"):
+        face_normals = [
+            tuple(sign if i == axis else 0 for i in range(3))
+            for axis in range(3)
+            for sign in (-1, 1)
+        ]
+    elif NAME == "d8":
+        face_normals = [
+            n
+            for a in (-1, 1)
+            for b in (-1, 1)
+            for n in [
+                (a * math.sqrt(2 / 3), b / math.sqrt(3), 0),
+                (0, b / math.sqrt(3), a * math.sqrt(2 / 3)),
+            ]
+        ]
+    elif NAME == "d12":
+        phi = (1 + math.sqrt(5)) / 2
+        face_normals = [
+            unit(n)
+            for a in (-1, 1)
+            for b in (-1, 1)
+            for n in [(0, a * phi, b), (a, 0, b * phi), (a * phi, b, 0)]
+        ]
+    else:
+        # Exact icosahedron in the original north/south-pole orientation.
+        ideal = [(0, 1, 0), (0, -1, 0)] + [
+            (
+                2
+                / math.sqrt(5)
+                * math.cos((2 * k + (0 if sign == 1 else 1)) * math.pi / 5),
+                sign / math.sqrt(5),
+                2
+                / math.sqrt(5)
+                * math.sin((2 * k + (0 if sign == 1 else 1)) * math.pi / 5),
+            )
+            for sign in (-1, 1)
+            for k in range(5)
+        ]
+        face_normals = []
+        for ids in combinations(range(12), 3):
+            a, b, c = [ideal[i] for i in ids]
+            n = unit(cross(sub(b, a), sub(c, a)))
+            if dot(n, a) < 0:
+                n = mul(n, -1)
+            if max(dot(n, q) - dot(n, a) for q in ideal) > 1e-8:
+                continue
+            if not any(
+                np.linalg.norm(np.array(n) - old) < 1e-8 for old in face_normals
+            ):
+                face_normals.append(n)
+        assert len(face_normals) == 20
     vertices = []
-    for ids in combinations(range(12), 3):
+    for ids in combinations(range(len(face_normals)), 3):
         n = np.array([face_normals[i] for i in ids])
         if abs(np.linalg.det(n)) < 1e-8:
             continue
@@ -97,8 +144,6 @@ else:
         [i for i, v in enumerate(vertices) if abs(dot(n, v) - inradius) < 1e-8]
         for n in face_normals
     ]
-    assert len(vertices) == 20 and all(len(f) == 5 for f in faces)
-    BEVEL = 0.03
 inner = [mul(v, 1 - BEVEL / inradius) for v in vertices]
 edges = [
     (a, b)
@@ -175,23 +220,34 @@ for patch, (a, b) in enumerate(edges, len(faces)):
         triangle(p[0], q[1], q[0])
 for corner in range(len(vertices)):
     ns = [face_normals[i] for i, f in enumerate(faces) if corner in f]
-    assert len(ns) == 3
-    grid = {}
-    for i in range(SEGMENTS + 1):
-        for j in range(SEGMENTS + 1 - i):
-            ws = ((SEGMENTS - i - j) / SEGMENTS, i / SEGMENTS, j / SEGMENTS)
-            n = unit(tuple(sum(n[k] * w for n, w in zip(ns, ws)) for k in range(3)))
-            grid[i, j] = vertex(
-                add(inner[corner], mul(n, BEVEL)),
-                n,
-                ((i + j / 2) / SEGMENTS, j / SEGMENTS),
-                len(faces) + len(edges) + corner,
-            )
-    for i in range(SEGMENTS):
-        for j in range(SEGMENTS - i):
-            triangle(grid[i, j], grid[i + 1, j], grid[i, j + 1])
-            if i + j < SEGMENTS - 1:
-                triangle(grid[i + 1, j], grid[i + 1, j + 1], grid[i, j + 1])
+    centre = unit(tuple(sum(n[k] for n in ns) for k in range(3)))
+    u = unit(sub(ns[0], mul(centre, dot(ns[0], centre))))
+    v = cross(centre, u)
+    ns.sort(key=lambda n: math.atan2(dot(n, v), dot(n, u)))
+    # A fan supports the 3/4/5 faces meeting at cube/octahedron/icosahedron corners.
+    for a, b in zip(ns, ns[1:] + ns[:1]):
+        triangle_normals = [centre, a, b]
+        grid = {}
+        for i in range(SEGMENTS + 1):
+            for j in range(SEGMENTS + 1 - i):
+                ws = ((SEGMENTS - i - j) / SEGMENTS, i / SEGMENTS, j / SEGMENTS)
+                n = unit(
+                    tuple(
+                        sum(n[k] * w for n, w in zip(triangle_normals, ws))
+                        for k in range(3)
+                    )
+                )
+                grid[i, j] = vertex(
+                    add(inner[corner], mul(n, BEVEL)),
+                    n,
+                    ((i + j / 2) / SEGMENTS, j / SEGMENTS),
+                    len(faces) + len(edges) + corner,
+                )
+        for i in range(SEGMENTS):
+            for j in range(SEGMENTS - i):
+                triangle(grid[i, j], grid[i + 1, j], grid[i, j + 1])
+                if i + j < SEGMENTS - 1:
+                    triangle(grid[i + 1, j], grid[i + 1, j + 1], grid[i, j + 1])
 # Cycles transfers the existing color/engraving to the new UVs and tangent frame.
 bpy.ops.object.select_all(action="SELECT")
 bpy.ops.object.delete(use_global=False)
@@ -232,14 +288,9 @@ bpy.ops.object.select_all(action="DESELECT")
 source.select_set(True)
 target.select_set(True)
 bpy.context.view_layer.objects.active = target
-for kind, name, color in [
-    ("DIFFUSE", NAME + "_diffuse", (1, 1, 1, 1)),
-    ("NORMAL", NAME + "_normal", (0.5, 0.5, 1, 1)),
-]:
+for kind, name, color in [("DIFFUSE", NAME + "_diffuse", (1, 1, 1, 1))]:
     image = bpy.data.images.new(name, width=2048, height=2048, alpha=False)
     image.generated_color = color
-    if kind == "NORMAL":
-        image.colorspace_settings.name = "Non-Color"
     node = mat.node_tree.nodes.new("ShaderNodeTexImage")
     node.image = image
     mat.node_tree.nodes.active = node
@@ -247,31 +298,21 @@ for kind, name, color in [
     image.filepath_raw = str(OUT / (name + ".png"))
     image.file_format = "PNG"
     image.save()
-# Bake the already de-numbered source normal map onto the same regular mesh.
-# This keeps the blank die's bevel shading without retaining engraved glyphs.
-source_shader = source.data.materials[0].node_tree.nodes.get("Principled BSDF")
-normal_map = source_shader.inputs["Normal"].links[0].from_node
-source_texture = normal_map.inputs["Color"].links[0].from_node
-source_texture.image = bpy.data.images.load(
-    str(ROOT / f"src/assets/{NAME}/source/{NAME}-original-blank-normal.png")
-)
-source_texture.image.colorspace_settings.name = "Non-Color"
-blank = bpy.data.images.new(
-    NAME + "-blank-normal", width=2048, height=2048, alpha=False
-)
-blank.colorspace_settings.name = "Non-Color"
-blank_node = mat.node_tree.nodes.new("ShaderNodeTexImage")
-blank_node.image = blank
-mat.node_tree.nodes.active = blank_node
-bpy.ops.object.bake(type="NORMAL")
-blank.filepath_raw = str(OUT / (NAME + "-blank-normal.png"))
-blank.file_format = "PNG"
-blank.save()
+# Analytic mesh normals supply all edge/corner rounding. Do not bake the old
+# bevels onto the new flat faces; final engraving is derived from final ink.
+from PIL import Image
+
+for suffix in ("_normal", "-blank-normal"):
+    path = OUT / (NAME + suffix + ".png")
+    Image.new("RGB", (2048, 2048), (128, 128, 255)).save(path)
+    node = mat.node_tree.nodes.new("ShaderNodeTexImage")
+    node.image = bpy.data.images.load(str(path))
+    node.image.colorspace_settings.name = "Non-Color"
 # Export through Blender so UV V direction and tangent handedness match the
 # baked tangent-space normal map. A geometry-only UV flip would invert bumps.
 shader = mat.node_tree.nodes.get("Principled BSDF")
 images = {
-    Path(node.image.filepath_raw).stem: node
+    Path(node.image.filepath_raw or node.image.filepath).stem: node
     for node in mat.node_tree.nodes
     if node.type == "TEX_IMAGE"
 }

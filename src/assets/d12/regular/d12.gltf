@@ -64,7 +64,7 @@
   "images": [
     {
       "mimeType": "image/png",
-      "name": "d12_normal.001",
+      "name": "d12_normal.png",
       "uri": "d12_normal.png"
     },
     {
@@ -77,73 +77,73 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 1040,
+      "count": 2160,
       "max": [
-        0.8037377595901489,
-        0.8037377595901489,
-        0.8037377595901489
+        0.802420973777771,
+        0.802420973777771,
+        0.802420973777771
       ],
       "min": [
-        -0.8037377595901489,
-        -0.8037377595901489,
-        -0.8037377595901489
+        -0.802420973777771,
+        -0.802420973777771,
+        -0.802420973777771
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 1040,
+      "count": 2160,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 1040,
+      "count": 2160,
       "type": "VEC2"
     },
     {
       "bufferView": 3,
       "componentType": 5126,
-      "count": 1040,
+      "count": 2160,
       "type": "VEC4"
     },
     {
       "bufferView": 4,
       "componentType": 5123,
-      "count": 3348,
+      "count": 7668,
       "type": "SCALAR"
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 12480,
+      "byteLength": 25920,
       "byteOffset": 0,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 12480,
-      "byteOffset": 12480,
+      "byteLength": 25920,
+      "byteOffset": 25920,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 8320,
-      "byteOffset": 24960,
+      "byteLength": 17280,
+      "byteOffset": 51840,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 16640,
-      "byteOffset": 33280,
+      "byteLength": 34560,
+      "byteOffset": 69120,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 6696,
-      "byteOffset": 49920,
+      "byteLength": 15336,
+      "byteOffset": 103680,
       "target": 34963
     }
   ],
@@ -155,7 +155,7 @@
   ],
   "buffers": [
     {
-      "byteLength": 56616,
+      "byteLength": 119016,
       "uri": "d12.bin"
     }
   ]

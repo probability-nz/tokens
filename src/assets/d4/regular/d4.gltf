@@ -64,7 +64,7 @@
   "images": [
     {
       "mimeType": "image/png",
-      "name": "d4_normal.001",
+      "name": "d4_normal.png",
       "uri": "d4_normal.png"
     },
     {
@@ -77,73 +77,73 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 208,
+      "count": 432,
       "max": [
-        0.790985107421875,
-        0.9606601595878601,
-        0.47879669070243835
+        0.8116695284843445,
+        0.985660195350647,
+        0.48409751057624817
       ],
       "min": [
-        -0.790985107421875,
+        -0.8116695284843445,
         -0.3535533845424652,
-        -0.9057191014289856
+        -0.9310644865036011
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 208,
+      "count": 432,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 208,
+      "count": 432,
       "type": "VEC2"
     },
     {
       "bufferView": 3,
       "componentType": 5126,
-      "count": 208,
+      "count": 432,
       "type": "VEC4"
     },
     {
       "bufferView": 4,
       "componentType": 5123,
-      "count": 660,
+      "count": 1524,
       "type": "SCALAR"
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 2496,
+      "byteLength": 5184,
       "byteOffset": 0,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 2496,
-      "byteOffset": 2496,
+      "byteLength": 5184,
+      "byteOffset": 5184,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 1664,
-      "byteOffset": 4992,
+      "byteLength": 3456,
+      "byteOffset": 10368,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 3328,
-      "byteOffset": 6656,
+      "byteLength": 6912,
+      "byteOffset": 13824,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 1320,
-      "byteOffset": 9984,
+      "byteLength": 3048,
+      "byteOffset": 20736,
       "target": 34963
     }
   ],
@@ -155,7 +155,7 @@
   ],
   "buffers": [
     {
-      "byteLength": 11304,
+      "byteLength": 23784,
       "uri": "d4.bin"
     }
   ]

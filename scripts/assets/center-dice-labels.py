@@ -2,7 +2,7 @@
 
 Run before prepare-assets.mjs. Original maps, UVs, meshes and face ordering stay
 intact; centered/ contains reproducible maps derived from the original artwork.
-D4 retains corner labels with shared anchors; the classic pip die is unchanged.
+D4 retains shared corner anchors; the classic die keeps its original pip layout.
 """
 
 import importlib.util
@@ -43,7 +43,7 @@ def hull(points):
 
 
 def face_uvs(name, with_frames=False):
-    folder = ASSETS / name / ("regular" if name in ("d4", "d12") else "source")
+    folder = ASSETS / name / "regular"
     path = folder / f"{name}.gltf"
     doc, positions, groups = align.geometry(path)
     buffers = [(folder / b["uri"]).read_bytes() for b in doc["buffers"]]
@@ -247,7 +247,7 @@ def center(name):
     diffuse = Image.open(folder / f"{name}_diffuse.png").convert("RGB")
     normal = Image.open(folder / f"{name}_normal.png").convert("RGB")
     # Use freshly baked regular maps, not potentially stale published copies.
-    blank_folder = folder if name in ("d4", "d12") else ASSETS / "blank-dice"
+    blank_folder = folder
     blank = Image.open(blank_folder / f"{name}-blank-normal.png").convert("RGB")
     assert normal.size == blank.size
     # D20 source albedo is double the normal-map resolution. Work at the shared
@@ -258,15 +258,15 @@ def center(name):
     entry = next(
         e
         for e in json.loads((ASSETS / "catalog.json").read_text())["pieces"]
-        if e["name"] == name.upper()
+        if e["name"] == ("Classic die" if name == "die" else name.upper())
     )
-    for job in label_jobs(name, faces, diffuse, entry):
+    for job in ([] if name == "die" else label_jobs(name, faces, diffuse, entry)):
         box, inside, safe, ink = (job[key] for key in ("box", "inside", "safe", "ink"))
         source, destination, scale = (
             job[key] for key in ("source", "destination", "scale")
         )
         color = np.array(diffuse.crop(box))
-        radius = max(3, round(diffuse.width / 160))
+        radius = 3  # Preserve antialiasing; the old engraving is no longer copied.
         engraving = np.asarray(engraving_labels.crop(box)) & inside
         if name == "d4":
             engraving &= ndimage.binary_dilation(ink, iterations=3)
@@ -316,8 +316,8 @@ def center(name):
     clean[~keep] = 255
     output_color = Image.fromarray(clean)
     output_color.save(out / f"{name}_diffuse.png")
-    if name in ("d4", "d12"):
-        # Their analytic mesh normals already describe flat faces and round bevels.
+    if name in ("die", *NAMES):
+        # Analytic mesh normals describe flat faces and the shared round bevels.
         # Rebaked old face-edge shading would make the regular faces look inset.
         blank = Image.new("RGB", normal.size, (128, 128, 255))
     engraving_normal(output_color, blank).save(out / f"{name}_normal.png")
@@ -326,6 +326,6 @@ def center(name):
 
 if __name__ == "__main__":
     for name in sys.argv[1:] or NAMES:
-        if name not in NAMES:
+        if name not in ("die", *NAMES):
             raise ValueError(name)
         center(name)
