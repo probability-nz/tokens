@@ -77,73 +77,73 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 4260,
+      "count": 660,
       "max": [
-        0.798031747341156,
-        0.798031747341156,
-        0.798031747341156
+        0.7958371043205261,
+        0.7958371043205261,
+        0.7958371043205261
       ],
       "min": [
-        -0.798031747341156,
-        -0.798031747341156,
-        -0.798031747341156
+        -0.7958371043205261,
+        -0.7958371043205261,
+        -0.7958371043205261
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 4260,
+      "count": 660,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 4260,
+      "count": 660,
       "type": "VEC2"
     },
     {
       "bufferView": 3,
       "componentType": 5126,
-      "count": 4260,
+      "count": 660,
       "type": "VEC4"
     },
     {
       "bufferView": 4,
       "componentType": 5123,
-      "count": 15228,
+      "count": 828,
       "type": "SCALAR"
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 51120,
+      "byteLength": 7920,
       "byteOffset": 0,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 51120,
-      "byteOffset": 51120,
+      "byteLength": 7920,
+      "byteOffset": 7920,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 34080,
-      "byteOffset": 102240,
+      "byteLength": 5280,
+      "byteOffset": 15840,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 68160,
-      "byteOffset": 136320,
+      "byteLength": 10560,
+      "byteOffset": 21120,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 30456,
-      "byteOffset": 204480,
+      "byteLength": 1656,
+      "byteOffset": 31680,
       "target": 34963
     }
   ],
@@ -155,7 +155,7 @@
   ],
   "buffers": [
     {
-      "byteLength": 234936,
+      "byteLength": 33336,
       "uri": "d12.bin"
     }
   ]

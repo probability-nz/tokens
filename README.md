@@ -18,9 +18,9 @@ Assets were created by Misha Tsyatsko under contract for Garbo Succus.
 ## Regular dice and face poses
 
 All six dice shapes (including the classic pip cube) use centred, mathematically
-regular meshes with a **1.0 mm geometric fillet radius at catalog scale**. Faces
-are flat; edges are cylindrical and corners spherical, with six subdivisions
-per arc. UV islands use a spacious painting grid: one upright island per numbered
+regular meshes with a **1.2 mm geometric fillet radius at catalog scale**. Faces
+are flat; edges are cylindrical and corners spherical, with analytic smooth normals. D12/D20 use one subdivision
+per half-edge/corner patch; the sharper shapes use two. UV islands use a spacious painting grid: one upright island per numbered
 face, including its rounded rim. Seams meet halfway around rounded edges;
 there are no separate edge/corner islands or overlapping triangles. Original
 artwork is transferred onto the new UVs; engraving is rebuilt

@@ -23,8 +23,8 @@ catalog = json.loads((ROOT / "src/assets/catalog.json").read_text())
 entry = next(e for e in catalog["pieces"] if e["src"] == f"{NAME}/{NAME}.gltf")
 assert max(entry["scale"]) == min(entry["scale"])
 # One physical fillet radius for every numbered/blank die, at catalog scale.
-BEVEL = 0.0010 / entry["scale"][0]
-SEGMENTS = 6
+BEVEL = 0.0012 / entry["scale"][0]
+SEGMENTS = 1 if NAME in ("d12", "d20") else 2
 
 
 def add(a, b):
