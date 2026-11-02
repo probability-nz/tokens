@@ -1,0 +1,21 @@
+{
+  "columns": 2,
+  "patches": [
+    {
+      "kind": "face",
+      "label": "Opposite 1"
+    },
+    {
+      "kind": "face",
+      "label": "Opposite 2"
+    },
+    {
+      "kind": "face",
+      "label": "Opposite 3"
+    },
+    {
+      "kind": "face",
+      "label": "Opposite 4"
+    }
+  ]
+}

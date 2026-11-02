@@ -3,6 +3,7 @@ Run: blender -b --python-exit-code 1 --python scripts/assets/regular-dice.py -- 
 Original source files are retained for reproducible baking (no external assets).
 """
 
+import importlib.util
 import bpy
 import json
 import math
@@ -21,7 +22,7 @@ catalog = json.loads((ROOT / "src/assets/catalog.json").read_text())
 entry = next(e for e in catalog["pieces"] if e["src"] == f"{NAME}/{NAME}.gltf")
 assert max(entry["scale"]) == min(entry["scale"])
 # One physical fillet radius for every numbered/blank die, at catalog scale.
-BEVEL = 0.0006 / entry["scale"][0]
+BEVEL = 0.0010 / entry["scale"][0]
 SEGMENTS = 6
 
 
@@ -150,7 +151,30 @@ edges = [
     for a, b in combinations(range(len(vertices)), 2)
     if sum(a in f and b in f for f in faces) == 2
 ]
-atlas = math.ceil(math.sqrt(len(faces) + len(edges) + len(vertices)))
+# One upright, padded island per face, including its rounded rim. The regular
+# grid is deliberately easy to paint rather than tightly packed.
+atlas = math.ceil(math.sqrt(len(faces)))
+spec = importlib.util.spec_from_file_location(
+    "align", ROOT / "scripts/assets/align-dice.py"
+)
+align = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(align)
+face_poses = [
+    max(
+        entry["faces"],
+        key=lambda f: (-1 if NAME == "d4" else 1)
+        * (align.matrix(f["rotation"]) @ n)[1],
+    )
+    for n in face_normals
+]
+face_slots = [int(f["name"]) - 1 for f in face_poses]
+assert sorted(face_slots) == list(range(len(faces)))
+patches = [None] * len(faces)
+for slot in face_slots:
+    patches[slot] = {
+        "kind": "face",
+        "label": f"{'Opposite' if NAME == 'd4' else 'Face'} {slot + 1}",
+    }
 positions = []
 normals = []
 uvs = []
@@ -163,8 +187,8 @@ def vertex(p, n, uv, patch):
     normals.append(n)
     uvs.append(
         (
-            (patch % atlas + 0.04 + 0.92 * uv[0]) / atlas,
-            (patch // atlas + 0.04 + 0.92 * uv[1]) / atlas,
+            (patch % atlas + 0.08 + 0.84 * uv[0]) / atlas,
+            (atlas - 1 - patch // atlas + 0.04 + 0.84 * uv[1]) / atlas,
         )
     )
     return i
@@ -182,72 +206,86 @@ def triangle(a, b, c):
     indices.extend([a, b, c])
 
 
+frames = []
 for patch, (corners, n) in enumerate(zip(faces, face_normals)):
     centre = mul(n, inradius)
-    ps = [add(inner[i], mul(n, BEVEL)) for i in corners]
-    u = unit(sub(ps[0], centre))
+    u = tuple(align.matrix(face_poses[patch]["rotation"])[0])
     v = cross(n, u)
+    radius = max(
+        math.sqrt(dot(sub(vertices[i], centre), sub(vertices[i], centre)))
+        for i in corners
+    )
+    frames.append((centre, u, v, radius))
+
+
+def face_vertex(p, n, face):
+    centre, u, v, radius = frames[face]
+    return vertex(
+        p,
+        n,
+        (
+            0.5 + dot(sub(p, centre), u) / (2 * radius),
+            0.5 + dot(sub(p, centre), v) / (2 * radius),
+        ),
+        face_slots[face],
+    )
+
+
+for face, (corners, n) in enumerate(zip(faces, face_normals)):
+    centre, u, v, radius = frames[face]
+    ps = [add(inner[i], mul(n, BEVEL)) for i in corners]
     ps.sort(key=lambda p: math.atan2(dot(sub(p, centre), v), dot(sub(p, centre), u)))
-    radius = max(math.sqrt(dot(sub(p, centre), sub(p, centre))) for p in ps)
-    ids = [
-        vertex(
-            p,
-            n,
-            (
-                0.5 + dot(sub(p, centre), u) / (2 * radius),
-                0.5 + dot(sub(p, centre), v) / (2 * radius),
-            ),
-            patch,
-        )
-        for p in ps
-    ]
+    ids = [face_vertex(p, n, face) for p in ps]
     for i in range(1, len(ids) - 1):
         triangle(ids[0], ids[i], ids[i + 1])
-for patch, (a, b) in enumerate(edges, len(faces)):
-    n0, n1 = [face_normals[i] for i, f in enumerate(faces) if a in f and b in f]
-    rows = []
-    for step in range(SEGMENTS + 1):
-        t = step / SEGMENTS
-        n = unit(add(mul(n0, 1 - t), mul(n1, t)))
-        rows.append(
-            [
-                vertex(add(inner[i], mul(n, BEVEL)), n, (u, t), patch)
-                for i, u in [(a, 0), (b, 1)]
-            ]
-        )
-    for p, q in zip(rows, rows[1:]):
-        triangle(p[0], p[1], q[1])
-        triangle(p[0], q[1], q[0])
+flat_vertex_count = len(positions)
+for a, b in edges:
+    neighbours = [i for i, f in enumerate(faces) if a in f and b in f]
+    middle = unit(add(*(face_normals[i] for i in neighbours)))
+    for face in neighbours:
+        rows = []
+        for step in range(SEGMENTS + 1):
+            t = step / SEGMENTS
+            n = unit(add(mul(face_normals[face], 1 - t), mul(middle, t)))
+            rows.append(
+                [face_vertex(add(inner[i], mul(n, BEVEL)), n, face) for i in (a, b)]
+            )
+        for p, q in zip(rows, rows[1:]):
+            triangle(p[0], p[1], q[1])
+            triangle(p[0], q[1], q[0])
 for corner in range(len(vertices)):
-    ns = [face_normals[i] for i, f in enumerate(faces) if corner in f]
-    centre = unit(tuple(sum(n[k] for n in ns) for k in range(3)))
-    u = unit(sub(ns[0], mul(centre, dot(ns[0], centre))))
+    neighbours = [i for i, f in enumerate(faces) if corner in f]
+    centre = unit(tuple(sum(face_normals[i][k] for i in neighbours) for k in range(3)))
+    u = unit(
+        sub(
+            face_normals[neighbours[0]],
+            mul(centre, dot(face_normals[neighbours[0]], centre)),
+        )
+    )
     v = cross(centre, u)
-    ns.sort(key=lambda n: math.atan2(dot(n, v), dot(n, u)))
-    # A fan supports the 3/4/5 faces meeting at cube/octahedron/icosahedron corners.
-    for a, b in zip(ns, ns[1:] + ns[:1]):
-        triangle_normals = [centre, a, b]
-        grid = {}
-        for i in range(SEGMENTS + 1):
-            for j in range(SEGMENTS + 1 - i):
-                ws = ((SEGMENTS - i - j) / SEGMENTS, i / SEGMENTS, j / SEGMENTS)
-                n = unit(
-                    tuple(
-                        sum(n[k] * w for n, w in zip(triangle_normals, ws))
-                        for k in range(3)
+    neighbours.sort(
+        key=lambda i: math.atan2(dot(face_normals[i], v), dot(face_normals[i], u))
+    )
+    for a, b in zip(neighbours, neighbours[1:] + neighbours[:1]):
+        middle = unit(add(face_normals[a], face_normals[b]))
+        for face in (a, b):
+            triangle_normals = [centre, face_normals[face], middle]
+            grid = {}
+            for i in range(SEGMENTS + 1):
+                for j in range(SEGMENTS + 1 - i):
+                    ws = ((SEGMENTS - i - j) / SEGMENTS, i / SEGMENTS, j / SEGMENTS)
+                    n = unit(
+                        tuple(
+                            sum(n[k] * w for n, w in zip(triangle_normals, ws))
+                            for k in range(3)
+                        )
                     )
-                )
-                grid[i, j] = vertex(
-                    add(inner[corner], mul(n, BEVEL)),
-                    n,
-                    ((i + j / 2) / SEGMENTS, j / SEGMENTS),
-                    len(faces) + len(edges) + corner,
-                )
-        for i in range(SEGMENTS):
-            for j in range(SEGMENTS - i):
-                triangle(grid[i, j], grid[i + 1, j], grid[i, j + 1])
-                if i + j < SEGMENTS - 1:
-                    triangle(grid[i + 1, j], grid[i + 1, j + 1], grid[i, j + 1])
+                    grid[i, j] = face_vertex(add(inner[corner], mul(n, BEVEL)), n, face)
+            for i in range(SEGMENTS):
+                for j in range(SEGMENTS - i):
+                    triangle(grid[i, j], grid[i + 1, j], grid[i, j + 1])
+                    if i + j < SEGMENTS - 1:
+                        triangle(grid[i + 1, j], grid[i + 1, j + 1], grid[i, j + 1])
 # Cycles transfers the existing color/engraving to the new UVs and tangent frame.
 bpy.ops.object.select_all(action="SELECT")
 bpy.ops.object.delete(use_global=False)
@@ -288,6 +326,18 @@ bpy.ops.object.select_all(action="DESELECT")
 source.select_set(True)
 target.select_set(True)
 bpy.context.view_layer.objects.active = target
+# Sample a fixed 95% of the original face when baking, independent of fillet
+# width, leaving its border out of the artwork. Otherwise wider fillets clip
+# source digits before the centering step can fit them to the smaller face.
+original_coords = [v.co.copy() for v in mesh.vertices]
+for i in range(flat_vertex_count):
+    n = normals[i]
+    centre = mul(n, inradius)
+    p = add(
+        centre, mul(sub(positions[i], centre), 0.95 * inradius / (inradius - BEVEL))
+    )
+    mesh.vertices[i].co = (p[0], -p[2], p[1])
+mesh.update()
 for kind, name, color in [("DIFFUSE", NAME + "_diffuse", (1, 1, 1, 1))]:
     image = bpy.data.images.new(name, width=2048, height=2048, alpha=False)
     image.generated_color = color
@@ -298,6 +348,10 @@ for kind, name, color in [("DIFFUSE", NAME + "_diffuse", (1, 1, 1, 1))]:
     image.filepath_raw = str(OUT / (name + ".png"))
     image.file_format = "PNG"
     image.save()
+for vert, co in zip(mesh.vertices, original_coords):
+    vert.co = co
+mesh.update()
+mesh.normals_split_custom_set_from_vertices([(x, -z, y) for x, y, z in normals])
 # Analytic mesh normals supply all edge/corner rounding. Do not bake the old
 # bevels onto the new flat faces; final engraving is derived from final ink.
 from PIL import Image
@@ -363,9 +417,13 @@ for suffix, fill in [
             fill,
             (
                 round(x * image.width / atlas),
-                round((atlas - y - 1) * image.height / atlas),
+                round(y * image.height / atlas),
                 round((x + 1) * image.width / atlas),
-                round((atlas - y) * image.height / atlas),
+                round((y + 1) * image.height / atlas),
             ),
         )
     image.save(path)
+
+(OUT / "uv-layout.json").write_text(
+    json.dumps({"columns": atlas, "patches": patches}, indent=2) + "\n"
+)

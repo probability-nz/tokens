@@ -77,73 +77,73 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 2160,
+      "count": 4260,
       "max": [
-        0.8897005319595337,
-        0.9903024435043335,
-        0.8480021953582764
+        0.8865537643432617,
+        0.9838422536849976,
+        0.8462405204772949
       ],
       "min": [
-        -0.8897005319595337,
-        -0.9903024435043335,
-        -0.8480021953582764
+        -0.8865537643432617,
+        -0.9838422536849976,
+        -0.8462405204772949
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 2160,
+      "count": 4260,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 2160,
+      "count": 4260,
       "type": "VEC2"
     },
     {
       "bufferView": 3,
       "componentType": 5126,
-      "count": 2160,
+      "count": 4260,
       "type": "VEC4"
     },
     {
       "bufferView": 4,
       "componentType": 5123,
-      "count": 7620,
+      "count": 15180,
       "type": "SCALAR"
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 25920,
+      "byteLength": 51120,
       "byteOffset": 0,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 25920,
-      "byteOffset": 25920,
+      "byteLength": 51120,
+      "byteOffset": 51120,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 17280,
-      "byteOffset": 51840,
+      "byteLength": 34080,
+      "byteOffset": 102240,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 34560,
-      "byteOffset": 69120,
+      "byteLength": 68160,
+      "byteOffset": 136320,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 15240,
-      "byteOffset": 103680,
+      "byteLength": 30360,
+      "byteOffset": 204480,
       "target": 34963
     }
   ],
@@ -155,7 +155,7 @@
   ],
   "buffers": [
     {
-      "byteLength": 118920,
+      "byteLength": 234840,
       "uri": "d20.bin"
     }
   ]

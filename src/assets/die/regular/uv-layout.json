@@ -1,0 +1,29 @@
+{
+  "columns": 3,
+  "patches": [
+    {
+      "kind": "face",
+      "label": "Face 1"
+    },
+    {
+      "kind": "face",
+      "label": "Face 2"
+    },
+    {
+      "kind": "face",
+      "label": "Face 3"
+    },
+    {
+      "kind": "face",
+      "label": "Face 4"
+    },
+    {
+      "kind": "face",
+      "label": "Face 5"
+    },
+    {
+      "kind": "face",
+      "label": "Face 6"
+    }
+  ]
+}

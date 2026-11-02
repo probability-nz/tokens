@@ -14,7 +14,7 @@ spec.loader.exec_module(align)
 
 
 class RoundingTests(unittest.TestCase):
-    def test_every_die_has_a_point_six_mm_geometric_fillet(self):
+    def test_every_die_has_a_one_mm_geometric_fillet(self):
         catalog = json.loads((align.ASSETS / "catalog.json").read_text())
         for entry in catalog["pieces"]:
             if not entry["faces"]:
@@ -78,11 +78,11 @@ class RoundingTests(unittest.TestCase):
                 self.assertTrue(
                     np.all(counts == 2), "Rounded patches must form a closed surface"
                 )
-                # Every surface point must be exactly 0.6mm along its normal
+                # Every surface point must be exactly 1.0mm along its normal
                 # from the boundary of the same inward-offset convex core.
                 # Blender quantizes custom split normals; allow one micron.
-                core = points - 0.6 * normals
-                distances = ds[None, :] - 0.6 - core @ ns.T
+                core = points - 1.0 * normals
+                distances = ds[None, :] - 1.0 - core @ ns.T
                 self.assertGreater(float(distances.min()), -0.001)
                 self.assertLess(float(np.min(np.abs(distances), axis=1).max()), 0.001)
                 # Rounded edges/corners must actually be tessellated; a sharp

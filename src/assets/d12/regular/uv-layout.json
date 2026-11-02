@@ -1,0 +1,53 @@
+{
+  "columns": 4,
+  "patches": [
+    {
+      "kind": "face",
+      "label": "Face 1"
+    },
+    {
+      "kind": "face",
+      "label": "Face 2"
+    },
+    {
+      "kind": "face",
+      "label": "Face 3"
+    },
+    {
+      "kind": "face",
+      "label": "Face 4"
+    },
+    {
+      "kind": "face",
+      "label": "Face 5"
+    },
+    {
+      "kind": "face",
+      "label": "Face 6"
+    },
+    {
+      "kind": "face",
+      "label": "Face 7"
+    },
+    {
+      "kind": "face",
+      "label": "Face 8"
+    },
+    {
+      "kind": "face",
+      "label": "Face 9"
+    },
+    {
+      "kind": "face",
+      "label": "Face 10"
+    },
+    {
+      "kind": "face",
+      "label": "Face 11"
+    },
+    {
+      "kind": "face",
+      "label": "Face 12"
+    }
+  ]
+}

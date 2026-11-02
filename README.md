@@ -16,9 +16,12 @@ Assets were created by Misha Tsyatsko under contract for Garbo Succus.
 ## Regular dice and face poses
 
 All six dice shapes (including the classic pip cube) use centred, mathematically
-regular meshes with a **0.6 mm geometric fillet radius at catalog scale**. Faces
+regular meshes with a **1.0 mm geometric fillet radius at catalog scale**. Faces
 are flat; edges are cylindrical and corners spherical, with six subdivisions
-per arc. Original artwork is transferred onto the new UVs; engraving is rebuilt
+per arc. UV islands use a spacious painting grid: one upright island per numbered
+face, including its rounded rim. Seams meet halfway around rounded edges;
+there are no separate edge/corner islands or overlapping triangles. Original
+artwork is transferred onto the new UVs; engraving is rebuilt
 from the final ink. Blank versions share the exact same mesh.
 
 Original artwork remains in `source`; reproducible bake outputs are in `regular`.
@@ -74,3 +77,17 @@ Tests cover the published AVIFs as well as the PNG masters, physical reading-fra
 anchors, equal lettering heights, complete digit/dot components, residual engraving,
 engraving registration/direction, white filtering gutters, flat regular blank maps,
 and rebuilding regular dice without stale published blank maps.
+
+## Painting your own dice
+
+Each die's `paint/` folder contains 2048×2048 PNGs: `blank.png`, `numbered.png`,
+transparent `uv-guide.png`, and a labelled `reference.png`. Open the blank or
+numbered image in Photoshop (or another image editor), add the guide as a layer,
+paint underneath it, then hide the guide before exporting. Keep the original
+square dimensions and extend colours beyond island outlines for filtering.
+
+Faces are arranged in number order, upright in their reading frame. Each island
+includes its rounded rim, so painting a face also colours its edges. Artwork is
+never forced to repeat. D4 labels identify the vertex opposite each physical face.
+Use a neutral normal map for custom art to avoid retaining the old engraving.
+`paint/README.txt` explains the layers and seam matching in more detail.
