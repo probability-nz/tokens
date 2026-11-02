@@ -52,6 +52,7 @@ for (const piece of catalog.pieces) {
   const modelPath = join(assets, piece.src);
   const directory = dirname(modelPath);
   const centered = ['Classic die', 'D4', 'D6', 'D8', 'D12', 'D20'].includes(piece.name);
+  if (centered) await run('python3', [join(root, 'scripts/assets/optimize_gltf.py'), join(directory, 'regular', basename(modelPath))]);
   if (centered) await run('python3', [join(root, 'scripts/assets/center-dice-labels.py'), piece.name === 'Classic die' ? 'die' : piece.name.toLowerCase()]);
   const sourceDirectory = join(
     directory,
@@ -200,6 +201,7 @@ for (const piece of catalog.pieces) {
   await writeFile(modelPath, prettyJson(gltf));
 }
 
+await run('python3', [join(root, 'scripts/assets/share-dice-buffers.py')]);
 await run('python3', [join(root, 'scripts/assets/sync-blank-dice.py')]);
 await run('python3', [join(root, 'scripts/assets/align-dice.py')]);
 

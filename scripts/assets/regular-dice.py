@@ -459,3 +459,10 @@ for suffix, fill in [
 (OUT / "uv-layout.json").write_text(
     json.dumps({"columns": atlas, "patches": patches}, indent=2) + "\n"
 )
+
+# Weld only byte-identical complete attributes; UV/normal/tangent seams survive.
+import runpy
+
+runpy.run_path(str(ROOT / "scripts/assets/optimize_gltf.py"))["optimize_file"](
+    document_path
+)

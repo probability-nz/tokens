@@ -12,6 +12,14 @@ NAMES = ("d4", "d6", "d8", "d12", "d20")
 
 
 class BlankDiceTests(unittest.TestCase):
+    def test_classic_and_d6_reuse_the_same_published_buffer(self):
+        paths = []
+        for name in ("die", "d6"):
+            doc = json.loads((SOURCE / name / f"{name}.gltf").read_text())
+            paths.append((SOURCE / name / doc["buffers"][0]["uri"]).resolve())
+        self.assertEqual(paths[0], paths[1])
+        self.assertFalse((SOURCE / "d6/d6.bin").exists())
+
     def test_blank_variants_are_last_and_retain_catalog_metadata(self):
         catalog = json.loads((SOURCE / "catalog.json").read_text())["pieces"]
         names = ["Classic die", "D4", "D6", "D8", "D12", "D20"]

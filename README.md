@@ -95,3 +95,16 @@ Use a neutral normal map for custom art to avoid retaining the old engraving.
 `paint/README.txt` explains the layers and seam matching in more detail.
 
 The standalone `dist/` build includes every die’s `paint/` layers and instructions.
+
+## Lossless mesh optimization
+
+`optimize_gltf.py` welds vertices only when every attribute byte matches,
+including UVs, normals, and tangents. It retains separate vertices at painting
+seams, preserves triangle winding and topology, orders triangles for a small
+vertex cache, and orders vertex data by first use. No quantization, geometry
+simplification, or runtime decoder is involved. Generation and preparation both
+apply it; repeated runs are idempotent. Tests compare the full attribute data
+of every oriented triangle before and after optimization.
+
+Byte-identical published buffers are shared across numbered models too; Classic,
+D6 and blank D6 resolve to the same cube buffer. Bake inputs remain self-contained.
