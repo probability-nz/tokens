@@ -19,3 +19,8 @@ Use your PNG as the model's base-colour texture. For custom artwork, remove the
 original numbered normal map or replace it with a neutral normal map, otherwise
 the original numbers will still appear engraved beneath your artwork.
 The blank model already has a neutral normal map.
+
+FONT: All numbered dice use the shared Comic Neue Bold font in fonts/.
+Install ComicNeue-Bold.ttf to add matching text in Photoshop or other editors.
+Use 90% horizontal scale and close tracking; see the shared font README.txt.
+The full font and its SIL OFL license are included with the painting downloads.

@@ -1,4 +1,4 @@
-"""Blender: generate consistently rounded regular dice meshes and transfer their original artwork.
+"""Blender: generate consistently rounded dice meshes, font labels and classic pips.
 Run: blender -b --python-exit-code 1 --python scripts/assets/regular-dice.py -- d4 (die, d4, d6, d8, d10, d12 or d20)
 Original source files are retained for reproducible baking (no external assets).
 """
@@ -328,16 +328,11 @@ for corner in range(len(vertices)):
 bpy.ops.object.select_all(action="SELECT")
 bpy.ops.object.delete(use_global=False)
 source = None
-if NAME != "d10":
+if NAME == "die":
     bpy.ops.import_scene.gltf(
         filepath=str(ROOT / f"src/assets/{NAME}/source/{NAME}.gltf")
     )
     source = next(o for o in bpy.context.scene.objects if o.type == "MESH")
-# The source sharp tetrahedron has a 1.5 high axis and a sqrt(3) base edge.
-# Correct its height and centre before projecting its artwork onto the regular die.
-if NAME == "d4":
-    source.scale.z *= math.sqrt(8) / 3
-    source.location.z += 0.225 * math.sqrt(8) / 3
 if source is not None:
     source.scale *= resize
     source.location *= resize
@@ -373,8 +368,8 @@ if source is not None:
 target.select_set(True)
 bpy.context.view_layer.objects.active = target
 # Sample a fixed 95% of the original face when baking, independent of fillet
-# width, leaving its border out of the artwork. Otherwise wider fillets clip
-# source digits before the centering step can fit them to the smaller face.
+# width, leaving its border out of the classic pip artwork. Numbered faces
+# are rendered from the shared font after the mesh is exported.
 original_coords = [v.co.copy() for v in mesh.vertices]
 for i in range(flat_vertex_count):
     n = normals[i]
@@ -513,7 +508,10 @@ runpy.run_path(str(ROOT / "scripts/assets/optimize_gltf.py"))["optimize_file"](
     document_path
 )
 
-if NAME == "d10":
+if NAME != "die":
     import subprocess
 
-    subprocess.run(["python3", str(ROOT / "scripts/assets/d10-artwork.py")], check=True)
+    subprocess.run(
+        ["python3", str(ROOT / "scripts/assets/center-dice-labels.py"), NAME],
+        check=True,
+    )

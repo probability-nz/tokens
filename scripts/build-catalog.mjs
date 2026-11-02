@@ -135,6 +135,12 @@ for (const [index, piece] of catalog.pieces.entries()) {
   }
 }
 
+// Ship the one shared, installable font together with its original license.
+const fontDirectory = join(assets, 'fonts');
+for (const file of await readdir(fontDirectory)) {
+  files.add(relativeFile(file, 'shared font', undefined, fontDirectory));
+}
+
 await rm(output, { force: true, recursive: true });
 for (const source of files) {
   const destination = join(output, relative(assets, source));

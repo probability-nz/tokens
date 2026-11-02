@@ -18,7 +18,7 @@ align = center.align
 
 
 class D10Tests(unittest.TestCase):
-    def test_digits_match_the_existing_set_artwork(self):
+    def test_digits_match_the_shared_font_across_dice(self):
         catalog = json.loads((align.ASSETS / "catalog.json").read_text())["pieces"]
 
         def glyph(name, label):

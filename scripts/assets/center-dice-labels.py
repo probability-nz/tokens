@@ -1,7 +1,7 @@
 """Center numeral artwork and rebuild matching engraving on each planar die face.
 
-Run before prepare-assets.mjs. Original maps, UVs, meshes and face ordering stay
-intact; centered/ contains reproducible maps derived from the original artwork.
+Run before prepare-assets.mjs. UVs, meshes and face ordering stay intact;
+centered/ contains reproducible maps rendered from the bundled font.
 D4 retains shared corner anchors; the classic die keeps its original pip layout.
 """
 
@@ -16,13 +16,7 @@ from PIL import Image, ImageDraw
 from scipy import ndimage
 
 sys.path.insert(0, str(Path(__file__).parent))
-from dice_style import (
-    LABEL_CLEARANCE_MM,
-    LABEL_MAX_HEIGHT_MM,
-    LABEL_FACE_FRACTION,
-    ENGRAVING_HALF_WIDTH_MM,
-    ENGRAVING_DEPTH_MM,
-)
+from dice_style import ENGRAVING_HALF_WIDTH_MM, ENGRAVING_DEPTH_MM
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "src/assets"
@@ -136,115 +130,6 @@ def label_mask(image, threshold=100):
     return keep[components]
 
 
-def label_jobs(name, faces, diffuse, entry):
-    labels = Image.fromarray(label_mask(diffuse))
-    jobs = []
-    for centre, polygon, face_normal, frame in faces:
-        box, inside, target = face_region(centre, polygon, diffuse.size, 1.06)
-        _, safe, _ = face_region(centre, polygon, diffuse.size, 1.0)
-        ink = np.asarray(labels.crop(box)) & inside
-        if not ink.any():
-            raise ValueError(f"{name}: no label on face")
-        components, count = ndimage.label(ink)
-        sizes = np.bincount(components.ravel())
-        sizes[0] = 0
-        parts = [ink]
-        if name == "d4":
-            parts = [
-                components == index
-                for index in range(1, count + 1)
-                if sizes[index] > max(20, sizes.max() * 0.05)
-            ]
-            if len(parts) != 3:
-                raise ValueError(
-                    "Each D4 face must contain three complete corner labels"
-                )
-        for part in parts:
-            y, x = np.nonzero(part)
-            destination = target
-            basis = None
-            if name == "d4":
-                mean_uv = (
-                    np.array([x.mean(), y.mean()]) + box[:2] + 0.5
-                ) / diffuse.size
-                corner = polygon[np.argmin(np.linalg.norm(polygon - mean_uv, axis=1))]
-                centre_world = np.r_[centre, 1] @ frame
-                up = np.r_[corner, 1] @ frame - centre_world
-                up /= np.linalg.norm(up)
-                basis = np.array([np.cross(up, face_normal), -up]).T
-                destination = (
-                    (centre + 0.46 * (corner - centre)) * diffuse.size - 0.5 - box[:2]
-                )
-            else:
-                pose = max(
-                    entry["faces"],
-                    key=lambda f: (align.matrix(f["rotation"]) @ face_normal)[1],
-                )
-                basis = align.matrix(pose["rotation"]).T[:, [0, 2]]
-                # A 6/9 dot remains alongside the digit but must not pull the
-                # numeral itself off centre. Keep all substantial digit components.
-                body = part & (sizes[components] >= sizes.max() * 0.1)
-                y, x = np.nonzero(body)
-            # Measure in the actual face/corner reading frame, not in the
-            # arbitrarily rotated UV atlas. Engraving is derived from the final ink.
-            projection = np.diag(1 / np.array(diffuse.size)) @ frame[:2] @ basis
-            points = np.c_[x, y] @ projection
-            source = ((points.min(axis=0) + points.max(axis=0)) / 2) @ np.linalg.inv(
-                projection
-            )
-            height = np.ptp(points, axis=0)[1]
-            # Fit the complete ink (including 6/9 dots) inside the physical
-            # polygon, with the same clearance on every die. The numeral body
-            # remains the centering anchor even when it has a side dot.
-            millimetres_per_unit = entry["scale"][0] * 1000
-            polygon_frame = (polygon * diffuse.size - 0.5 - box[:2]) @ projection
-            destination_frame = destination @ projection
-            ink_y, ink_x = np.nonzero(part)
-            ink_frame = (np.c_[ink_x, ink_y] - source) @ projection
-            maximum_scale = float("inf")
-            for edge, end in zip(polygon_frame, np.roll(polygon_frame, -1, axis=0)):
-                direction = end - edge
-                inward = np.array([-direction[1], direction[0]])
-                inward /= np.linalg.norm(inward)
-                if np.dot(inward, polygon_frame.mean(axis=0) - edge) < 0:
-                    inward *= -1
-                available = (
-                    np.dot(inward, destination_frame - edge)
-                    - LABEL_CLEARANCE_MM / millimetres_per_unit
-                )
-                reach = -np.min(ink_frame @ inward)
-                if reach > 0:
-                    maximum_scale = min(maximum_scale, available / reach)
-            if maximum_scale <= 0:
-                raise ValueError(f"{name}: label anchor is too close to its face edge")
-            face_height = np.ptp(polygon_frame, axis=0)[1]
-            scale = 1.0
-            jobs.append(
-                dict(
-                    box=box,
-                    inside=inside,
-                    safe=safe,
-                    ink=part,
-                    source=source,
-                    destination=destination,
-                    scale=scale,
-                    height=height,
-                    maximum_height=maximum_scale * height,
-                    face_height=face_height,
-                )
-            )
-    units_per_mm = 1 / (entry["scale"][0] * 1000)
-    common_height = min(
-        (4.0 if name == "d4" else LABEL_MAX_HEIGHT_MM) * units_per_mm,
-        min(job["face_height"] for job in jobs)
-        * (0.27 if name == "d4" else LABEL_FACE_FRACTION),
-        min(job["maximum_height"] for job in jobs),
-    )
-    for job in jobs:
-        job["scale"] = common_height / job["height"]
-    return jobs
-
-
 def engraving_normal(color, blank, texels_per_mm=None):
     """Derive an inset lip from the final ink, so geometry and print cannot drift.
 
@@ -284,80 +169,24 @@ def engraving_normal(color, blank, texels_per_mm=None):
 
 def center(name):
     folder, faces = face_uvs(name, True)
-    diffuse = Image.open(folder / f"{name}_diffuse.png").convert("RGB")
     normal = Image.open(folder / f"{name}_normal.png").convert("RGB")
-    # Use freshly baked regular maps, not potentially stale published copies.
-    blank_folder = folder
-    blank = Image.open(blank_folder / f"{name}-blank-normal.png").convert("RGB")
-    assert normal.size == blank.size
-    # D20 source albedo is double the normal-map resolution. Work at the shared
-    # resolution so ink and generated engraving use identical texel coordinates.
-    diffuse = diffuse.resize(normal.size, Image.Resampling.LANCZOS)
-    if name == "d4":
-        # The imported tetrahedron can project tiny fragments of neighbouring
-        # bevel ink. Keep the twelve substantial corner digits, not those flecks.
-        components, _ = ndimage.label(label_mask(diffuse))
-        sizes = np.bincount(components.ravel())
-        sizes[0] = 0
-        keep = ndimage.binary_dilation(
-            sizes[components] > sizes.max() * 0.05, iterations=3
-        )
-        clean = np.array(diffuse)
-        clean[~keep] = 255
-        diffuse = Image.fromarray(clean)
-    output_color = diffuse.copy()
-    engraving_labels = Image.fromarray(label_mask(diffuse, 180))
     entry = next(
         e
         for e in json.loads((ASSETS / "catalog.json").read_text())["pieces"]
         if e["name"] == ("Classic die" if name == "die" else name.upper())
     )
-    for job in ([] if name == "die" else label_jobs(name, faces, diffuse, entry)):
-        box, inside, safe, ink = (job[key] for key in ("box", "inside", "safe", "ink"))
-        source, destination, scale = (
-            job[key] for key in ("source", "destination", "scale")
+    if name == "die":
+        output_color = (
+            Image.open(folder / "die_diffuse.png")
+            .convert("RGB")
+            .resize(normal.size, Image.Resampling.LANCZOS)
         )
-        color = np.array(diffuse.crop(box))
-        radius = 3  # Preserve antialiasing; the old engraving is no longer copied.
-        engraving = np.asarray(engraving_labels.crop(box)) & inside
-        if name == "d4":
-            engraving &= ndimage.binary_dilation(ink, iterations=3)
-        horizontal = engraving.copy()
-        for offset in range(1, radius + 1):
-            horizontal[:, offset:] |= engraving[:, :-offset]
-            horizontal[:, :-offset] |= engraving[:, offset:]
-        mask = horizontal.copy()
-        for offset in range(1, radius + 1):
-            mask[offset:] |= horizontal[:-offset]
-            mask[:-offset] |= horizontal[offset:]
-        offset = (source - destination / scale)[::-1]
+    else:
+        from dice_font import render
 
-        def transform(values, order=1):
-            return ndimage.affine_transform(
-                values,
-                np.eye(2) / scale,
-                offset=offset,
-                output_shape=inside.shape,
-                order=order,
-                mode="constant",
-                cval=0,
-                prefilter=False,
-            )
-
-        moved = transform(mask.astype(float)) > 0
-        if not safe[moved].all():
-            raise ValueError(
-                f"{name}: shifted engraving reaches face border {box} source {source} target {destination} scale {scale}"
-            )
-        new_color = np.array(output_color.crop(box))
-        new_color[mask] = 255
-        for channel in range(3):
-            ink_channel = (255 - color[:, :, channel].astype(float)) * mask
-            shifted_ink = transform(ink_channel)
-            new_color[:, :, channel][moved] = (
-                np.rint(255 - shifted_ink[moved]).clip(0, 255).astype("uint8")
-            )
-        output_color.paste(Image.fromarray(new_color), box[:2])
+        output_color = render(name, faces, entry, align.matrix, normal.size)
+        # Keep a reproducible source atlas for authoring and existing tools.
+        output_color.save(folder / f"{name}_diffuse.png")
     out = ASSETS / name / "centered"
     out.mkdir(exist_ok=True)
     # Atlas backgrounds are not physical face borders. Black outside each

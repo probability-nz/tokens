@@ -7,8 +7,8 @@ axis or bounding sphere. These are design targets, not exact Chessex measurement
 
 HEIGHT_MM = {"die": 16, "d4": 16, "d6": 16, "d8": 16, "d10": 16, "d12": 18, "d20": 20}
 FILLET_MM = 1.2
-LABEL_CLEARANCE_MM = 0.6
+LABEL_CLEARANCE_MM = 0.45
 LABEL_MAX_HEIGHT_MM = 7.0
-LABEL_FACE_FRACTION = 0.55
+LABEL_FACE_FRACTION = 0.60
 ENGRAVING_HALF_WIDTH_MM = 0.08
 ENGRAVING_DEPTH_MM = 0.05

@@ -24,4 +24,4 @@ Storybook preview, including Assets / Blank Dice / Full Set.
 
 Source: https://github.com/probability-nz/tokens
 CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
-Garbo Succus; original source artwork by Misha Tsyatsko. D10 reuses the original D12 digit artwork.
+Garbo Succus; original source artwork by Misha Tsyatsko. Numbered dice use the shared Comic Neue Bold font; see ../fonts/OFL.txt.

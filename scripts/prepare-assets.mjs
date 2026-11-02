@@ -53,7 +53,6 @@ for (const piece of catalog.pieces) {
   const directory = dirname(modelPath);
   const centered = ['Classic die', 'D4', 'D6', 'D8', 'D10', 'D12', 'D20'].includes(piece.name);
   if (centered) await run('python3', [join(root, 'scripts/assets/optimize_gltf.py'), join(directory, 'regular', basename(modelPath))]);
-  if (piece.name === 'D10') await run('python3', [join(root, 'scripts/assets/d10-artwork.py')]);
   if (centered) await run('python3', [join(root, 'scripts/assets/center-dice-labels.py'), piece.name === 'Classic die' ? 'die' : piece.name.toLowerCase()]);
   const sourceDirectory = join(
     directory,

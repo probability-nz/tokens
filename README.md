@@ -21,8 +21,8 @@ All seven dice models (including the classic pip cube) use centred, symmetric me
 are flat; edges are cylindrical and corners spherical, with analytic smooth normals. D10/D12/D20 use one subdivision
 per half-edge/corner patch; the sharper shapes use two. UV islands use a spacious painting grid: one upright island per numbered
 face, including its rounded rim. Seams meet halfway around rounded edges;
-there are no separate edge/corner islands or overlapping triangles. Original
-artwork is transferred onto the new UVs; engraving is rebuilt
+there are no separate edge/corner islands or overlapping triangles. Classic pips are transferred onto the new UVs; numbered faces use the bundled
+Comic Neue Bold font. Engraving is rebuilt
 from the final ink. Blank versions share the exact same mesh.
 
 Original artwork remains in `source`; reproducible bake outputs are in `regular`.
@@ -44,10 +44,9 @@ blank-model generator; all blanks share one neutral normal-map texel.
 D10 is a pentagonal trapezohedron with ten congruent kite faces, numbered 0–9
 (0 represents ten). Opposite numbers sum to nine. `d10_geometry.py` defines its
 planes and exact rotational symmetries; outcomes use 18-degree yaw increments
-and zero Z rotation, preserving the full silhouette. `d10-artwork.py` reuses
-Misha Tsyatsko's original D12 numeral artwork (zero is extracted from its 10),
-including matching 6/9 dots. The shared centering/engraving pass supplies the
-final maps. There is no substitute font. The numbered and blank D10 share one
+and zero Z rotation, preserving the full silhouette. All numbered dice use
+`scripts/assets/dice_font.py` and the same bundled Comic Neue Bold font,
+including matching 6/9 dots. The numbered and blank D10 share one
 optimized 220-triangle mesh: one subdivision per half-edge, with additional
 radial subdivisions only at the two five-face tips to preserve their rounding.
 
@@ -86,23 +85,32 @@ islands and 6/9 dots cannot displace the numeral itself. D4's three labels on ea
 face use identical corner spacing. Lettering uses a common physical height per
 die. Digits and disambiguation dots move together. Engraved normal-map detail is
 regenerated from the final ink so old print/engraving offsets cannot survive.
-Every label has at least 0.6 mm of clearance inside the flat face polygon.
+Every label has at least 0.45 mm of clearance inside the flat face polygon.
 A single physical digit height is fitted to the widest label on each die,
-including two-digit values and 6/9 dots. Height is capped at 7 mm and 55% of the
+including two-digit values and 6/9 dots. Height is capped at 7 mm and 60% of the
 flat face's reading height; D4 uses its three corner anchors, a 4 mm cap and 27%.
-The glyph shape and stroke proportions are retained when scaling.
+The font uses 90% horizontal scale and an ink-to-ink digit gap of 4% of numeral
+height, approximating the compact lettering in Chessex opaque-set photos.
+These are visual targets, not exact measurements or the proprietary Chessex font.
+References: https://gnomishbazaar.com/products/chessex-opaque-white-black-polyhedral-7-die-set-chx25401
+and https://superretro.com.au/products/polyhedral-7-die-set-opaque-ivoryblack.
 
 Engraving normals are regenerated after this fitting, with a 0.05 mm virtual
 depth and 0.08 mm lip half-width converted through each model's UV texel density.
 Mesh normals remain analytic and tangent frames are rebuilt for the new meshes;
 blank models retain the shared neutral normal texel.
 
-`centered/` maps are generated from the `regular/` bake by
+`centered/` maps are generated from the bundled font (or classic pip bake) by
 `scripts/assets/center-dice-labels.py`, using NumPy, Pillow and SciPy. All dice
 use analytic mesh normals with neutral blank maps, so old baked edges cannot
 make the faces appear inset. Atlas padding is white to prevent dark island
 borders bleeding into faces at coarse mip levels. Preparation runs this step
 automatically; repeated builds never re-center an already processed image.
+
+The unmodified installable font, SIL Open Font License, source revision and SHA-256
+are in `src/assets/fonts/`, distributed once as `dist/fonts/`. Install the TTF in
+Photoshop or another painting application to match the supplied artwork. The
+font has its own OFL license; original commissioned source art retains its attribution.
 
 Tests cover the published AVIFs as well as the PNG masters, physical reading-frame
 anchors, equal lettering heights, complete digit/dot components, residual engraving,
