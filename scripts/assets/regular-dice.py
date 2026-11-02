@@ -24,7 +24,7 @@ entry = next(e for e in catalog["pieces"] if e["src"] == f"{NAME}/{NAME}.gltf")
 assert max(entry["scale"]) == min(entry["scale"])
 # One physical fillet radius for every numbered/blank die, at catalog scale.
 BEVEL = 0.0012 / entry["scale"][0]
-SEGMENTS = 1 if NAME in ("d12", "d20") else 2
+SEGMENTS = 1 if NAME in ("d10", "d12", "d20") else 2
 
 
 def add(a, b):
@@ -284,6 +284,20 @@ for corner in range(len(vertices)):
         middle = unit(add(face_normals[a], face_normals[b]))
         for face in (a, b):
             triangle_normals = [centre, face_normals[face], middle]
+            if NAME == "d10" and len(neighbours) == 5:
+                # Keep the five-face polar tips round without subdividing all
+                # edge strips. Split only the two radial corner edges: their
+                # neighbours use the same midpoint, so the surface stays closed.
+                c, f, m = triangle_normals
+                cf, cm = unit(add(c, f)), unit(add(c, m))
+                ids = [
+                    face_vertex(add(inner[corner], mul(n, BEVEL)), n, face)
+                    for n in (c, f, m, cf, cm)
+                ]
+                triangle(ids[0], ids[3], ids[4])
+                triangle(ids[3], ids[1], ids[2])
+                triangle(ids[3], ids[2], ids[4])
+                continue
             grid = {}
             for i in range(SEGMENTS + 1):
                 for j in range(SEGMENTS + 1 - i):
@@ -444,66 +458,10 @@ for index in range(count):
     tangent = unit(sub(t[:3], mul(n, dot(n, t[:3]))))
     struct.pack_into("<4f", encoded, offset("TANGENT", index, 4), *tangent, t[3])
 buffer_path.write_bytes(encoded)
-document["asset"]["copyright"] = (
-    "Garbo Succus. CC BY 4.0."
-    if NAME == "d10"
-    else "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."
-)
+document["asset"][
+    "copyright"
+] = "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."
 document_path.write_text(json.dumps(document, indent=2) + "\n")
-if NAME == "d10":
-    # Original vector-font artwork: no imported model or external texture input.
-    from PIL import Image, ImageDraw, ImageFont
-
-    image = Image.new("RGB", (2048, 2048), "white")
-    draw = ImageDraw.Draw(image)
-    font = ImageFont.load_default(size=140)
-    for face, corners in enumerate(faces):
-        centre, u, v, radius = frames[face]
-        ps = [add(inner[i], mul(face_normals[face], BEVEL)) for i in corners]
-        ps.sort(
-            key=lambda p: math.atan2(dot(sub(p, centre), v), dot(sub(p, centre), u))
-        )
-        # Area centroid, rather than the four-vertex average of an asymmetric kite.
-        weights = [
-            np.linalg.norm(np.cross(sub(ps[i], ps[0]), sub(ps[i + 1], ps[0])))
-            for i in range(1, len(ps) - 1)
-        ]
-        centroid = np.average(
-            [(np.array(ps[0]) + ps[i] + ps[i + 1]) / 3 for i in range(1, len(ps) - 1)],
-            axis=0,
-            weights=weights,
-        )
-        slot = face_slots[face]
-        x = (
-            (
-                slot % atlas
-                + 0.08
-                + 0.84 * (0.5 + dot(sub(centroid, centre), u) / (2 * radius))
-            )
-            * 2048
-            / atlas
-        )
-        y = (
-            (
-                slot // atlas
-                + 0.96
-                - 0.84 * (0.5 + dot(sub(centroid, centre), v) / (2 * radius))
-            )
-            * 2048
-            / atlas
-        )
-        label = entry["faces"][slot]["name"]
-        box = draw.textbbox((0, 0), label, font=font)
-        draw.text(
-            (x - (box[0] + box[2]) / 2, y - (box[1] + box[3]) / 2),
-            label,
-            font=font,
-            fill="black",
-        )
-        if label in ("6", "9"):
-            dx = (box[2] - box[0]) / 2 + 12
-            draw.ellipse((x + dx, y + 34, x + dx + 9, y + 43), fill="black")
-    image.save(OUT / "d10_diffuse.png")
 print("Wrote rounded", NAME, "geometry and color/normal maps", flush=True)
 # The old bevel UVs can contain padding or stray ink. The new rounded bevels
 # already have analytic smooth normals: keep their material white and their
@@ -541,3 +499,8 @@ import runpy
 runpy.run_path(str(ROOT / "scripts/assets/optimize_gltf.py"))["optimize_file"](
     document_path
 )
+
+if NAME == "d10":
+    import subprocess
+
+    subprocess.run(["python3", str(ROOT / "scripts/assets/d10-artwork.py")], check=True)

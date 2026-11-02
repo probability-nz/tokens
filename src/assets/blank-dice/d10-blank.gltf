@@ -2,7 +2,7 @@
   "asset": {
     "generator": "Khronos glTF Blender I/O v5.0.21",
     "version": "2.0",
-    "copyright": "Garbo Succus. CC BY 4.0."
+    "copyright": "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."
   },
   "scene": 0,
   "scenes": [
@@ -70,14 +70,14 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 609,
+      "count": 342,
       "max": [
-        0.7847169041633606,
+        0.7832789421081543,
         0.9843266606330872,
         0.7510808110237122
       ],
       "min": [
-        -0.7847169041633606,
+        -0.7832789421081543,
         -0.9843266606330872,
         -0.7510808110237122
       ],
@@ -86,57 +86,57 @@
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 609,
+      "count": 342,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 609,
+      "count": 342,
       "type": "VEC2"
     },
     {
       "bufferView": 3,
       "componentType": 5126,
-      "count": 609,
+      "count": 342,
       "type": "VEC4"
     },
     {
       "componentType": 5123,
       "type": "SCALAR",
       "bufferView": 4,
-      "count": 1500
+      "count": 660
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
       "byteOffset": 0,
-      "byteLength": 7308,
+      "byteLength": 4104,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 7308,
-      "byteLength": 7308,
+      "byteOffset": 4104,
+      "byteLength": 4104,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 14616,
-      "byteLength": 4872,
+      "byteOffset": 8208,
+      "byteLength": 2736,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 19488,
-      "byteLength": 9744,
+      "byteOffset": 10944,
+      "byteLength": 5472,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 29232,
-      "byteLength": 3000,
+      "byteOffset": 16416,
+      "byteLength": 1320,
       "target": 34963
     }
   ],
@@ -148,7 +148,7 @@
   ],
   "buffers": [
     {
-      "byteLength": 32232,
+      "byteLength": 17736,
       "uri": "../d10/d10.bin"
     }
   ],

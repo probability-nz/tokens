@@ -18,7 +18,7 @@ Assets were created by Misha Tsyatsko under contract for Garbo Succus.
 ## Regular dice and face poses
 
 All seven dice models (including the classic pip cube) use centred, symmetric meshes with a **1.2 mm geometric fillet radius at catalog scale**. Faces
-are flat; edges are cylindrical and corners spherical, with analytic smooth normals. D12/D20 use one subdivision
+are flat; edges are cylindrical and corners spherical, with analytic smooth normals. D10/D12/D20 use one subdivision
 per half-edge/corner patch; the sharper shapes use two. UV islands use a spacious painting grid: one upright island per numbered
 face, including its rounded rim. Seams meet halfway around rounded edges;
 there are no separate edge/corner islands or overlapping triangles. Original
@@ -26,7 +26,7 @@ artwork is transferred onto the new UVs; engraving is rebuilt
 from the final ink. Blank versions share the exact same mesh.
 
 Original artwork remains in `source`; reproducible bake outputs are in `regular`.
-Rebuild with Blender 5, Pillow and NumPy available:
+Rebuild with Blender 5, Pillow, NumPy and SciPy available:
 
 ```sh
 for die in die d4 d6 d8 d10 d12 d20; do
@@ -44,10 +44,12 @@ blank-model generator; all blanks share one neutral normal-map texel.
 D10 is a pentagonal trapezohedron with ten congruent kite faces, numbered 0–9
 (0 represents ten). Opposite numbers sum to nine. `d10_geometry.py` defines its
 planes and exact rotational symmetries; outcomes use 18-degree yaw increments
-and zero Z rotation, preserving the full silhouette. Its artwork is generated
-with Pillow's bundled font, so it needs no imported source model or external
-font. The numbered and blank D10 share one optimized mesh buffer. Its 500
-triangles preserve the same two-subdivision rounding used by the sharper dice.
+and zero Z rotation, preserving the full silhouette. `d10-artwork.py` reuses
+Misha Tsyatsko's original D12 numeral artwork (zero is extracted from its 10),
+including matching 6/9 dots. The shared centering/engraving pass supplies the
+final maps. There is no substitute font. The numbered and blank D10 share one
+optimized 220-triangle mesh: one subdivision per half-edge, with additional
+radial subdivisions only at the two five-face tips to preserve their rounding.
 
 D8/D12/D20 outcomes are fitted to the mesh planes and the whole solid's normal
 symmetries, preserving the original number mapping and a stable footprint.

@@ -6,6 +6,8 @@ from pathlib import Path
 import unittest
 import numpy as np
 from scipy.spatial import cKDTree
+from scipy import ndimage
+from PIL import Image
 
 spec = importlib.util.spec_from_file_location(
     "center", Path(__file__).with_name("center-dice-labels.py")
@@ -16,6 +18,43 @@ align = center.align
 
 
 class D10Tests(unittest.TestCase):
+    def test_digits_match_the_existing_set_artwork(self):
+        catalog = json.loads((align.ASSETS / "catalog.json").read_text())["pieces"]
+
+        def glyph(name, label):
+            _, faces = center.face_uvs(name)
+            entry = next(e for e in catalog if e["name"] == name.upper())
+            source_label = "10" if name == "d12" and label == "0" else label
+            pose = align.matrix(
+                next(f for f in entry["faces"] if f["name"] == source_label)["rotation"]
+            )
+            point, polygon, _ = max(faces, key=lambda f: (pose @ f[2])[1])
+            image = Image.open(
+                align.ASSETS / name / "centered" / f"{name}_diffuse.png"
+            ).convert("RGB")
+            box, inside, _ = center.face_region(point, polygon, image.size)
+            ink = (np.asarray(image.crop(box)).max(axis=2) < 100) & inside
+            components, _ = ndimage.label(ink)
+            sizes = np.bincount(components.ravel())
+            sizes[0] = 0
+            ids = [i for i in range(1, len(sizes)) if sizes[i] > sizes.max() * 0.1]
+            if source_label == "10":
+                ids = [max(ids, key=lambda i: np.nonzero(components == i)[1].mean())]
+            ink = np.isin(components, ids)
+            y, x = np.nonzero(ink)
+            cropped = Image.fromarray(ink[y.min() : y.max() + 1, x.min() : x.max() + 1])
+            return np.asarray(cropped.resize((96, 128), Image.Resampling.NEAREST))
+
+        for label in map(str, range(10)):
+            with self.subTest(label=label):
+                original, actual = glyph("d12", label), glyph("d10", label)
+                # Permit raster resampling at different atlas scales, but reject
+                # substituted fonts, altered strokes, or an incorrect digit.
+                overlap = np.count_nonzero(original & actual) / np.count_nonzero(
+                    original | actual
+                )
+                self.assertGreater(overlap, 0.92)
+
     def test_kites_opposites_labels_and_all_ten_symmetries(self):
         entry = next(
             p
