@@ -9,6 +9,7 @@ import json
 import math
 from pathlib import Path
 import sys
+import struct
 import numpy as np
 from itertools import combinations
 
@@ -393,6 +394,37 @@ bpy.ops.export_scene.gltf(
 )
 document_path = OUT / (NAME + ".gltf")
 document = json.loads(document_path.read_text())
+# Blender quantizes custom split normals internally. Restore the analytic
+# normals at the exported float32 positions so duplicate UV-seam vertices
+# agree exactly, then re-orthogonalize the exported tangent frame.
+primitive = document["meshes"][0]["primitives"][0]
+buffer_path = OUT / document["buffers"][0]["uri"]
+encoded = bytearray(buffer_path.read_bytes())
+lookup = {
+    tuple(float(x) for x in np.asarray(p, dtype=np.float32)): n
+    for p, n in zip(positions, normals)
+}
+
+
+def offset(attribute, index, width):
+    acc = document["accessors"][primitive["attributes"][attribute]]
+    view = document["bufferViews"][acc["bufferView"]]
+    return (
+        view.get("byteOffset", 0)
+        + acc.get("byteOffset", 0)
+        + index * view.get("byteStride", width * 4)
+    )
+
+
+count = document["accessors"][primitive["attributes"]["POSITION"]]["count"]
+for index in range(count):
+    p = struct.unpack_from("<3f", encoded, offset("POSITION", index, 3))
+    n = lookup[p]
+    struct.pack_into("<3f", encoded, offset("NORMAL", index, 3), *n)
+    t = struct.unpack_from("<4f", encoded, offset("TANGENT", index, 4))
+    tangent = unit(sub(t[:3], mul(n, dot(n, t[:3]))))
+    struct.pack_into("<4f", encoded, offset("TANGENT", index, 4), *tangent, t[3])
+buffer_path.write_bytes(encoded)
 document["asset"][
     "copyright"
 ] = "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."

@@ -9,7 +9,11 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "src/assets"
 SIZE = 2048
-FONT = ImageFont.truetype("DejaVuSans.ttf", 15)
+try:
+    FONT = ImageFont.truetype("DejaVuSans.ttf", 15)
+except OSError:
+    # Pillow bundles this font; generation must not depend on system fonts.
+    FONT = ImageFont.load_default(size=15)
 for name in ("die", "d4", "d6", "d8", "d12", "d20"):
     folder = ASSETS / name
     doc = json.loads((folder / "regular" / f"{name}.gltf").read_text())

@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile, rm } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, readdir, rm } from 'node:fs/promises';
 import { dirname, isAbsolute, join, normalize, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -98,6 +98,15 @@ for (const [index, piece] of catalog.pieces.entries()) {
   names.add(piece.name);
   sources.add(gltfPath);
   files.add(gltfPath);
+  // Painting layers belong in the standalone distribution, not only the repo.
+  const paintDirectory = join(dirname(gltfPath), 'paint');
+  const paintingFiles = await readdir(paintDirectory).catch((error) => {
+    if (error.code === 'ENOENT') return [];
+    throw error;
+  });
+  for (const file of paintingFiles) {
+    files.add(relativeFile(file, `${piece.src} painting template`, undefined, paintDirectory));
+  }
 
   const gltf = JSON.parse(await readFile(gltfPath, 'utf8'));
   for (const [resourceIndex, resource] of [
