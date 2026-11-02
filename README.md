@@ -100,7 +100,9 @@ depth, a 0.25 mm rounded inward profile, and 0.04 mm rim smoothing converted
 through each model's UV texel density. The groove curves across the numeral
 stroke instead of producing a narrow lip around a flat bottom. Classic round pips
 use fitted spherical-cap bowls with 0.35 mm virtual depth so their broad floors
-curve continuously, rather than reusing the numeral-stroke profile.
+curve continuously, rather than reusing the numeral-stroke profile. A 0.20 mm
+wide rounded mouth bevel bridges the bowl to the face, centred on the ink edge,
+with continuous height and slope at both ends.
 Mesh normals remain analytic and tangent frames are rebuilt for the new meshes;
 blank models retain the shared neutral normal texel.
 

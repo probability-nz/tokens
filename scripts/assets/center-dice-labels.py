@@ -21,6 +21,7 @@ from dice_style import (
     ENGRAVING_SMOOTHING_MM,
     ENGRAVING_DEPTH_MM,
     PIP_DEPTH_MM,
+    PIP_RIM_HALF_WIDTH_MM,
 )
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -152,6 +153,11 @@ def engraving_normal(color, blank, texels_per_mm=None, *, spherical_pips=False):
         for label, region in enumerate(ndimage.find_objects(components), 1):
             if region is None:
                 continue
+            padding = int(np.ceil(PIP_RIM_HALF_WIDTH_MM * density)) + 1
+            region = tuple(
+                slice(max(0, axis.start - padding), min(length, axis.stop + padding))
+                for axis, length in zip(region, ink.shape)
+            )
             mask = components[region] == label
             y, x = np.nonzero(mask)
             cx, cy = x.mean(), y.mean()
@@ -165,7 +171,21 @@ def engraving_normal(color, blank, texels_per_mm=None, *, spherical_pips=False):
                 - depth
                 - np.sqrt(np.maximum(sphere_radius**2 - radial_squared, 0))
             )
-            height[region] = np.minimum(bowl, 0)
+            # A softened manufactured rim bridges the bowl to the white face.
+            # Match height and slope at both ends instead of merely blurring
+            # the sharp mouth: the spherical floor stays intact beneath it.
+            half_width = min(PIP_RIM_HALF_WIDTH_MM * density, aperture * 0.25)
+            inner, outer = aperture - half_width, aperture + half_width
+            span = outer - inner
+            inner_z = np.sqrt(sphere_radius**2 - inner**2)
+            inner_height = sphere_radius - depth - inner_z
+            inner_slope = inner / inner_z
+            radial = np.sqrt(radial_squared)
+            t = np.clip((radial - inner) / span, 0, 1)
+            rim = (2 * t**3 - 3 * t**2 + 1) * inner_height + (
+                t**3 - 2 * t**2 + t
+            ) * span * inner_slope
+            height[region] = np.where(radial < inner, bowl, rim)
     else:
         # Distance grows inward from the antialiased ink boundary. A rounded scoop
         # continues curving through the stroke instead of ending at a flat lip.

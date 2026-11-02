@@ -60,7 +60,10 @@ class CenteredLabelsTests(unittest.TestCase):
         self.assertGreater(nx[226], nx[246] * 2.5)
         self.assertAlmostEqual(nx[226], -nx[286], delta=0.01)
         self.assertAlmostEqual(normal[226, 256, 1], 255 - normal[256, 226, 0], delta=1)
-        np.testing.assert_array_equal(normal[256, 190], [128, 128, 255])
+        # The manufactured rim extends into the white surface beyond the
+        # printed 50 px aperture, then returns smoothly to the flat face.
+        self.assertGreater(nx[201], 0.03)
+        np.testing.assert_array_equal(normal[256, 185], [128, 128, 255])
 
     def test_every_label_is_centered_and_keeps_its_components(self):
         for name in center.NAMES:
@@ -233,7 +236,9 @@ class CenteredLabelsTests(unittest.TestCase):
                 dot = residual[..., 0] * inward_x - residual[..., 1] * inward_y
                 with self.subTest(die=name, published=published):
                     self.assertGreater(np.mean(dot[edge] > 0), 0.97)
-                    near_edge = ndimage.maximum_filter(edge, size=9)
+                    near_edge = ndimage.maximum_filter(
+                        edge, size=25 if name == "die" else 9
+                    )
                     changed = np.linalg.norm(residual, axis=-1) > 8
                     self.assertLess(np.mean(changed[~(near_edge | ink)]), 0.0001)
 
