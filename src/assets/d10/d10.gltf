@@ -1,0 +1,303 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v5.0.21",
+    "version": "2.0",
+    "copyright": "Garbo Succus. CC BY 4.0."
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "Regular D10"
+    }
+  ],
+  "materials": [
+    {
+      "name": "d10 preferred",
+      "normalTexture": {
+        "index": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.5
+      },
+      "extensions": {
+        "MSFT_lod": {
+          "ids": [
+            1
+          ]
+        }
+      },
+      "extras": {
+        "MSFT_screencoverage": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "d10 preview",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 2
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.5
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Regular D10",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2,
+            "TANGENT": 3
+          },
+          "indices": 4,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 0
+        }
+      }
+    },
+    {
+      "sampler": 0,
+      "extensions": {
+        "EXT_texture_avif": {
+          "source": 1
+        },
+        "EXT_texture_webp": {
+          "source": 2
+        }
+      }
+    },
+    {
+      "sampler": 0,
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 2
+        }
+      }
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/webp",
+      "name": "d10 normal",
+      "uri": "d10_normal.webp"
+    },
+    {
+      "mimeType": "image/avif",
+      "name": "d10 preferred",
+      "uri": "d10_diffuse.avif"
+    },
+    {
+      "mimeType": "image/webp",
+      "name": "d10 preview",
+      "uri": "d10_preview.webp"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 609,
+      "max": [
+        0.7847169041633606,
+        0.9843266606330872,
+        0.7510808110237122
+      ],
+      "min": [
+        -0.7847169041633606,
+        -0.9843266606330872,
+        -0.7510808110237122
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 609,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 609,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 609,
+      "type": "VEC4"
+    },
+    {
+      "componentType": 5123,
+      "type": "SCALAR",
+      "bufferView": 4,
+      "count": 1500
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 7308,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 7308,
+      "byteLength": 7308,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 14616,
+      "byteLength": 4872,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 19488,
+      "byteLength": 9744,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 29232,
+      "byteLength": 3000,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 32232,
+      "uri": "d10.bin"
+    }
+  ],
+  "extensionsUsed": [
+    "EXT_texture_avif",
+    "EXT_texture_webp",
+    "MSFT_lod"
+  ],
+  "extensionsRequired": [
+    "EXT_texture_webp"
+  ],
+  "extras": {
+    "probability": {
+      "faces": [
+        {
+          "name": "0",
+          "rotation": [
+            -0.9553166181245092,
+            -1.5707963267948966,
+            0
+          ]
+        },
+        {
+          "name": "1",
+          "rotation": [
+            2.186276035465284,
+            -2.827433388230814,
+            0
+          ]
+        },
+        {
+          "name": "2",
+          "rotation": [
+            -0.9553166181245092,
+            2.199114857512855,
+            0
+          ]
+        },
+        {
+          "name": "3",
+          "rotation": [
+            2.186276035465284,
+            0.9424777960769379,
+            0
+          ]
+        },
+        {
+          "name": "4",
+          "rotation": [
+            -0.9553166181245092,
+            -0.3141592653589793,
+            0
+          ]
+        },
+        {
+          "name": "5",
+          "rotation": [
+            2.186276035465284,
+            -0.3141592653589793,
+            0
+          ]
+        },
+        {
+          "name": "6",
+          "rotation": [
+            -0.9553166181245092,
+            0.9424777960769379,
+            0
+          ]
+        },
+        {
+          "name": "7",
+          "rotation": [
+            2.186276035465284,
+            2.199114857512855,
+            0
+          ]
+        },
+        {
+          "name": "8",
+          "rotation": [
+            -0.9553166181245092,
+            -2.827433388230814,
+            0
+          ]
+        },
+        {
+          "name": "9",
+          "rotation": [
+            2.186276035465284,
+            -1.5707963267948966,
+            0
+          ]
+        }
+      ]
+    }
+  }
+}

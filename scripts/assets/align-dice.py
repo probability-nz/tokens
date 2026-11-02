@@ -158,6 +158,10 @@ def generate():
                     ]
                 )
             ]
+        elif entry["name"] == "D10":
+            from d10_geometry import poses
+            entry["faces"] = poses()
+            entry["rotation"] = entry["faces"][0]["rotation"]
         elif entry["name"] in hints:
             _, ps, groups = geometry(ASSETS / entry["src"])
             hint = hints[entry["name"]]

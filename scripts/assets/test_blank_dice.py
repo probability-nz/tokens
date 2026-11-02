@@ -8,7 +8,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "src/assets/blank-dice"
 SOURCE = ROOT / "src/assets"
-NAMES = ("d4", "d6", "d8", "d12", "d20")
+NAMES = ("d4", "d6", "d8", "d10", "d12", "d20")
 
 
 class BlankDiceTests(unittest.TestCase):
@@ -22,12 +22,12 @@ class BlankDiceTests(unittest.TestCase):
 
     def test_blank_variants_are_last_and_retain_catalog_metadata(self):
         catalog = json.loads((SOURCE / "catalog.json").read_text())["pieces"]
-        names = ["Classic die", "D4", "D6", "D8", "D12", "D20"]
+        names = ["Classic die", "D4", "D6", "D8", "D10", "D12", "D20"]
         self.assertEqual(
             [p["name"] for p in catalog],
             names + ["Pawn"] + [n + " (blank)" for n in names[1:]],
         )
-        for original, blank in zip(catalog[1:6], catalog[-5:]):
+        for original, blank in zip(catalog[1:7], catalog[-6:]):
             for key in ("scale", "rotation", "faces"):
                 self.assertEqual(blank[key], original[key])
             self.assertTrue((SOURCE / blank["src"]).is_file())

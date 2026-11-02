@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2] / "src/assets"
 shared = {}
-for name in ("die", "d4", "d6", "d8", "d12", "d20"):
+for name in ("die", "d4", "d6", "d8", "d10", "d12", "d20"):
     path = ROOT / name / f"{name}.gltf"
     doc = json.loads(path.read_text())
     for buffer in doc["buffers"]:

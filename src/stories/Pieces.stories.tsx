@@ -46,6 +46,7 @@ export const ClassicDie = { ...story('Classic die'), name: 'Classic die' };
 export const D4 = { ...story('D4'), name: 'D4' };
 export const D6 = { ...story('D6'), name: 'D6' };
 export const D8 = { ...story('D8'), name: 'D8' };
+export const D10 = { ...story('D10'), name: 'D10' };
 export const D12 = { ...story('D12'), name: 'D12' };
 export const D20 = { ...story('D20'), name: 'D20' };
 export const Pawn = story('Pawn');

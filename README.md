@@ -17,8 +17,7 @@ Assets were created by Misha Tsyatsko under contract for Garbo Succus.
 
 ## Regular dice and face poses
 
-All six dice shapes (including the classic pip cube) use centred, mathematically
-regular meshes with a **1.2 mm geometric fillet radius at catalog scale**. Faces
+All seven dice models (including the classic pip cube) use centred, symmetric meshes with a **1.2 mm geometric fillet radius at catalog scale**. Faces
 are flat; edges are cylindrical and corners spherical, with analytic smooth normals. D12/D20 use one subdivision
 per half-edge/corner patch; the sharper shapes use two. UV islands use a spacious painting grid: one upright island per numbered
 face, including its rounded rim. Seams meet halfway around rounded edges;
@@ -30,7 +29,7 @@ Original artwork remains in `source`; reproducible bake outputs are in `regular`
 Rebuild with Blender 5, Pillow and NumPy available:
 
 ```sh
-for die in die d4 d6 d8 d12 d20; do
+for die in die d4 d6 d8 d10 d12 d20; do
   blender -b --python-exit-code 1 --python scripts/assets/regular-dice.py -- "$die"
 done
 node scripts/prepare-assets.mjs
@@ -42,6 +41,14 @@ All blank glTFs share their numbered variant's published `.bin`, including
 positions, normals, UVs, tangents and indices. `sync-blank-dice.py` is the single
 blank-model generator; all blanks share one neutral normal-map texel.
 `blank-dice.py` is a compatibility entry point for this same generator.
+D10 is a pentagonal trapezohedron with ten congruent kite faces, numbered 0–9
+(0 represents ten). Opposite numbers sum to nine. `d10_geometry.py` defines its
+planes and exact rotational symmetries; outcomes use 18-degree yaw increments
+and zero Z rotation, preserving the full silhouette. Its artwork is generated
+with Pillow's bundled font, so it needs no imported source model or external
+font. The numbered and blank D10 share one optimized mesh buffer. Its 500
+triangles preserve the same two-subdivision rounding used by the sharper dice.
+
 D8/D12/D20 outcomes are fitted to the mesh planes and the whole solid's normal
 symmetries, preserving the original number mapping and a stable footprint.
 `authored-dice-poses.json` retains the original hints for identifying numbered

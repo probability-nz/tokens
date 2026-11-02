@@ -47,7 +47,7 @@ def triangle_records(doc, data):
 
 class OptimizerTests(unittest.TestCase):
     def test_source_meshes_preserve_all_attributes_and_are_idempotent(self):
-        for name in ("die", "d4", "d6", "d8", "d12", "d20"):
+        for name in ("die", "d4", "d6", "d8", "d10", "d12", "d20"):
             with self.subTest(die=name):
                 folder = ROOT / "src/assets" / name / "regular"
                 doc = json.loads((folder / f"{name}.gltf").read_text())

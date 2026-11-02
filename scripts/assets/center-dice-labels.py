@@ -17,7 +17,7 @@ from scipy import ndimage
 
 ROOT = Path(__file__).resolve().parents[2]
 ASSETS = ROOT / "src/assets"
-NAMES = ("d4", "d6", "d8", "d12", "d20")
+NAMES = ("d4", "d6", "d8", "d10", "d12", "d20")
 spec = importlib.util.spec_from_file_location(
     "align", Path(__file__).with_name("align-dice.py")
 )
@@ -203,6 +203,7 @@ def label_jobs(name, faces, diffuse, entry):
             "d4": 0.90,
             "d6": 1.0,
             "d8": 0.88,
+            "d10": 0.90,
             "d12": 0.90,
             "d20": 0.90,
         }[name]

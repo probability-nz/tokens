@@ -14,7 +14,7 @@ try:
 except OSError:
     # Pillow bundles this font; generation must not depend on system fonts.
     FONT = ImageFont.load_default(size=15)
-for name in ("die", "d4", "d6", "d8", "d12", "d20"):
+for name in ("die", "d4", "d6", "d8", "d10", "d12", "d20"):
     folder = ASSETS / name
     doc = json.loads((folder / "regular" / f"{name}.gltf").read_text())
     layout = json.loads((folder / "regular/uv-layout.json").read_text())

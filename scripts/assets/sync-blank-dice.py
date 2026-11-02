@@ -8,7 +8,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[2] / "src/assets"
 # All blanks share one neutral texel; curved shading comes from the meshes.
 Image.new("RGB", (1, 1), (128, 128, 255)).save(ROOT / "blank-dice/flat-normal.png")
-for name in ("d4", "d6", "d8", "d12", "d20"):
+for name in ("d4", "d6", "d8", "d10", "d12", "d20"):
     source = ROOT / name / "regular"
     doc = json.loads((source / (name + ".gltf")).read_text())
     numbered = json.loads((ROOT / name / (name + ".gltf")).read_text())

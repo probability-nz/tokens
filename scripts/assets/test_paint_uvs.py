@@ -21,7 +21,7 @@ spec.loader.exec_module(align)
 class PaintUVTests(unittest.TestCase):
     def test_islands_do_not_overlap_and_corner_seams_are_continuous(self):
         for name, published in itertools.product(
-            ("die", "d4", "d6", "d8", "d12", "d20"), (False, True)
+            ("die", "d4", "d6", "d8", "d10", "d12", "d20"), (False, True)
         ):
             with self.subTest(die=name, published=published):
                 asset_folder = ROOT / "src/assets" / name
@@ -85,9 +85,36 @@ class PaintUVTests(unittest.TestCase):
                     hull_area = ConvexHull(
                         uv[slots == slot].astype(float) * columns
                     ).volume
-                    self.assertAlmostEqual(
-                        float(np.abs(signed).sum() / 2), hull_area, delta=1e-6
-                    )
+                    if name != "d10":
+                        self.assertAlmostEqual(
+                            float(np.abs(signed).sum() / 2), hull_area, delta=1e-6
+                        )
+                    # A kite's unequal corner angles can produce a slightly
+                    # concave rim outline. Convex-hull area alone is not an
+                    # overlap test: directly separate every pair of triangles.
+                    for i, first in enumerate(triangles):
+                        for second in triangles[i + 1 :]:
+                            if np.any(
+                                np.minimum(first.max(axis=0), second.max(axis=0))
+                                - np.maximum(first.min(axis=0), second.min(axis=0))
+                                < 1e-10
+                            ):
+                                continue
+                            edges = np.concatenate(
+                                (
+                                    np.roll(first, -1, axis=0) - first,
+                                    np.roll(second, -1, axis=0) - second,
+                                )
+                            )
+                            axes = edges[:, [1, 0]] * [1, -1]
+                            axes /= np.linalg.norm(axes, axis=1)[:, None]
+                            a, b = first @ axes.T, second @ axes.T
+                            overlap = np.minimum(
+                                a.max(axis=0), b.max(axis=0)
+                            ) - np.maximum(a.min(axis=0), b.min(axis=0))
+                            self.assertTrue(
+                                np.any(overlap < 1e-9), "UV triangle interiors overlap"
+                            )
                     # All triangles at the same 3D corner point must use
                     # the same UV: the old per-wedge mapping repeated art.
                     seen = {}
@@ -115,7 +142,7 @@ class PaintUVTests(unittest.TestCase):
 
     def test_standalone_build_includes_current_painting_layers(self):
         subprocess.run(["node", "scripts/build-catalog.mjs"], cwd=ROOT, check=True)
-        for name in ("die", "d4", "d6", "d8", "d12", "d20"):
+        for name in ("die", "d4", "d6", "d8", "d10", "d12", "d20"):
             for source in (ROOT / "src/assets" / name / "paint").iterdir():
                 with self.subTest(die=name, layer=source.name):
                     self.assertEqual(

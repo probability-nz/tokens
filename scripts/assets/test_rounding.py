@@ -20,6 +20,7 @@ class RoundingTests(unittest.TestCase):
             ("d4", 150),
             ("d6", 300),
             ("d8", 300),
+            ("d10", 500),
             ("d12", 280),
             ("d20", 280),
         ):

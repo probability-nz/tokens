@@ -1,5 +1,5 @@
 """Blender: generate consistently rounded regular dice meshes and transfer their original artwork.
-Run: blender -b --python-exit-code 1 --python scripts/assets/regular-dice.py -- d4 (die, d4, d6, d8, d12 or d20)
+Run: blender -b --python-exit-code 1 --python scripts/assets/regular-dice.py -- d4 (die, d4, d6, d8, d10, d12 or d20)
 Original source files are retained for reproducible baking (no external assets).
 """
 
@@ -15,9 +15,9 @@ from itertools import combinations
 
 ROOT = Path(__file__).resolve().parents[2]
 NAME = sys.argv[sys.argv.index("--") + 1] if "--" in sys.argv else "d4"
-assert NAME in ("die", "d4", "d6", "d8", "d12", "d20")
+assert NAME in ("die", "d4", "d6", "d8", "d10", "d12", "d20")
 OUT = ROOT / f"src/assets/{NAME}/regular"
-OUT.mkdir(exist_ok=True)
+OUT.mkdir(parents=True, exist_ok=True)
 RADIUS = 3 * math.sqrt(2) / 4
 catalog = json.loads((ROOT / "src/assets/catalog.json").read_text())
 entry = next(e for e in catalog["pieces"] if e["src"] == f"{NAME}/{NAME}.gltf")
@@ -76,10 +76,18 @@ else:
     )
     align_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(align_module)
-    _, _, groups = align_module.geometry(ROOT / f"src/assets/{NAME}/source/{NAME}.gltf")
-    inradius = float(
-        np.mean([np.mean(np.array(g["points"]) @ g["normal"]) for g in groups])
-    )
+    if NAME == "d10":
+        sys.path.insert(0, str(Path(__file__).parent))
+        import d10_geometry
+
+        inradius = d10_geometry.INRADIUS
+    else:
+        _, _, groups = align_module.geometry(
+            ROOT / f"src/assets/{NAME}/source/{NAME}.gltf"
+        )
+        inradius = float(
+            np.mean([np.mean(np.array(g["points"]) @ g["normal"]) for g in groups])
+        )
     if NAME in ("die", "d6"):
         face_normals = [
             tuple(sign if i == axis else 0 for i in range(3))
@@ -96,6 +104,8 @@ else:
                 (0, b / math.sqrt(3), a * math.sqrt(2 / 3)),
             ]
         ]
+    elif NAME == "d10":
+        face_normals = d10_geometry.normals()
     elif NAME == "d12":
         phi = (1 + math.sqrt(5)) / 2
         face_normals = [
@@ -168,13 +178,16 @@ face_poses = [
     )
     for n in face_normals
 ]
-face_slots = [int(f["name"]) - 1 for f in face_poses]
+face_slots = [
+    next(i for i, outcome in enumerate(entry["faces"]) if outcome["name"] == f["name"])
+    for f in face_poses
+]
 assert sorted(face_slots) == list(range(len(faces)))
 patches = [None] * len(faces)
 for slot in face_slots:
     patches[slot] = {
         "kind": "face",
-        "label": f"{'Opposite' if NAME == 'd4' else 'Face'} {slot + 1}",
+        "label": f"{'Opposite' if NAME == 'd4' else 'Face'} {entry['faces'][slot]['name']}",
     }
 positions = []
 normals = []
@@ -290,8 +303,12 @@ for corner in range(len(vertices)):
 # Cycles transfers the existing color/engraving to the new UVs and tangent frame.
 bpy.ops.object.select_all(action="SELECT")
 bpy.ops.object.delete(use_global=False)
-bpy.ops.import_scene.gltf(filepath=str(ROOT / f"src/assets/{NAME}/source/{NAME}.gltf"))
-source = next(o for o in bpy.context.scene.objects if o.type == "MESH")
+source = None
+if NAME != "d10":
+    bpy.ops.import_scene.gltf(
+        filepath=str(ROOT / f"src/assets/{NAME}/source/{NAME}.gltf")
+    )
+    source = next(o for o in bpy.context.scene.objects if o.type == "MESH")
 # The source sharp tetrahedron has a 1.5 high axis and a sqrt(3) base edge.
 # Correct its height and centre before projecting its artwork onto the regular die.
 if NAME == "d4":
@@ -324,7 +341,8 @@ scene.render.bake.use_pass_direct = False
 scene.render.bake.use_pass_indirect = False
 scene.render.bake.use_pass_color = True
 bpy.ops.object.select_all(action="DESELECT")
-source.select_set(True)
+if source is not None:
+    source.select_set(True)
 target.select_set(True)
 bpy.context.view_layer.objects.active = target
 # Sample a fixed 95% of the original face when baking, independent of fillet
@@ -345,7 +363,8 @@ for kind, name, color in [("DIFFUSE", NAME + "_diffuse", (1, 1, 1, 1))]:
     node = mat.node_tree.nodes.new("ShaderNodeTexImage")
     node.image = image
     mat.node_tree.nodes.active = node
-    bpy.ops.object.bake(type=kind)
+    if source is not None:
+        bpy.ops.object.bake(type=kind)
     image.filepath_raw = str(OUT / (name + ".png"))
     image.file_format = "PNG"
     image.save()
@@ -425,11 +444,67 @@ for index in range(count):
     tangent = unit(sub(t[:3], mul(n, dot(n, t[:3]))))
     struct.pack_into("<4f", encoded, offset("TANGENT", index, 4), *tangent, t[3])
 buffer_path.write_bytes(encoded)
-document["asset"][
-    "copyright"
-] = "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."
+document["asset"]["copyright"] = (
+    "Garbo Succus. CC BY 4.0."
+    if NAME == "d10"
+    else "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."
+)
 document_path.write_text(json.dumps(document, indent=2) + "\n")
-print("Wrote regular", NAME, "geometry and rebaked color/normal maps", flush=True)
+if NAME == "d10":
+    # Original vector-font artwork: no imported model or external texture input.
+    from PIL import Image, ImageDraw, ImageFont
+
+    image = Image.new("RGB", (2048, 2048), "white")
+    draw = ImageDraw.Draw(image)
+    font = ImageFont.load_default(size=140)
+    for face, corners in enumerate(faces):
+        centre, u, v, radius = frames[face]
+        ps = [add(inner[i], mul(face_normals[face], BEVEL)) for i in corners]
+        ps.sort(
+            key=lambda p: math.atan2(dot(sub(p, centre), v), dot(sub(p, centre), u))
+        )
+        # Area centroid, rather than the four-vertex average of an asymmetric kite.
+        weights = [
+            np.linalg.norm(np.cross(sub(ps[i], ps[0]), sub(ps[i + 1], ps[0])))
+            for i in range(1, len(ps) - 1)
+        ]
+        centroid = np.average(
+            [(np.array(ps[0]) + ps[i] + ps[i + 1]) / 3 for i in range(1, len(ps) - 1)],
+            axis=0,
+            weights=weights,
+        )
+        slot = face_slots[face]
+        x = (
+            (
+                slot % atlas
+                + 0.08
+                + 0.84 * (0.5 + dot(sub(centroid, centre), u) / (2 * radius))
+            )
+            * 2048
+            / atlas
+        )
+        y = (
+            (
+                slot // atlas
+                + 0.96
+                - 0.84 * (0.5 + dot(sub(centroid, centre), v) / (2 * radius))
+            )
+            * 2048
+            / atlas
+        )
+        label = entry["faces"][slot]["name"]
+        box = draw.textbbox((0, 0), label, font=font)
+        draw.text(
+            (x - (box[0] + box[2]) / 2, y - (box[1] + box[3]) / 2),
+            label,
+            font=font,
+            fill="black",
+        )
+        if label in ("6", "9"):
+            dx = (box[2] - box[0]) / 2 + 12
+            draw.ellipse((x + dx, y + 34, x + dx + 9, y + 43), fill="black")
+    image.save(OUT / "d10_diffuse.png")
+print("Wrote rounded", NAME, "geometry and color/normal maps", flush=True)
 # The old bevel UVs can contain padding or stray ink. The new rounded bevels
 # already have analytic smooth normals: keep their material white and their
 # tangent-space normal neutral instead of projecting old bevel artifacts.

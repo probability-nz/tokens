@@ -1,0 +1,162 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v5.0.21",
+    "version": "2.0",
+    "copyright": "Garbo Succus. CC BY 4.0."
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "Regular D10"
+    }
+  ],
+  "materials": [
+    {
+      "name": "D10",
+      "normalTexture": {
+        "index": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.5
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Regular D10",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2,
+            "TANGENT": 3
+          },
+          "indices": 4,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/png",
+      "name": "d10_normal.png",
+      "uri": "d10_normal.png"
+    },
+    {
+      "mimeType": "image/png",
+      "name": "d10_diffuse",
+      "uri": "d10_diffuse.png"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 609,
+      "max": [
+        0.7847169041633606,
+        0.9843266606330872,
+        0.7510808110237122
+      ],
+      "min": [
+        -0.7847169041633606,
+        -0.9843266606330872,
+        -0.7510808110237122
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 609,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 609,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 609,
+      "type": "VEC4"
+    },
+    {
+      "componentType": 5123,
+      "type": "SCALAR",
+      "bufferView": 4,
+      "count": 1500
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 7308,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 7308,
+      "byteLength": 7308,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 14616,
+      "byteLength": 4872,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 19488,
+      "byteLength": 9744,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 29232,
+      "byteLength": 3000,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 32232,
+      "uri": "d10.bin"
+    }
+  ]
+}
