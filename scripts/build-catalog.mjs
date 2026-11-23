@@ -126,6 +126,22 @@ for (const [index, piece] of catalog.pieces.entries()) {
   }
 }
 
+// The card deck has its own manifest and artwork license.
+const deckDirectory = join(assets, 'playing-cards', 'austin');
+const deckPath = join(deckDirectory, 'deck.json');
+const deck = JSON.parse(await readFile(deckPath, 'utf8'));
+files.add(deckPath);
+files.add(join(deckDirectory, 'LICENSE.md'));
+for (const [id, model] of Object.entries(deck.cards)) {
+  if (model !== id + '.gltf') throw new Error('Invalid playing card: ' + id);
+  const modelPath = relativeFile(model, id, '.gltf', deckDirectory);
+  const gltf = JSON.parse(await readFile(modelPath, 'utf8'));
+  files.add(modelPath);
+  for (const {uri} of [...gltf.buffers, ...gltf.images]) {
+    files.add(relativeFile(uri, id, undefined, deckDirectory));
+  }
+}
+
 await rm(output, { force: true, recursive: true });
 for (const source of files) {
   const destination = join(output, relative(assets, source));
