@@ -12,14 +12,6 @@ export type Marking =
       size: number;
       angle: number;
     };
-export function faceLabel(kind: Kind, name: string) {
-  return (
-    name +
-    (['D10', 'D12', 'D20'].includes(kind) && ['6', '9'].includes(name)
-      ? '.'
-      : '')
-  );
-}
 type Chart = {
   center: Vector2;
   pixels: number;
@@ -53,17 +45,30 @@ function printBorders(patches: Patch[], count: number) {
   return borders;
 }
 
-// Largest centered text box that clears a segment. In box-scaled space
-// its first contact is at an endpoint or where the segment crosses x = ±y.
-function textClearance(a: Vector2, b: Vector2) {
-  const extent = (p: Vector2) => Math.max(Math.abs(p.x), Math.abs(p.y));
-  let limit = Math.min(extent(a), extent(b));
-  for (const sign of [-1, 1]) {
-    const start = a.x + sign * a.y,
-      end = b.x + sign * b.y;
-    if (start * end < 0) {
-      const t = start / (start - end);
-      limit = Math.min(limit, Math.abs(a.x + (b.x - a.x) * t));
+// The first intersection between an expanding glyph and a face boundary.
+function glyphLimit(
+  outline: readonly Vector2[],
+  edges: readonly Vector2[][],
+  anchor: Vector2,
+  angle: number,
+) {
+  let limit = Infinity;
+  const cos = Math.cos(angle),
+    sin = Math.sin(angle);
+  for (const [a, b] of edges) {
+    const ax = a.x - anchor.x,
+      ay = a.y - anchor.y;
+    const dx = b.x - a.x,
+      dy = b.y - a.y;
+    const numerator = ax * dy - ay * dx;
+    for (const point of outline) {
+      const x = cos * point.x - sin * point.y,
+        y = sin * point.x + cos * point.y;
+      const det = x * dy - y * dx;
+      if (!det) continue;
+      const along = (ax * y - ay * x) / det;
+      const scale = numerator / det;
+      if (along >= 0 && along <= 1 && scale > 0) limit = Math.min(limit, scale);
     }
   }
   return limit;
@@ -71,7 +76,7 @@ function textClearance(a: Vector2, b: Vector2) {
 // Both variants share one generated geometry, including UVs and the ordered face poses.
 export function generateDie(
   kind: Kind,
-  ink: { halfWidth: number; halfHeight: number },
+  outlines: ReadonlyMap<string, readonly Vector2[]>,
   { faces, patches } = generateShape(kind),
 ) {
   const cols = Math.ceil(Math.sqrt(faces.length)),
@@ -89,8 +94,6 @@ export function generateDie(
     rows * side + Math.ceil(extra / Math.floor(width / small)) * small;
   const markings: Marking[] = [];
   const borders = printBorders(patches, faces.length);
-  const halfInk = new Vector2(ink.halfWidth, ink.halfHeight);
-  let typeSize = Infinity;
   const charts: Chart[] = faces.map((f, i) => {
     const project = (p: Vector3) => new Vector2(p.dot(f.right), p.dot(f.down));
     const outline = f.rim.map(project);
@@ -98,12 +101,6 @@ export function generateDie(
       ...outline.flatMap((p) => [Math.abs(p.x), Math.abs(p.y)]),
     );
     const pixels = (side / 2 - 6) / span;
-    for (const [a, b] of borders[i].values()) {
-      typeSize = Math.min(
-        typeSize,
-        textClearance(project(a).divide(halfInk), project(b).divide(halfInk)),
-      );
-    }
     return {
       project,
       pixels,
@@ -113,26 +110,40 @@ export function generateDie(
       ),
     };
   });
+  let typeSize = Infinity;
   for (const [i, f] of faces.entries()) {
     const { pixels, center, project } = charts[i];
+    const edges = Array.from(borders[i].values(), ([a, b]) => [
+      project(a),
+      project(b),
+    ]);
+    function addText(value: string, anchor: Vector2, angle = 0) {
+      typeSize = Math.min(
+        typeSize,
+        glyphLimit(outlines.get(value)!, edges, anchor, angle),
+      );
+      const pixel = anchor.clone().multiplyScalar(pixels).add(center);
+      markings.push({
+        type: 'text',
+        value,
+        x: pixel.x,
+        y: pixel.y,
+        size: pixels,
+        angle,
+      });
+    }
     if (kind === 'D4') {
       // A tetrahedron rests on a face. Its upper vertex reads the same on all three adjacent faces.
       for (const p of f.rim) {
         const top = faces.reduce((best, g) =>
           g.axis.dot(p) < best.axis.dot(p) ? g : best,
         );
-        const direction = project(p).normalize();
-        const anchor = project(p)
-          .multiplyScalar(0.57 * pixels)
-          .add(center);
-        markings.push({
-          type: 'text',
-          value: top.name,
-          x: anchor.x,
-          y: anchor.y,
-          size: side * 0.15,
-          angle: Math.atan2(direction.x, -direction.y),
-        });
+        const vertex = project(p);
+        addText(
+          top.name,
+          vertex.clone().multiplyScalar(0.57),
+          Math.atan2(vertex.x, -vertex.y),
+        );
       }
     } else if (kind === 'Classic die') {
       for (const [x, y] of pipLayout(Number(f.name))) {
@@ -144,15 +155,22 @@ export function generateDie(
         });
       }
     } else {
-      markings.push({
-        type: 'text',
-        value: faceLabel(kind, f.name),
-        x: center.x,
-        y: center.y,
-        size: typeSize * 0.81 * pixels,
-        angle: 0,
-      });
+      // The face pose maps these axes onto the same table axes at every stop.
+      // Their origin is above the die pivot even for asymmetric faces.
+      addText(f.name, new Vector2());
     }
+  }
+  // One physical font size per die, with clearance for antialiasing and engraving.
+  // Keep the D10 at its established size on its broad kite-shaped faces.
+  const labelFill: Partial<Record<Kind, number>> = {
+    D4: 0.92,
+    D6: 0.92,
+    D8: 0.92,
+    D10: 0.78,
+  };
+  const fill = labelFill[kind] ?? 0.97;
+  for (const mark of markings) {
+    if (mark.type === 'text') mark.size *= typeSize * fill;
   }
   const pos: number[] = [],
     norm: number[] = [],

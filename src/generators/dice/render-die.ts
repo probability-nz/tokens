@@ -1,58 +1,67 @@
 import {
   BufferGeometry,
+  Vector2,
   Float32BufferAttribute,
   MeshStandardMaterial,
   CanvasTexture,
   SRGBColorSpace,
 } from 'three';
 import { tabletopMotion } from './tabletop-motion';
-import { generateDie, faceLabel } from './generate-die';
+import { generateDie } from './generate-die';
 import { generateShape, type Kind } from './shapes';
 import { markingNormals } from './marking-normals';
-function print(
-  ctx: CanvasRenderingContext2D,
-  value: string,
-  x: number,
-  y: number,
-  size: number,
-  angle = 0,
-) {
-  ctx.save();
-  ctx.translate(x, y);
-  ctx.rotate(angle);
-  ctx.font = '700 ' + size + 'px Comfortaa';
+function rasterize(ctx: CanvasRenderingContext2D, value: string, size: number) {
+  const font = '700 ' + size + 'px Comfortaa';
+  ctx.font = font;
   const m = ctx.measureText(value);
+  const width =
+    Math.ceil(m.actualBoundingBoxLeft + m.actualBoundingBoxRight) + 10;
+  const height =
+    Math.ceil(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent) + 10;
+  ctx.canvas.width = width;
+  ctx.canvas.height = height;
+  ctx.font = font;
+  ctx.fillStyle = '#222';
   ctx.fillText(
     value,
-    (m.actualBoundingBoxLeft - m.actualBoundingBoxRight) / 2,
-    (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2,
+    (width + m.actualBoundingBoxLeft - m.actualBoundingBoxRight) / 2,
+    (height + m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2,
   );
-  ctx.restore();
+  return ctx.getImageData(0, 0, width, height);
+}
+
+// Sample the visible glyph outline in ems, relative to its ink center.
+function glyphOutline(ctx: CanvasRenderingContext2D, value: string) {
+  const em = 100;
+  const { width, height, data } = rasterize(ctx, value, em);
+  const points: Vector2[] = [];
+  const neighbors = [4, -4, width * 4, -width * 4];
+  for (let y = 1; y < height - 1; y++) {
+    for (let x = 1; x < width - 1; x++) {
+      const alpha = (y * width + x) * 4 + 3;
+      if (data[alpha] > 16 && neighbors.some((d) => data[alpha + d] <= 16))
+        points.push(
+          new Vector2((x + 0.5 - width / 2) / em, (y + 0.5 - height / 2) / em),
+        );
+    }
+  }
+  return points;
 }
 
 export function createDieResources(kind: Kind) {
   const shape = generateShape(kind);
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d')!;
-  ctx.font = '700 100px Comfortaa';
-  const metrics = shape.faces.map((f) =>
-    ctx.measureText(faceLabel(kind, f.name)),
-  );
-  const ink = {
-    halfWidth:
-      Math.max(
-        ...metrics.map(
-          (m) => m.actualBoundingBoxLeft + m.actualBoundingBoxRight,
-        ),
-      ) / 200,
-    halfHeight:
-      Math.max(
-        ...metrics.map(
-          (m) => m.actualBoundingBoxAscent + m.actualBoundingBoxDescent,
-        ),
-      ) / 200,
-  };
-  const { faces, pos, norm, uv, atlas } = generateDie(kind, ink, shape);
+  const stamp = document
+    .createElement('canvas')
+    .getContext('2d', { willReadFrequently: true })!;
+  const outlines = new Map<string, Vector2[]>();
+  if (kind !== 'Classic die') {
+    for (const face of shape.faces) {
+      outlines.set(face.name, glyphOutline(stamp, face.name));
+    }
+  }
+  const { faces, pos, norm, uv, atlas } = generateDie(kind, outlines, shape);
   const { width, height, cols, side, markings } = atlas;
   canvas.width = width;
   canvas.height = height;
@@ -60,9 +69,33 @@ export function createDieResources(kind: Kind) {
   ctx.fillRect(0, 0, width, height);
   ctx.fillStyle = '#222';
   for (const mark of markings) {
-    if (mark.type === 'text')
-      print(ctx, mark.value, mark.x, mark.y, mark.size, mark.angle);
-    else {
+    if (mark.type === 'text') {
+      // Canvas metrics can differ from the hinted pixels at the final font size.
+      // Center the rendered ink before rotating the label into its face.
+      const { width, height, data } = rasterize(stamp, mark.value, mark.size);
+      let left = width,
+        right = 0,
+        top = height,
+        bottom = 0;
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          if (data[(y * width + x) * 4 + 3] < 64) continue;
+          left = Math.min(left, x);
+          right = Math.max(right, x);
+          top = Math.min(top, y);
+          bottom = Math.max(bottom, y);
+        }
+      }
+      ctx.save();
+      ctx.translate(mark.x, mark.y);
+      ctx.rotate(mark.angle);
+      ctx.drawImage(
+        stamp.canvas,
+        -(left + right + 1) / 2,
+        -(top + bottom + 1) / 2,
+      );
+      ctx.restore();
+    } else {
       ctx.beginPath();
       ctx.arc(mark.x, mark.y, mark.radius, 0, Math.PI * 2);
       ctx.fill();
