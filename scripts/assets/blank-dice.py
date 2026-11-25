@@ -14,7 +14,7 @@ from scipy.sparse.linalg import cg
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = Path(sys.argv[1]).expanduser() if len(sys.argv) > 1 else ROOT
 OUT = ROOT / 'src/assets/blank-dice'
-NAMES = ('d4', 'd6', 'd8', 'd12', 'd20')
+NAMES = ('d4', 'd6', 'd8', 'd12', 'd20', 'd10')
 
 
 def blank(name):
@@ -89,7 +89,7 @@ def blank(name):
         data = (folder / buffer['uri']).read_bytes()
         buffer['uri'] = 'data:application/octet-stream;base64,' + base64.b64encode(data).decode()
     doc['asset']['copyright'] = 'Garbo Succus; source assets by Misha Tsyatsko. CC BY 4.0. Number/pip maps removed; original geometry and bevel shading retained.'
-    doc['asset']['extras'] = {'source': 'https://github.com/probability-nz/tokens', 'commit': 'b2559ef7924965d3440478e6b2c54aae79944763'}
+    doc['asset']['extras'] = {'source': 'https://github.com/probability-nz/tokens'}
     (OUT / f'{name}-blank.gltf').write_text(json.dumps(doc, indent=2) + '\n')
     print(name, 'blanked pixels:', np.count_nonzero(np.asarray(mask)), flush=True)
 

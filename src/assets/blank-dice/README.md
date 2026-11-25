@@ -1,7 +1,7 @@
 # Blank original dice
 
 Blank variants of the actual `probability-nz/tokens` catalog models used by
-Play's Create tab: D4, D6, D8, D12 and D20. No new shapes are generated.
+Play's Create tab: D4, D6, D8, D10, D12 and D20. No new shapes are generated.
 
 Mesh buffers (including positions, vertex normals, UVs and indices), nodes,
 accessors, dimensions, samplers and material roughness are preserved exactly.
@@ -12,7 +12,7 @@ Each glTF embeds its original binary buffer and references its adjacent PNG.
 Keep both files together when importing.
 
 Source: https://github.com/probability-nz/tokens
-Source commit: b2559ef (same asset tree as probability/main b49bad1).
+The paired numbered models in this checkout supply the current geometry and rotations.
 CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
 Garbo Succus; source assets by Misha Tsyatsko.
 Modified: number/pip albedo removed, normal-map numeral/pip regions flattened.

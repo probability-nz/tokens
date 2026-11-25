@@ -1,145 +1,204 @@
 {
-    "asset" : {
-        "generator" : "Khronos glTF Blender I/O v3.2.43",
-        "version" : "2.0"
+    "asset": {
+        "generator": "Khronos glTF Blender I/O v3.2.43",
+        "version": "2.0"
     },
-    "scene" : 0,
-    "scenes" : [
+    "scene": 0,
+    "scenes": [
         {
-            "name" : "Scene",
-            "nodes" : [
+            "name": "Scene",
+            "nodes": [
                 0
             ]
         }
     ],
-    "nodes" : [
+    "nodes": [
         {
-            "mesh" : 0,
-            "name" : "d6"
+            "mesh": 0,
+            "name": "d6",
+            "translation": [
+                -0.0,
+                -0.0,
+                1.1775693440128312e-16
+            ]
         }
     ],
-    "materials" : [
+    "materials": [
         {
-            "doubleSided" : true,
-            "name" : "Material",
-            "normalTexture" : {
-                "index" : 0
+            "doubleSided": true,
+            "name": "Material",
+            "normalTexture": {
+                "index": 0
             },
-            "pbrMetallicRoughness" : {
-                "baseColorTexture" : {
-                    "index" : 1
+            "pbrMetallicRoughness": {
+                "baseColorTexture": {
+                    "index": 1
                 },
-                "metallicFactor" : 0,
-                "roughnessFactor" : 0.4000000059604645
+                "metallicFactor": 0,
+                "roughnessFactor": 0.4000000059604645
             }
         }
     ],
-    "meshes" : [
+    "meshes": [
         {
-            "name" : "Cube.003",
-            "primitives" : [
+            "name": "Cube.003",
+            "primitives": [
                 {
-                    "attributes" : {
-                        "POSITION" : 0,
-                        "NORMAL" : 1,
-                        "TEXCOORD_0" : 2
+                    "attributes": {
+                        "POSITION": 0,
+                        "NORMAL": 1,
+                        "TEXCOORD_0": 2
                     },
-                    "indices" : 3,
-                    "material" : 0
+                    "indices": 3,
+                    "material": 0
                 }
             ]
         }
     ],
-    "textures" : [
+    "textures": [
         {
-            "sampler" : 0,
-            "source" : 0
+            "sampler": 0,
+            "source": 0
         },
         {
-            "sampler" : 0,
-            "source" : 1
+            "sampler": 0,
+            "source": 1
         }
     ],
-    "images" : [
+    "images": [
         {
-            "mimeType" : "image/png",
-            "name" : "d6_normal",
-            "uri" : "d6_normal.png"
+            "mimeType": "image/png",
+            "name": "d6_normal",
+            "uri": "d6_normal.png"
         },
         {
-            "mimeType" : "image/png",
-            "name" : "d6_diffuse",
-            "uri" : "d6_diffuse.png"
+            "mimeType": "image/png",
+            "name": "d6_diffuse",
+            "uri": "d6_diffuse.png"
         }
     ],
-    "accessors" : [
+    "accessors": [
         {
-            "bufferView" : 0,
-            "componentType" : 5126,
-            "count" : 96,
-            "max" : [
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 96,
+            "max": [
                 0.5,
                 0.5,
                 0.5
             ],
-            "min" : [
+            "min": [
                 -0.5,
                 -0.5,
                 -0.5
             ],
-            "type" : "VEC3"
+            "type": "VEC3"
         },
         {
-            "bufferView" : 1,
-            "componentType" : 5126,
-            "count" : 96,
-            "type" : "VEC3"
+            "bufferView": 1,
+            "componentType": 5126,
+            "count": 96,
+            "type": "VEC3"
         },
         {
-            "bufferView" : 2,
-            "componentType" : 5126,
-            "count" : 96,
-            "type" : "VEC2"
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 96,
+            "type": "VEC2"
         },
         {
-            "bufferView" : 3,
-            "componentType" : 5123,
-            "count" : 324,
-            "type" : "SCALAR"
+            "bufferView": 3,
+            "componentType": 5123,
+            "count": 324,
+            "type": "SCALAR"
         }
     ],
-    "bufferViews" : [
+    "bufferViews": [
         {
-            "buffer" : 0,
-            "byteLength" : 1152,
-            "byteOffset" : 0
+            "buffer": 0,
+            "byteLength": 1152,
+            "byteOffset": 0
         },
         {
-            "buffer" : 0,
-            "byteLength" : 1152,
-            "byteOffset" : 1152
+            "buffer": 0,
+            "byteLength": 1152,
+            "byteOffset": 1152
         },
         {
-            "buffer" : 0,
-            "byteLength" : 768,
-            "byteOffset" : 2304
+            "buffer": 0,
+            "byteLength": 768,
+            "byteOffset": 2304
         },
         {
-            "buffer" : 0,
-            "byteLength" : 648,
-            "byteOffset" : 3072
+            "buffer": 0,
+            "byteLength": 648,
+            "byteOffset": 3072
         }
     ],
-    "samplers" : [
+    "samplers": [
         {
-            "magFilter" : 9729,
-            "minFilter" : 9987
+            "magFilter": 9729,
+            "minFilter": 9987
         }
     ],
-    "buffers" : [
+    "buffers": [
         {
-            "byteLength" : 3720,
-            "uri" : "d6.bin"
+            "byteLength": 3720,
+            "uri": "d6.bin"
         }
-    ]
+    ],
+    "extras": {
+        "probability": {
+            "faces": [
+                {
+                    "name": "1",
+                    "rotation": [
+                        1.5707963267948966,
+                        0,
+                        1.570796511531739
+                    ]
+                },
+                {
+                    "name": "2",
+                    "rotation": [
+                        0,
+                        -5.448202074891113e-08,
+                        0
+                    ]
+                },
+                {
+                    "name": "3",
+                    "rotation": [
+                        0,
+                        2.188965974606462e-07,
+                        1.5707963267948966
+                    ]
+                },
+                {
+                    "name": "4",
+                    "rotation": [
+                        -3.141592653589793,
+                        -3.455754988446349e-07,
+                        1.5707963267948966
+                    ]
+                },
+                {
+                    "name": "5",
+                    "rotation": [
+                        0,
+                        1.6408108612169991e-07,
+                        -3.141592653589793
+                    ]
+                },
+                {
+                    "name": "6",
+                    "rotation": [
+                        -1.5707963267948966,
+                        0,
+                        -1.5707963267430465
+                    ]
+                }
+            ]
+        }
+    }
 }

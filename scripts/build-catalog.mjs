@@ -3,8 +3,10 @@ import { dirname, isAbsolute, join, normalize, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
-const assets = join(root, 'src', 'assets');
-const output = join(root, 'dist');
+const cc0 = process.argv[2] === '--cc0';
+const collection = cc0 ? 'cc0' : '';
+const assets = join(root, 'src', 'assets', collection);
+const output = join(root, 'dist', collection);
 const catalogPath = join(assets, 'catalog.json');
 const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
 
@@ -59,6 +61,7 @@ if (
 const names = new Set();
 const sources = new Set();
 const files = new Set([catalogPath]);
+if (cc0) files.add(join(assets, 'LICENSE'));
 for (const [index, piece] of catalog.pieces.entries()) {
   if (
     !record(piece) ||
