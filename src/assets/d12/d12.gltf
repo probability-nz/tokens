@@ -20,7 +20,7 @@
       "translation": [
         -5.53212581883816e-10,
         -1.529045894515123e-10,
-        -0.0
+        0
       ],
       "scale": [
         1.2440964173739446,
@@ -32,12 +32,9 @@
   "materials": [
     {
       "name": "d12 preferred",
-      "normalTexture": {
-        "index": 0
-      },
       "pbrMetallicRoughness": {
         "baseColorTexture": {
-          "index": 1
+          "index": 0
         },
         "metallicFactor": 0,
         "roughnessFactor": 0.5
@@ -60,7 +57,7 @@
       "name": "d12 preview",
       "pbrMetallicRoughness": {
         "baseColorTexture": {
-          "index": 2
+          "index": 1
         },
         "metallicFactor": 0,
         "roughnessFactor": 0.5
@@ -75,10 +72,9 @@
           "attributes": {
             "POSITION": 0,
             "NORMAL": 1,
-            "TEXCOORD_0": 2,
-            "TANGENT": 3
+            "TEXCOORD_0": 2
           },
-          "indices": 4,
+          "indices": 3,
           "material": 0
         }
       ]
@@ -88,19 +84,11 @@
     {
       "sampler": 0,
       "extensions": {
-        "EXT_texture_webp": {
-          "source": 0
-        }
-      }
-    },
-    {
-      "sampler": 0,
-      "extensions": {
         "EXT_texture_avif": {
-          "source": 1
+          "source": 0
         },
         "EXT_texture_webp": {
-          "source": 2
+          "source": 1
         }
       }
     },
@@ -108,17 +96,12 @@
       "sampler": 0,
       "extensions": {
         "EXT_texture_webp": {
-          "source": 2
+          "source": 1
         }
       }
     }
   ],
   "images": [
-    {
-      "mimeType": "image/webp",
-      "name": "d12 normal",
-      "uri": "d12_normal.webp"
-    },
     {
       "mimeType": "image/avif",
       "name": "d12 preferred",
@@ -134,74 +117,58 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 477,
-      "max": [
-        0.6480906009674072,
-        0.6480906009674072,
-        0.6480906009674072
-      ],
+      "count": 347,
+      "type": "VEC3",
       "min": [
         -0.6480906009674072,
         -0.6480906009674072,
         -0.6480906009674072
       ],
-      "type": "VEC3"
+      "max": [
+        0.6480906009674072,
+        0.6480906009674072,
+        0.6480906009674072
+      ]
     },
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 477,
+      "count": 347,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 477,
+      "count": 347,
       "type": "VEC2"
     },
     {
       "bufferView": 3,
-      "componentType": 5126,
-      "count": 477,
-      "type": "VEC4"
-    },
-    {
       "componentType": 5123,
-      "type": "SCALAR",
-      "bufferView": 4,
-      "count": 828
+      "count": 1188,
+      "type": "SCALAR"
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
       "byteOffset": 0,
-      "byteLength": 5724,
-      "target": 34962
+      "byteLength": 4164
     },
     {
       "buffer": 0,
-      "byteOffset": 5724,
-      "byteLength": 5724,
-      "target": 34962
+      "byteOffset": 4164,
+      "byteLength": 4164
     },
     {
       "buffer": 0,
-      "byteOffset": 11448,
-      "byteLength": 3816,
-      "target": 34962
+      "byteOffset": 8328,
+      "byteLength": 2776
     },
     {
       "buffer": 0,
-      "byteOffset": 15264,
-      "byteLength": 7632,
-      "target": 34962
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 22896,
-      "byteLength": 1656,
-      "target": 34963
+      "byteOffset": 11104,
+      "byteLength": 2376
     }
   ],
   "samplers": [
@@ -212,17 +179,9 @@
   ],
   "buffers": [
     {
-      "byteLength": 24552,
-      "uri": "d12.bin"
+      "uri": "d12.bin",
+      "byteLength": 13480
     }
-  ],
-  "extensionsUsed": [
-    "EXT_texture_avif",
-    "EXT_texture_webp",
-    "MSFT_lod"
-  ],
-  "extensionsRequired": [
-    "EXT_texture_webp"
   ],
   "extras": {
     "probability": {
@@ -238,29 +197,21 @@
         {
           "name": "2",
           "rotation": [
-            2.034443929606989,
-            0.31415935962020053,
-            -1.0172218643123463
-          ]
-        },
-        {
-          "name": "3",
-          "rotation": [
-            3.141592624008285,
-            0.9424780692697012,
-            2.1243707541731767
-          ]
-        },
-        {
-          "name": "4",
-          "rotation": [
             0.65235801394835,
             0.5235983654419514,
             -0.36486352479936973
           ]
         },
         {
-          "name": "5",
+          "name": "3",
+          "rotation": [
+            2.034443929606989,
+            0.31415935962020053,
+            -1.0172218643123463
+          ]
+        },
+        {
+          "name": "4",
           "rotation": [
             3.141592653589793,
             0.3141594305112665,
@@ -268,11 +219,19 @@
           ]
         },
         {
-          "name": "6",
+          "name": "5",
           "rotation": [
             -2.4892345251259216,
             -0.5235986250813599,
             -2.776728899759269
+          ]
+        },
+        {
+          "name": "6",
+          "rotation": [
+            3.141592624008285,
+            0.9424780692697012,
+            2.1243707541731767
           ]
         },
         {
@@ -286,29 +245,21 @@
         {
           "name": "8",
           "rotation": [
-            -1.107148821728019,
-            -0.31415951003451226,
-            1.0172215480023519
-          ]
-        },
-        {
-          "name": "9",
-          "rotation": [
             -2.124370724591668,
             1.5707962508135849,
             0
           ]
         },
         {
-          "name": "10",
+          "name": "9",
           "rotation": [
-            -2.4892344973848264,
-            -0.5235986879783159,
-            0.36486380931272566
+            0.6523580400063371,
+            0.523598424522873,
+            2.776729076674415
           ]
         },
         {
-          "name": "11",
+          "name": "10",
           "rotation": [
             0,
             -0.31415946300685,
@@ -316,14 +267,30 @@
           ]
         },
         {
+          "name": "11",
+          "rotation": [
+            -1.107148821728019,
+            -0.31415951003451226,
+            1.0172215480023519
+          ]
+        },
+        {
           "name": "12",
           "rotation": [
-            0.6523580400063371,
-            0.523598424522873,
-            2.776729076674415
+            -2.4892344973848264,
+            -0.5235986879783159,
+            0.36486380931272566
           ]
         }
       ]
     }
-  }
+  },
+  "extensionsUsed": [
+    "EXT_texture_avif",
+    "EXT_texture_webp",
+    "MSFT_lod"
+  ],
+  "extensionsRequired": [
+    "EXT_texture_webp"
+  ]
 }

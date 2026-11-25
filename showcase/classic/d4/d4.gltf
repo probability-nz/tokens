@@ -1,1 +1,233 @@
-{"asset":{"generator":"Khronos glTF Blender I/O v3.2.43","version":"2.0"},"scene":0,"scenes":[{"name":"Scene","nodes":[0]}],"nodes":[{"mesh":0,"name":"d4","translation":[3.017724432003223e-8,0.21213208326435906,2.9133846550716796e-8],"scale":[1,0.9428090993549744,1]}],"materials":[{"doubleSided":true,"name":"d4 preferred","normalTexture":{"index":0},"pbrMetallicRoughness":{"baseColorTexture":{"index":1},"metallicFactor":0,"roughnessFactor":0.5},"extensions":{"MSFT_lod":{"ids":[1]}},"extras":{"MSFT_screencoverage":[0,0]}},{"doubleSided":true,"name":"d4 preview","pbrMetallicRoughness":{"baseColorTexture":{"index":2},"metallicFactor":0,"roughnessFactor":0.5}}],"meshes":[{"name":"Cylinder","primitives":[{"attributes":{"POSITION":0,"NORMAL":1,"TEXCOORD_0":2},"indices":3,"material":0}]}],"textures":[{"sampler":0,"extensions":{"EXT_texture_webp":{"source":0}}},{"sampler":0,"extensions":{"EXT_texture_avif":{"source":1},"EXT_texture_webp":{"source":2}}},{"sampler":0,"extensions":{"EXT_texture_webp":{"source":2}}}],"images":[{"mimeType":"image/webp","name":"d4 normal","uri":"d4_normal.webp"},{"mimeType":"image/avif","name":"d4 preferred","uri":"d4_diffuse.avif"},{"mimeType":"image/webp","name":"d4 preview","uri":"d4_preview.webp"}],"accessors":[{"bufferView":0,"componentType":5126,"count":108,"max":[0.7968528270721436,0.7990608215332031,0.4774247407913208],"min":[-0.7968528270721436,-0.6000000238418579,-0.9127622842788696],"type":"VEC3"},{"bufferView":1,"componentType":5126,"count":108,"type":"VEC3"},{"bufferView":2,"componentType":5126,"count":108,"type":"VEC2"},{"bufferView":3,"componentType":5123,"count":444,"type":"SCALAR"}],"bufferViews":[{"buffer":1,"byteLength":1296,"byteOffset":0,"extensions":{"EXT_meshopt_compression":{"buffer":0,"byteOffset":0,"byteLength":998,"byteStride":12,"count":108,"mode":"ATTRIBUTES"}}},{"buffer":1,"byteLength":1296,"byteOffset":1296,"extensions":{"EXT_meshopt_compression":{"buffer":0,"byteOffset":998,"byteLength":1118,"byteStride":12,"count":108,"mode":"ATTRIBUTES"}}},{"buffer":1,"byteLength":864,"byteOffset":2592,"extensions":{"EXT_meshopt_compression":{"buffer":0,"byteOffset":2116,"byteLength":805,"byteStride":8,"count":108,"mode":"ATTRIBUTES"}}},{"buffer":1,"byteLength":888,"byteOffset":3456,"extensions":{"EXT_meshopt_compression":{"buffer":0,"byteOffset":2921,"byteLength":460,"byteStride":2,"count":444,"mode":"INDICES"}}}],"samplers":[{"magFilter":9729,"minFilter":9987}],"buffers":[{"uri":"8b72390cb68d497b6063.bin","byteLength":3381},{"byteLength":4344,"extensions":{"EXT_meshopt_compression":{"fallback":true}}}],"extensionsUsed":["EXT_texture_avif","EXT_texture_webp","MSFT_lod","EXT_meshopt_compression"],"extensionsRequired":["EXT_texture_webp","EXT_meshopt_compression"],"extras":{"probability":{"faces":[{"name":"1","rotation":[0,9.993704365997565e-8,0]},{"name":"2","rotation":[-0.5148059856215995,0.29284269667046253,2.120263552206677]},{"name":"3","rotation":[-2.5261129823395905,-0.6154796905237783,1.5707963112585377]},{"name":"4","rotation":[1.7457652684392593,0.29284279206155445,1.0213290996617566]}]}}}
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v3.2.43",
+    "version": "2.0"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "d4",
+      "translation": [
+        3.017724432003223e-8,
+        0.21213208326435906,
+        2.9133846550716796e-8
+      ],
+      "scale": [
+        1,
+        0.9428090993549744,
+        1
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "d4 preferred",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.5
+      },
+      "extensions": {
+        "MSFT_lod": {
+          "ids": [
+            1
+          ]
+        }
+      },
+      "extras": {
+        "MSFT_screencoverage": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "d4 preview",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.5
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Cylinder",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "extensions": {
+        "EXT_texture_avif": {
+          "source": 0
+        },
+        "EXT_texture_webp": {
+          "source": 1
+        }
+      }
+    },
+    {
+      "sampler": 0,
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 1
+        }
+      }
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/avif",
+      "name": "d4 preferred",
+      "uri": "d4_diffuse.avif"
+    },
+    {
+      "mimeType": "image/webp",
+      "name": "d4 preview",
+      "uri": "d4_preview.webp"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 120,
+      "type": "VEC3",
+      "min": [
+        -0.7968528270721436,
+        -0.6000000238418579,
+        -0.9127622842788696
+      ],
+      "max": [
+        0.7968528270721436,
+        0.7990608215332031,
+        0.4774247407913208
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 120,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 120,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 516,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 1440
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 1440,
+      "byteLength": 1440
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 2880,
+      "byteLength": 960
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 3840,
+      "byteLength": 1032
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "uri": "d4.bin",
+      "byteLength": 4872
+    }
+  ],
+  "extras": {
+    "probability": {
+      "faces": [
+        {
+          "name": "1",
+          "rotation": [
+            0,
+            9.993704365997565e-8,
+            0
+          ]
+        },
+        {
+          "name": "2",
+          "rotation": [
+            -0.5148059856215995,
+            0.29284269667046253,
+            2.120263552206677
+          ]
+        },
+        {
+          "name": "3",
+          "rotation": [
+            -2.5261129823395905,
+            -0.6154796905237783,
+            1.5707963112585377
+          ]
+        },
+        {
+          "name": "4",
+          "rotation": [
+            1.7457652684392593,
+            0.29284279206155445,
+            1.0213290996617566
+          ]
+        }
+      ]
+    }
+  },
+  "extensionsUsed": [
+    "EXT_texture_avif",
+    "EXT_texture_webp",
+    "MSFT_lod"
+  ],
+  "extensionsRequired": [
+    "EXT_texture_webp"
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "asset": {
+    "version": "2.0",
+    "copyright": "CC0-1.0"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "D3"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "roughnessFactor": 0.42,
+        "metallicFactor": 0
+      }
+    }
+  ],
+  "extensionsUsed": [
+    "EXT_texture_avif",
+    "EXT_texture_webp"
+  ],
+  "extensionsRequired": [
+    "EXT_texture_webp"
+  ],
+  "images": [
+    {
+      "uri": "d3.avif",
+      "mimeType": "image/avif"
+    },
+    {
+      "uri": "d3.webp",
+      "mimeType": "image/webp"
+    }
+  ],
+  "textures": [
+    {
+      "extensions": {
+        "EXT_texture_avif": {
+          "source": 0
+        },
+        "EXT_texture_webp": {
+          "source": 1
+        }
+      }
+    }
+  ],
+  "buffers": [
+    {
+      "uri": "d3.bin",
+      "byteLength": 129528
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 45360
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 45360,
+      "byteLength": 45360
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 90720,
+      "byteLength": 30240
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 120960,
+      "byteLength": 8568
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 3780,
+      "type": "VEC3",
+      "min": [
+        -0.00800000037997961,
+        -0.00800000037997961,
+        -0.007816839963197708
+      ],
+      "max": [
+        0.005959999747574329,
+        0.00800000037997961,
+        0.007816839963197708
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 3780,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 3780,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 4284,
+      "type": "SCALAR"
+    }
+  ],
+  "extras": {
+    "probability": {
+      "faces": [
+        {
+          "name": "1",
+          "rotation": [
+            -1.5707963267948966,
+            1.5707963267948966,
+            0
+          ]
+        },
+        {
+          "name": "2",
+          "rotation": [
+            1.5707963267948966,
+            -0.5235987755982986,
+            -3.141592653589793
+          ]
+        },
+        {
+          "name": "3",
+          "rotation": [
+            -1.5707963267948966,
+            -0.5235987755982994,
+            -0.0
+          ]
+        }
+      ]
+    }
+  }
+}

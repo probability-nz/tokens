@@ -31,13 +31,10 @@
   "materials": [
     {
       "doubleSided": true,
-      "name": "Material",
-      "normalTexture": {
-        "index": 0
-      },
+      "name": "d4 preferred",
       "pbrMetallicRoughness": {
         "baseColorTexture": {
-          "index": 1
+          "index": 0
         },
         "metallicFactor": 0,
         "roughnessFactor": 0.5
@@ -64,18 +61,9 @@
     {
       "sampler": 0,
       "source": 0
-    },
-    {
-      "sampler": 0,
-      "source": 1
     }
   ],
   "images": [
-    {
-      "mimeType": "image/png",
-      "name": "d4_normal",
-      "uri": "d4_normal.png"
-    },
     {
       "mimeType": "image/png",
       "name": "d4_diffuse",
@@ -86,58 +74,58 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 108,
-      "max": [
-        0.7968528270721436,
-        0.7990608215332031,
-        0.4774247407913208
-      ],
+      "count": 120,
+      "type": "VEC3",
       "min": [
         -0.7968528270721436,
         -0.6000000238418579,
         -0.9127622842788696
       ],
-      "type": "VEC3"
+      "max": [
+        0.7968528270721436,
+        0.7990608215332031,
+        0.4774247407913208
+      ]
     },
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 108,
+      "count": 120,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 108,
+      "count": 120,
       "type": "VEC2"
     },
     {
       "bufferView": 3,
       "componentType": 5123,
-      "count": 444,
+      "count": 516,
       "type": "SCALAR"
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 1296,
-      "byteOffset": 0
+      "byteOffset": 0,
+      "byteLength": 1440
     },
     {
       "buffer": 0,
-      "byteLength": 1296,
-      "byteOffset": 1296
+      "byteOffset": 1440,
+      "byteLength": 1440
     },
     {
       "buffer": 0,
-      "byteLength": 864,
-      "byteOffset": 2592
+      "byteOffset": 2880,
+      "byteLength": 960
     },
     {
       "buffer": 0,
-      "byteLength": 888,
-      "byteOffset": 3456
+      "byteOffset": 3840,
+      "byteLength": 1032
     }
   ],
   "samplers": [
@@ -148,8 +136,8 @@
   ],
   "buffers": [
     {
-      "byteLength": 4344,
-      "uri": "d4.bin"
+      "uri": "d4.bin",
+      "byteLength": 4872
     }
   ],
   "extras": {

@@ -1,1 +1,228 @@
-{"asset":{"generator":"Khronos glTF Blender I/O v5.0.21","version":"2.0","copyright":"Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."},"scene":0,"scenes":[{"name":"Scene","nodes":[0]}],"nodes":[{"mesh":0,"name":"Regular D12","translation":[-5.53212581883816e-10,-1.529045894515123e-10,0],"scale":[1.2440964173739446,1.2440964173739446,1.2440964173739446]}],"materials":[{"name":"d12 preferred","normalTexture":{"index":0},"pbrMetallicRoughness":{"metallicFactor":0,"roughnessFactor":0.5,"baseColorFactor":[1,1,1,1]}}],"meshes":[{"name":"Regular D12","primitives":[{"attributes":{"POSITION":0,"NORMAL":1,"TEXCOORD_0":2,"TANGENT":3},"indices":4,"material":0}]}],"textures":[{"source":0,"sampler":0}],"images":[{"uri":"d12-blank-normal.png","mimeType":"image/png"}],"accessors":[{"bufferView":0,"componentType":5126,"count":477,"max":[0.6480906009674072,0.6480906009674072,0.6480906009674072],"min":[-0.6480906009674072,-0.6480906009674072,-0.6480906009674072],"type":"VEC3"},{"bufferView":1,"componentType":5126,"count":477,"type":"VEC3"},{"bufferView":2,"componentType":5126,"count":477,"type":"VEC2"},{"bufferView":3,"componentType":5126,"count":477,"type":"VEC4"},{"componentType":5123,"type":"SCALAR","bufferView":4,"count":828}],"bufferViews":[{"buffer":1,"byteOffset":0,"byteLength":5724,"target":34962,"extensions":{"EXT_meshopt_compression":{"buffer":0,"byteOffset":0,"byteLength":1887,"byteStride":12,"count":477,"mode":"ATTRIBUTES"}}},{"buffer":1,"byteOffset":5724,"byteLength":5724,"target":34962,"extensions":{"EXT_meshopt_compression":{"buffer":0,"byteOffset":1887,"byteLength":1874,"byteStride":12,"count":477,"mode":"ATTRIBUTES"}}},{"buffer":1,"byteOffset":11448,"byteLength":3816,"target":34962,"extensions":{"EXT_meshopt_compression":{"buffer":0,"byteOffset":3761,"byteLength":2595,"byteStride":8,"count":477,"mode":"ATTRIBUTES"}}},{"buffer":1,"byteOffset":15264,"byteLength":7632,"target":34962,"extensions":{"EXT_meshopt_compression":{"buffer":0,"byteOffset":6356,"byteLength":4913,"byteStride":16,"count":477,"mode":"ATTRIBUTES"}}},{"buffer":1,"byteOffset":22896,"byteLength":1656,"target":34963,"extensions":{"EXT_meshopt_compression":{"buffer":0,"byteOffset":11269,"byteLength":1025,"byteStride":2,"count":828,"mode":"INDICES"}}}],"samplers":[{"magFilter":9729,"minFilter":9987}],"buffers":[{"uri":"8a2201bed715d45d296a.bin","byteLength":12294},{"byteLength":24552,"extensions":{"EXT_meshopt_compression":{"fallback":true}}}],"extras":{"probability":{"faces":[{"name":"1","rotation":[1.382085866431029,-0.5235988209627662,-0.3648636745318769]},{"name":"2","rotation":[2.034443929606989,0.31415935962020053,-1.0172218643123463]},{"name":"3","rotation":[3.141592624008285,0.9424780692697012,2.1243707541731767]},{"name":"4","rotation":[0.65235801394835,0.5235983654419514,-0.36486352479936973]},{"name":"5","rotation":[3.141592653589793,0.3141594305112665,-2.1243707063092967]},{"name":"6","rotation":[-2.4892345251259216,-0.5235986250813599,-2.776728899759269]},{"name":"7","rotation":[-1.759506721121164,0.5235988428074788,0.36486354245668917]},{"name":"8","rotation":[-1.107148821728019,-0.31415951003451226,1.0172215480023519]},{"name":"9","rotation":[-2.124370724591668,1.5707962508135849,0]},{"name":"10","rotation":[-2.4892344973848264,-0.5235986879783159,0.36486380931272566]},{"name":"11","rotation":[0,-0.31415946300685,2.1243707063092967]},{"name":"12","rotation":[0.6523580400063371,0.523598424522873,2.776729076674415]}]}},"extensionsUsed":["EXT_meshopt_compression"],"extensionsRequired":["EXT_meshopt_compression"]}
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v5.0.21",
+    "version": "2.0",
+    "copyright": "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "Regular D12",
+      "translation": [
+        -5.53212581883816e-10,
+        -1.529045894515123e-10,
+        0
+      ],
+      "scale": [
+        1.2440964173739446,
+        1.2440964173739446,
+        1.2440964173739446
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.5
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Regular D12",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 347,
+      "type": "VEC3",
+      "min": [
+        -0.6480906009674072,
+        -0.6480906009674072,
+        -0.6480906009674072
+      ],
+      "max": [
+        0.6480906009674072,
+        0.6480906009674072,
+        0.6480906009674072
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 347,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 347,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 1188,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 4164
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 4164,
+      "byteLength": 4164
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 8328,
+      "byteLength": 2776
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 11104,
+      "byteLength": 2376
+    }
+  ],
+  "buffers": [
+    {
+      "uri": "../d12/d12.bin",
+      "byteLength": 13480
+    }
+  ],
+  "extras": {
+    "probability": {
+      "faces": [
+        {
+          "name": "1",
+          "rotation": [
+            1.382085866431029,
+            -0.5235988209627662,
+            -0.3648636745318769
+          ]
+        },
+        {
+          "name": "2",
+          "rotation": [
+            0.65235801394835,
+            0.5235983654419514,
+            -0.36486352479936973
+          ]
+        },
+        {
+          "name": "3",
+          "rotation": [
+            2.034443929606989,
+            0.31415935962020053,
+            -1.0172218643123463
+          ]
+        },
+        {
+          "name": "4",
+          "rotation": [
+            3.141592653589793,
+            0.3141594305112665,
+            -2.1243707063092967
+          ]
+        },
+        {
+          "name": "5",
+          "rotation": [
+            -2.4892345251259216,
+            -0.5235986250813599,
+            -2.776728899759269
+          ]
+        },
+        {
+          "name": "6",
+          "rotation": [
+            3.141592624008285,
+            0.9424780692697012,
+            2.1243707541731767
+          ]
+        },
+        {
+          "name": "7",
+          "rotation": [
+            -1.759506721121164,
+            0.5235988428074788,
+            0.36486354245668917
+          ]
+        },
+        {
+          "name": "8",
+          "rotation": [
+            -2.124370724591668,
+            1.5707962508135849,
+            0
+          ]
+        },
+        {
+          "name": "9",
+          "rotation": [
+            0.6523580400063371,
+            0.523598424522873,
+            2.776729076674415
+          ]
+        },
+        {
+          "name": "10",
+          "rotation": [
+            0,
+            -0.31415946300685,
+            2.1243707063092967
+          ]
+        },
+        {
+          "name": "11",
+          "rotation": [
+            -1.107148821728019,
+            -0.31415951003451226,
+            1.0172215480023519
+          ]
+        },
+        {
+          "name": "12",
+          "rotation": [
+            -2.4892344973848264,
+            -0.5235986879783159,
+            0.36486380931272566
+          ]
+        }
+      ]
+    }
+  }
+}
