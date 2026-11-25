@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
+import { dirname, join, posix } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 
@@ -23,9 +23,10 @@ for (const collection of ['classic', 'cc0']) {
         const file = join(dir, piece.src),
           gltf = await json(file);
         const published = showcase.pieces.find(
-          (p) => p.src === join(collection, piece.src),
+          (p) => p.src === posix.join(collection, piece.src),
         );
         assert.deepEqual(published.faces, piece.faces);
+        assert.deepEqual(gltf.extras.probability.faces, piece.faces);
         assert.deepEqual(piece.rotation, piece.faces[0].rotation);
         const n =
           piece.name === 'Classic die' ? 6 : Number(piece.name.match(/\d+/)[0]);

@@ -13,7 +13,7 @@ import {
   writeFile,
 } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { basename, dirname, extname, join, relative } from 'node:path';
+import { basename, dirname, extname, join, posix, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
 
@@ -57,7 +57,7 @@ async function record(path) {
   });
 }
 async function publish(collection, path) {
-  const dest = join(collection.key, path);
+  const dest = posix.join(collection.key, path);
   await mkdir(dirname(join(showcase, dest)), { recursive: true });
   await copyFile(join(collection.dir, path), join(showcase, dest));
   await record(dest);
@@ -196,6 +196,7 @@ async function generate(page, kind) {
   };
   const base = {
     asset: { version: '2.0', generator: 'tokens procedural dice' },
+    extras: { probability: { faces: mesh.faces } },
     scene: 0,
     scenes: [{ nodes: [0] }],
     nodes: [{ mesh: 0, name: kind }],
@@ -246,7 +247,7 @@ async function generate(page, kind) {
   };
   await writeJson(file, gltf);
   for (const resource of [binary, color, normal, preview])
-    await publish(collection, join(dirname(piece.src), resource));
+    await publish(collection, posix.join(posix.dirname(piece.src), resource));
   const blank = collection.catalog.pieces.find(
     (p) => p.name === kind + ' (blank)',
   );
@@ -257,7 +258,7 @@ async function generate(page, kind) {
       ...base,
       buffers: [
         {
-          uri: relative(dirname(target), join(dir, binary)),
+          uri: relative(dirname(target), join(dir, binary)).split(sep).join('/'),
           byteLength: data.length,
         },
       ],
@@ -267,7 +268,7 @@ async function generate(page, kind) {
   for (const entry of [piece, ...(blank ? [blank] : [])]) {
     entry.faces = mesh.faces;
     entry.rotation = mesh.faces[0].rotation;
-    const src = join(collection.key, entry.src);
+    const src = posix.join(collection.key, entry.src);
     const shared = combined.pieces.find((p) => p.src === src);
     Object.assign(shared, { rotation: entry.rotation, faces: entry.faces });
     for (const token of release.game.children.filter((t) => t.src === src))

@@ -1365,8 +1365,8 @@
     {
       "path": "cc0/dice/d100.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3306,
-      "sha256": "42f0f571875b2e26e73dd18035de35833ee3eff6a16eb915bf6988de85582980"
+      "bytes": 21084,
+      "sha256": "198ab31bc047aee909eb8b216147d04ea4619435b86aed5e7e6b9d510dda3549"
     },
     {
       "path": "cc0/dice/d100_normal.webp",
@@ -1395,8 +1395,8 @@
     {
       "path": "cc0/dice/d120.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3285,
-      "sha256": "cc4a24c8cbf3064d514a862379fdf37b2ff012a6a431d8ace697594b5ba8472f"
+      "bytes": 24692,
+      "sha256": "fa6580ead341e29427a4765d7cbb0973bc5862144f3dcdbe8616152bfc602ee8"
     },
     {
       "path": "cc0/dice/d120.webp",
@@ -1425,8 +1425,8 @@
     {
       "path": "cc0/dice/d16.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3265,
-      "sha256": "be99659db16f523688ac0fa6e82db47ff395b579f43c7bd748d11da057c6fe92"
+      "bytes": 6162,
+      "sha256": "9b920c9194a302b752916d5a167f9a27cca27227fd8c7a82581d577a722c853c"
     },
     {
       "path": "cc0/dice/d16.webp",
@@ -1455,8 +1455,8 @@
     {
       "path": "cc0/dice/d24.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3270,
-      "sha256": "5ffade1384dcc5ccb51e9f425fb1c62ad8c7c01146d875bd925257fea1539937"
+      "bytes": 7580,
+      "sha256": "dc265df39a59e687460be9d0c6ba7cb4c4d792019e464223587e9fb2ee34b565"
     },
     {
       "path": "cc0/dice/d24.webp",
@@ -1485,8 +1485,8 @@
     {
       "path": "cc0/dice/d3.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3269,
-      "sha256": "30a1000199889cb0049a394791d1c642638f2b28ca63b87f03cdfdec89d3c898"
+      "bytes": 3832,
+      "sha256": "28f6bcb64d3439ef887807e99741496163371a00aae82b21185e9e22ad6a680c"
     },
     {
       "path": "cc0/dice/d3.webp",
@@ -1515,8 +1515,8 @@
     {
       "path": "cc0/dice/d48.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3277,
-      "sha256": "937b0f7a945a26142202b6fdbf1c49ecdedbd953b232e18edc0542582cb3c2dd"
+      "bytes": 11844,
+      "sha256": "cdddb0b3f2ffff45969fbc67449672c7ed5c51bd6f004601c1e081843fa72503"
     },
     {
       "path": "cc0/dice/d48.webp",
@@ -2091,38 +2091,38 @@
     {
       "path": "classic/blank-dice/d10-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1903,
-      "sha256": "6d14c3b7b4ee98a10eec654136d04d06e5ae9b10e3c1e3bf880b5563353c8fb1"
+      "bytes": 3712,
+      "sha256": "b62985641f4431d7515534bd1084d133e57f36c68a8d3dc180e7db0956ebc9d8"
     },
     {
       "path": "classic/blank-dice/d12-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1905,
-      "sha256": "94e52cd057ad2b75e3b56c3a9359c66e4081c50cd4c4c99df390485f6540bc43"
+      "bytes": 4105,
+      "sha256": "f1c5e7c74171c9a8f8adeb964a514219e7518e4f066404ce527b9b829b2e2bef"
     },
     {
       "path": "classic/blank-dice/d20-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1905,
-      "sha256": "ee885ec7e2d085dfd50f1a73a0ab3225efae1a9fec68c96ed826efa126af8767"
+      "bytes": 5493,
+      "sha256": "b3b047042a0f99052da670e8653ec95a954962950deec2af21249a0e13e9d6c0"
     },
     {
       "path": "classic/blank-dice/d4-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1897,
-      "sha256": "2ac7fa832e8d45da77cc4295c2ed259b26fdca5ea5e8b9532d5ad949b6d92513"
+      "bytes": 2669,
+      "sha256": "8420d1d95e760c84f66210ffd3b86289a42b7e4e192a8524ea56849a89225899"
     },
     {
       "path": "classic/blank-dice/d6-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1808,
-      "sha256": "e4a3fa954a67a86d283e2e352acbbf1ad824e21e4f0f216692387e54732ccee4"
+      "bytes": 2882,
+      "sha256": "7bed6a9d97e95ed42734bbbd78168829ce5a917e30fc853d980710f25b0606fa"
     },
     {
       "path": "classic/blank-dice/d8-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1898,
-      "sha256": "c13da2726b95887cc50063540079b9e607a0ab9d44cc761e29c4ed2a47001ca4"
+      "bytes": 3361,
+      "sha256": "0256568f05c1739bc7e446d529c0a17c9369d7df83dbd1bca1207d77cd504d41"
     },
     {
       "path": "classic/d10/d10.bin",
@@ -2133,8 +2133,8 @@
     {
       "path": "classic/d10/d10.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3271,
-      "sha256": "70e246f9b3e39668d4b2eaac158dbbdbc9b2dae708d2ce6c96cfee73ff13bc5e"
+      "bytes": 5080,
+      "sha256": "07d0be8ea61822b70b4bf32ae88bceea7df80047de37e349ed6dea8e4e5143a9"
     },
     {
       "path": "classic/d10/d10_diffuse.avif",
@@ -2163,8 +2163,8 @@
     {
       "path": "classic/d12/d12.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3273,
-      "sha256": "902d2b5a6e3f67163f9cefcec3cf1b580ded04b6c51998aca909a1bfec59f8d2"
+      "bytes": 5473,
+      "sha256": "7817a469aa9de66328bb294e402035e20eee1171529f99d939a17dbc4cf864fe"
     },
     {
       "path": "classic/d12/d12_diffuse.avif",
@@ -2193,8 +2193,8 @@
     {
       "path": "classic/d20/d20.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3273,
-      "sha256": "011c2b00bccd6c31210d389c16eb280f6f832e2fb61d6fe4831f37fa899fc927"
+      "bytes": 6861,
+      "sha256": "352b3c13ff26232a1da9794d90481d4121cb97f0a573ff77651e99111a547444"
     },
     {
       "path": "classic/d20/d20_diffuse.avif",
@@ -2223,8 +2223,8 @@
     {
       "path": "classic/d4/d4.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3263,
-      "sha256": "b18bda5f299733a4b4e7ebda06b2b1fe88ed83a18f8c746cbc86fedf7ea586d2"
+      "bytes": 4035,
+      "sha256": "5f115615c9fb05748ba4ff9ae57dd335008563148945b321442979e1425bec94"
     },
     {
       "path": "classic/d4/d4_diffuse.avif",
@@ -2253,8 +2253,8 @@
     {
       "path": "classic/d6/d6.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3174,
-      "sha256": "32acf6df169c336fa5d494a93e891e86b6cee39f73b816eb02baf1261df6e37c"
+      "bytes": 4248,
+      "sha256": "743be9be79416ed178eb478ad446f1b8e361047b047cb7e0f1a75e305ac79881"
     },
     {
       "path": "classic/d6/d6_diffuse.avif",
@@ -2283,8 +2283,8 @@
     {
       "path": "classic/d8/d8.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3264,
-      "sha256": "1290b61371c78f7e897e29a68b42feb6233e8f01ddadccb406a19de3b7ef8d96"
+      "bytes": 4727,
+      "sha256": "5e3f864193ca21e9a9d5a9376b22b755cd24c2ac2b9a66dede7abf8ec1715d60"
     },
     {
       "path": "classic/d8/d8_diffuse.avif",
@@ -2313,8 +2313,8 @@
     {
       "path": "classic/die/die.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3187,
-      "sha256": "2bb20f306223f2ff34e98e625b0529b69dff5d52029c48f0d951f0b673c8775a"
+      "bytes": 4261,
+      "sha256": "dce57b5cbd0a2176cc055768031f40658066a779d4a0702cedfb3c7ed19fea11"
     },
     {
       "path": "classic/die/die_diffuse.avif",

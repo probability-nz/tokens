@@ -3,11 +3,13 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-const names = ['d4', 'd6', 'd8', 'd12', 'd20'];
+import { catalog } from '../catalog';
+
+const blanks = catalog.pieces.filter(piece => piece.name.endsWith(' (blank)'));
 
 type LinkedViews = { controls: Set<OrbitControls>; syncing: boolean };
 
-function Die({ name, linked }: { name: string; linked: LinkedViews }) {
+function Die({ name, src, linked }: { name: string; src: string; linked: LinkedViews }) {
   const host = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const element = host.current!;
@@ -84,7 +86,7 @@ function Die({ name, linked }: { name: string; linked: LinkedViews }) {
         }
       });
     new GLTFLoader().load(
-      `/blank-dice/${name}-blank.gltf`,
+      src,
       (gltf) => {
         if (disposed) {
           release(gltf.scene);
@@ -119,11 +121,11 @@ function Die({ name, linked }: { name: string; linked: LinkedViews }) {
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, [name, linked]);
+  }, [name, src, linked]);
   return (
     <div
       ref={host}
-      aria-label={`Blank ${name}`}
+      aria-label={name}
       style={{ minWidth: 0, height: 280 }}
     />
   );
@@ -144,8 +146,8 @@ export function BlankDicePreview() {
         alignContent: 'start',
       }}
     >
-      {names.map((name) => (
-        <Die key={name} name={name} linked={linked} />
+      {blanks.map(piece => (
+        <Die key={piece.src} name={piece.name} src={piece.src} linked={linked} />
       ))}
     </div>
   );
