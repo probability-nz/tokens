@@ -1,13 +1,11 @@
 {
   "asset": {
-    "generator": "Khronos glTF Blender I/O v5.0.21",
     "version": "2.0",
-    "copyright": "Garbo Succus; source artwork by Misha Tsyatsko. CC BY 4.0."
+    "generator": "tokens procedural dice"
   },
   "scene": 0,
   "scenes": [
     {
-      "name": "Scene",
       "nodes": [
         0
       ]
@@ -16,23 +14,157 @@
   "nodes": [
     {
       "mesh": 0,
-      "name": "Regular D10",
-      "translation": [
-        6.080941757204897e-17,
-        6.080941962977254e-17,
-        6.080941935947701e-17
+      "name": "D10"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
       ]
     }
   ],
+  "buffers": [
+    {
+      "uri": "d10.bin",
+      "byteLength": 15600
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 5400,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 5400,
+      "byteLength": 5400,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 10800,
+      "byteLength": 3600,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 14400,
+      "byteLength": 1200,
+      "target": 34963
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 450,
+      "type": "VEC3",
+      "min": [
+        -0.655414342880249,
+        -0.8245158195495605,
+        -0.6266784071922302
+      ],
+      "max": [
+        0.655414342880249,
+        0.8245158195495605,
+        0.6266784071922302
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 450,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 450,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 600,
+      "type": "SCALAR"
+    }
+  ],
+  "images": [
+    {
+      "uri": "d10_diffuse.avif",
+      "mimeType": "image/avif"
+    },
+    {
+      "uri": "d10_preview.webp",
+      "mimeType": "image/webp"
+    },
+    {
+      "uri": "d10_normal.webp",
+      "mimeType": "image/webp"
+    }
+  ],
+  "textures": [
+    {
+      "extensions": {
+        "EXT_texture_avif": {
+          "source": 0
+        },
+        "EXT_texture_webp": {
+          "source": 1
+        }
+      }
+    },
+    {
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 1
+        }
+      }
+    },
+    {
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 2
+        }
+      }
+    }
+  ],
+  "extensionsUsed": [
+    "EXT_texture_avif",
+    "EXT_texture_webp",
+    "MSFT_lod"
+  ],
+  "extensionsRequired": [
+    "EXT_texture_webp"
+  ],
   "materials": [
     {
-      "name": "d10 preferred",
       "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.48,
         "baseColorTexture": {
           "index": 0
-        },
-        "metallicFactor": 0,
-        "roughnessFactor": 0.5
+        }
+      },
+      "normalTexture": {
+        "index": 2
       },
       "extensions": {
         "MSFT_lod": {
@@ -49,227 +181,19 @@
       }
     },
     {
-      "name": "d10 preview",
       "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.48,
         "baseColorTexture": {
           "index": 1
-        },
-        "metallicFactor": 0,
-        "roughnessFactor": 0.5
-      }
-    }
-  ],
-  "meshes": [
-    {
-      "name": "Regular D10",
-      "primitives": [
-        {
-          "attributes": {
-            "POSITION": 0,
-            "NORMAL": 1,
-            "TEXCOORD_0": 2
-          },
-          "indices": 3,
-          "material": 0
-        }
-      ]
-    }
-  ],
-  "textures": [
-    {
-      "sampler": 0,
-      "extensions": {
-        "EXT_texture_avif": {
-          "source": 0
-        },
-        "EXT_texture_webp": {
-          "source": 1
-        }
-      }
-    },
-    {
-      "sampler": 0,
-      "extensions": {
-        "EXT_texture_webp": {
-          "source": 1
         }
       }
     }
-  ],
-  "images": [
-    {
-      "mimeType": "image/avif",
-      "name": "d10 preferred",
-      "uri": "d10_diffuse.avif"
-    },
-    {
-      "mimeType": "image/webp",
-      "name": "d10 preview",
-      "uri": "d10_preview.webp"
-    }
-  ],
-  "accessors": [
-    {
-      "bufferView": 0,
-      "componentType": 5126,
-      "count": 246,
-      "type": "VEC3",
-      "min": [
-        -0.6478744745254517,
-        -0.8111215829849243,
-        -0.6223034858703613
-      ],
-      "max": [
-        0.6478744745254517,
-        0.8111215829849243,
-        0.6223034858703613
-      ]
-    },
-    {
-      "bufferView": 1,
-      "componentType": 5126,
-      "count": 246,
-      "type": "VEC3"
-    },
-    {
-      "bufferView": 2,
-      "componentType": 5126,
-      "count": 246,
-      "type": "VEC2"
-    },
-    {
-      "bufferView": 3,
-      "componentType": 5123,
-      "count": 900,
-      "type": "SCALAR"
-    }
-  ],
-  "bufferViews": [
-    {
-      "buffer": 0,
-      "byteOffset": 0,
-      "byteLength": 2952
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 2952,
-      "byteLength": 2952
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 5904,
-      "byteLength": 1968
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 7872,
-      "byteLength": 1800
-    }
-  ],
-  "samplers": [
-    {
-      "magFilter": 9729,
-      "minFilter": 9987
-    }
-  ],
-  "buffers": [
-    {
-      "uri": "d10.bin",
-      "byteLength": 9672
-    }
-  ],
-  "extras": {
-    "probability": {
-      "faces": [
-        {
-          "name": "0",
-          "rotation": [
-            0.9553166359019439,
-            1.5707963267948966,
-            0
-          ]
-        },
-        {
-          "name": "1",
-          "rotation": [
-            -2.186276043518412,
-            0.3141592892563081,
-            -3.141592629613748
-          ]
-        },
-        {
-          "name": "2",
-          "rotation": [
-            -2.186275995914352,
-            -0.9424777745053418,
-            4.828999814614249e-8
-          ]
-        },
-        {
-          "name": "3",
-          "rotation": [
-            -2.1862760428030317,
-            0.31415929081315563,
-            2.166102537005963e-8
-          ]
-        },
-        {
-          "name": "4",
-          "rotation": [
-            -2.186275995914351,
-            -0.9424777745053423,
-            -3.141592605299794
-          ]
-        },
-        {
-          "name": "5",
-          "rotation": [
-            -2.1862760176878493,
-            1.5707963267948966,
-            0
-          ]
-        },
-        {
-          "name": "6",
-          "rotation": [
-            0.9553166576754422,
-            -0.9424777745053424,
-            4.828999965720187e-8
-          ]
-        },
-        {
-          "name": "7",
-          "rotation": [
-            0.9553166115021438,
-            0.31415929237000606,
-            1.9346001031355317e-8
-          ]
-        },
-        {
-          "name": "8",
-          "rotation": [
-            0.9553166576754422,
-            -0.9424777745053424,
-            -3.1415926052997936
-          ]
-        },
-        {
-          "name": "9",
-          "rotation": [
-            0.9553166107867619,
-            0.31415929081315586,
-            -3.141592631928768
-          ]
-        }
-      ]
-    }
-  },
-  "extensionsUsed": [
-    "EXT_texture_avif",
-    "EXT_texture_webp",
-    "MSFT_lod"
-  ],
-  "extensionsRequired": [
-    "EXT_texture_webp"
   ]
 }

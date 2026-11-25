@@ -1,7 +1,7 @@
 {
   "asset": {
     "version": "2.0",
-    "copyright": "CC0-1.0"
+    "generator": "tokens procedural dice"
   },
   "scene": 0,
   "scenes": [
@@ -32,23 +32,73 @@
       ]
     }
   ],
-  "materials": [
+  "buffers": [
     {
-      "pbrMetallicRoughness": {
-        "baseColorTexture": {
-          "index": 0
-        },
-        "roughnessFactor": 0.42,
-        "metallicFactor": 0
-      }
+      "uri": "d24.bin",
+      "byteLength": 28272
     }
   ],
-  "extensionsUsed": [
-    "EXT_texture_avif",
-    "EXT_texture_webp"
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 9792,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 9792,
+      "byteLength": 9792,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 19584,
+      "byteLength": 6528,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 26112,
+      "byteLength": 2160,
+      "target": 34963
+    }
   ],
-  "extensionsRequired": [
-    "EXT_texture_webp"
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 816,
+      "type": "VEC3",
+      "min": [
+        -0.014341249130666256,
+        -0.014341249130666256,
+        -0.014341249130666256
+      ],
+      "max": [
+        0.014341249130666256,
+        0.014341249130666256,
+        0.014341249130666256
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 816,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 816,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 1080,
+      "type": "SCALAR"
+    }
   ],
   "images": [
     {
@@ -57,6 +107,10 @@
     },
     {
       "uri": "d24.webp",
+      "mimeType": "image/webp"
+    },
+    {
+      "uri": "d24_normal.webp",
       "mimeType": "image/webp"
     }
   ],
@@ -70,268 +124,76 @@
           "source": 1
         }
       }
+    },
+    {
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 1
+        }
+      }
+    },
+    {
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 2
+        }
+      }
     }
   ],
-  "buffers": [
-    {
-      "uri": "d24.bin",
-      "byteLength": 10056
-    }
+  "extensionsUsed": [
+    "EXT_texture_avif",
+    "EXT_texture_webp",
+    "MSFT_lod"
   ],
-  "bufferViews": [
-    {
-      "buffer": 0,
-      "byteOffset": 0,
-      "byteLength": 3456
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 3456,
-      "byteLength": 3456
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 6912,
-      "byteLength": 2304
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 9216,
-      "byteLength": 840
-    }
+  "extensionsRequired": [
+    "EXT_texture_webp"
   ],
-  "accessors": [
+  "materials": [
     {
-      "bufferView": 0,
-      "componentType": 5126,
-      "count": 288,
-      "type": "VEC3",
-      "min": [
-        -0.014212657697498798,
-        -0.014212657697498798,
-        -0.014212657697498798
-      ],
-      "max": [
-        0.014212657697498798,
-        0.014212657697498798,
-        0.014212657697498798
-      ]
-    },
-    {
-      "bufferView": 1,
-      "componentType": 5126,
-      "count": 288,
-      "type": "VEC3"
-    },
-    {
-      "bufferView": 2,
-      "componentType": 5126,
-      "count": 288,
-      "type": "VEC2"
-    },
-    {
-      "bufferView": 3,
-      "componentType": 5123,
-      "count": 420,
-      "type": "SCALAR"
-    }
-  ],
-  "extras": {
-    "probability": {
-      "faces": [
-        {
-          "name": "1",
-          "rotation": [
-            0.2109107041130309,
-            0.0,
-            -0.7853981633974483
-          ]
-        },
-        {
-          "name": "2",
-          "rotation": [
-            1.7817070309079275,
-            -0.7853981633974482,
-            1.5707963267948966
-          ]
-        },
-        {
-          "name": "3",
-          "rotation": [
-            1.7817070309079275,
-            0.7853981633974482,
-            -3.141592653589793
-          ]
-        },
-        {
-          "name": "4",
-          "rotation": [
-            1.7817070309079275,
-            -0.7853981633974482,
-            -0.0
-          ]
-        },
-        {
-          "name": "5",
-          "rotation": [
-            1.7817070309079275,
-            0.7853981633974482,
-            1.5707963267948966
-          ]
-        },
-        {
-          "name": "6",
-          "rotation": [
-            0.2109107041130309,
-            0.0,
-            -2.356194490192345
-          ]
-        },
-        {
-          "name": "7",
-          "rotation": [
-            -2.9306819494767624,
-            0.0,
-            0.7853981633974483
-          ]
-        },
-        {
-          "name": "8",
-          "rotation": [
-            -1.3598856226818659,
-            -0.7853981633974482,
-            3.141592653589793
-          ]
-        },
-        {
-          "name": "9",
-          "rotation": [
-            -1.3598856226818659,
-            0.7853981633974482,
-            -1.5707963267948966
-          ]
-        },
-        {
-          "name": "10",
-          "rotation": [
-            -1.3598856226818659,
-            -0.7853981633974482,
-            1.5707963267948966
-          ]
-        },
-        {
-          "name": "11",
-          "rotation": [
-            -1.3598856226818659,
-            0.7853981633974482,
-            -3.141592653589793
-          ]
-        },
-        {
-          "name": "12",
-          "rotation": [
-            -2.9306819494767624,
-            0.0,
-            -0.7853981633974483
-          ]
-        },
-        {
-          "name": "13",
-          "rotation": [
-            0.2109107041130309,
-            -0.0,
-            2.356194490192345
-          ]
-        },
-        {
-          "name": "14",
-          "rotation": [
-            1.7817070309079275,
-            -0.7853981633974482,
-            -1.5707963267948966
-          ]
-        },
-        {
-          "name": "15",
-          "rotation": [
-            1.7817070309079275,
-            0.7853981633974482,
-            -0.0
-          ]
-        },
-        {
-          "name": "16",
-          "rotation": [
-            1.7817070309079275,
-            -0.7853981633974482,
-            3.141592653589793
-          ]
-        },
-        {
-          "name": "17",
-          "rotation": [
-            1.7817070309079275,
-            0.7853981633974482,
-            -1.5707963267948966
-          ]
-        },
-        {
-          "name": "18",
-          "rotation": [
-            0.2109107041130309,
-            0.0,
-            0.7853981633974483
-          ]
-        },
-        {
-          "name": "19",
-          "rotation": [
-            -2.9306819494767624,
-            0.0,
-            -2.356194490192345
-          ]
-        },
-        {
-          "name": "20",
-          "rotation": [
-            -1.3598856226818659,
-            -0.7853981633974482,
-            -0.0
-          ]
-        },
-        {
-          "name": "21",
-          "rotation": [
-            -1.3598856226818659,
-            0.7853981633974482,
-            1.5707963267948966
-          ]
-        },
-        {
-          "name": "22",
-          "rotation": [
-            -1.3598856226818659,
-            -0.7853981633974482,
-            -1.5707963267948966
-          ]
-        },
-        {
-          "name": "23",
-          "rotation": [
-            -2.9306819494767624,
-            -0.0,
-            2.356194490192345
-          ]
-        },
-        {
-          "name": "24",
-          "rotation": [
-            -1.3598856226818659,
-            0.7853981633974482,
-            -0.0
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.48,
+        "baseColorTexture": {
+          "index": 0
+        }
+      },
+      "normalTexture": {
+        "index": 2
+      },
+      "extensions": {
+        "MSFT_lod": {
+          "ids": [
+            1
           ]
         }
-      ]
+      },
+      "extras": {
+        "MSFT_screencoverage": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.48,
+        "baseColorTexture": {
+          "index": 1
+        }
+      }
     }
-  }
+  ]
 }

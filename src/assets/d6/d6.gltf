@@ -1,12 +1,11 @@
 {
   "asset": {
-    "generator": "Khronos glTF Blender I/O v3.2.43",
-    "version": "2.0"
+    "version": "2.0",
+    "generator": "tokens procedural dice"
   },
   "scene": 0,
   "scenes": [
     {
-      "name": "Scene",
       "nodes": [
         0
       ]
@@ -15,24 +14,157 @@
   "nodes": [
     {
       "mesh": 0,
-      "name": "d6",
-      "translation": [
-        0,
-        0,
-        1.1775693440128312e-16
+      "name": "D6"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
       ]
     }
   ],
+  "buffers": [
+    {
+      "uri": "d6.bin",
+      "byteLength": 9360
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 3240,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 3240,
+      "byteLength": 3240,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 6480,
+      "byteLength": 2160,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 8640,
+      "byteLength": 720,
+      "target": 34963
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 270,
+      "type": "VEC3",
+      "min": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "max": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 270,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 270,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 360,
+      "type": "SCALAR"
+    }
+  ],
+  "images": [
+    {
+      "uri": "d6_diffuse.avif",
+      "mimeType": "image/avif"
+    },
+    {
+      "uri": "d6_preview.webp",
+      "mimeType": "image/webp"
+    },
+    {
+      "uri": "d6_normal.webp",
+      "mimeType": "image/webp"
+    }
+  ],
+  "textures": [
+    {
+      "extensions": {
+        "EXT_texture_avif": {
+          "source": 0
+        },
+        "EXT_texture_webp": {
+          "source": 1
+        }
+      }
+    },
+    {
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 1
+        }
+      }
+    },
+    {
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 2
+        }
+      }
+    }
+  ],
+  "extensionsUsed": [
+    "EXT_texture_avif",
+    "EXT_texture_webp",
+    "MSFT_lod"
+  ],
+  "extensionsRequired": [
+    "EXT_texture_webp"
+  ],
   "materials": [
     {
-      "doubleSided": true,
-      "name": "d6 preferred",
       "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.48,
         "baseColorTexture": {
           "index": 0
-        },
-        "metallicFactor": 0,
-        "roughnessFactor": 0.4000000059604645
+        }
+      },
+      "normalTexture": {
+        "index": 2
       },
       "extensions": {
         "MSFT_lod": {
@@ -49,196 +181,19 @@
       }
     },
     {
-      "doubleSided": true,
-      "name": "d6 preview",
       "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.48,
         "baseColorTexture": {
           "index": 1
-        },
-        "metallicFactor": 0,
-        "roughnessFactor": 0.4000000059604645
-      }
-    }
-  ],
-  "meshes": [
-    {
-      "name": "Cube.003",
-      "primitives": [
-        {
-          "attributes": {
-            "POSITION": 0,
-            "NORMAL": 1,
-            "TEXCOORD_0": 2
-          },
-          "indices": 3,
-          "material": 0
-        }
-      ]
-    }
-  ],
-  "textures": [
-    {
-      "sampler": 0,
-      "extensions": {
-        "EXT_texture_avif": {
-          "source": 0
-        },
-        "EXT_texture_webp": {
-          "source": 1
-        }
-      }
-    },
-    {
-      "sampler": 0,
-      "extensions": {
-        "EXT_texture_webp": {
-          "source": 1
         }
       }
     }
-  ],
-  "images": [
-    {
-      "mimeType": "image/avif",
-      "name": "d6 preferred",
-      "uri": "d6_diffuse.avif"
-    },
-    {
-      "mimeType": "image/webp",
-      "name": "d6 preview",
-      "uri": "d6_preview.webp"
-    }
-  ],
-  "accessors": [
-    {
-      "bufferView": 0,
-      "componentType": 5126,
-      "count": 120,
-      "type": "VEC3",
-      "min": [
-        -0.5,
-        -0.5,
-        -0.5
-      ],
-      "max": [
-        0.5,
-        0.5,
-        0.5
-      ]
-    },
-    {
-      "bufferView": 1,
-      "componentType": 5126,
-      "count": 120,
-      "type": "VEC3"
-    },
-    {
-      "bufferView": 2,
-      "componentType": 5126,
-      "count": 120,
-      "type": "VEC2"
-    },
-    {
-      "bufferView": 3,
-      "componentType": 5123,
-      "count": 468,
-      "type": "SCALAR"
-    }
-  ],
-  "bufferViews": [
-    {
-      "buffer": 0,
-      "byteOffset": 0,
-      "byteLength": 1440
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 1440,
-      "byteLength": 1440
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 2880,
-      "byteLength": 960
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 3840,
-      "byteLength": 936
-    }
-  ],
-  "samplers": [
-    {
-      "magFilter": 9729,
-      "minFilter": 9987
-    }
-  ],
-  "buffers": [
-    {
-      "uri": "d6.bin",
-      "byteLength": 4776
-    }
-  ],
-  "extras": {
-    "probability": {
-      "faces": [
-        {
-          "name": "1",
-          "rotation": [
-            1.5707963267948966,
-            0,
-            1.570796511531739
-          ]
-        },
-        {
-          "name": "2",
-          "rotation": [
-            0,
-            -5.448202074891113e-8,
-            0
-          ]
-        },
-        {
-          "name": "3",
-          "rotation": [
-            0,
-            2.188965974606462e-7,
-            1.5707963267948966
-          ]
-        },
-        {
-          "name": "4",
-          "rotation": [
-            -1.5707963267948966,
-            0,
-            -1.5707963267430465
-          ]
-        },
-        {
-          "name": "5",
-          "rotation": [
-            -3.141592653589793,
-            -3.455754988446349e-7,
-            1.5707963267948966
-          ]
-        },
-        {
-          "name": "6",
-          "rotation": [
-            0,
-            1.6408108612169991e-7,
-            -3.141592653589793
-          ]
-        }
-      ]
-    }
-  },
-  "extensionsUsed": [
-    "EXT_texture_avif",
-    "EXT_texture_webp",
-    "MSFT_lod"
-  ],
-  "extensionsRequired": [
-    "EXT_texture_webp"
   ]
 }

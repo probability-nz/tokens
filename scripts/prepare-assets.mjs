@@ -45,8 +45,8 @@ const webpTexture = (sampler, source) => ({
 if (!Array.isArray(catalog.pieces)) {
   throw new Error('catalog.json must contain a pieces array');
 }
-const blanks = catalog.pieces.filter((piece) => piece.name.endsWith(' (blank)'));
-for (const piece of catalog.pieces.filter((piece) => !blanks.includes(piece))) {
+// The procedural dice are produced by generate:dice; authoring glTFs remain for other pieces.
+for (const piece of catalog.pieces.filter(piece => piece.faces.length === 0)) {
   const modelPath = join(assets, piece.src);
   const directory = dirname(modelPath);
   const sourceDirectory = join(directory, 'source');
@@ -183,22 +183,4 @@ for (const piece of catalog.pieces.filter((piece) => !blanks.includes(piece))) {
   gltf.textures = textures;
   gltf.images = images;
   await writeFile(modelPath, prettyJson(gltf));
-}
-
-for (const blank of blanks) {
-  const numbered = catalog.pieces.find((piece) => piece.name + ' (blank)' === blank.name);
-  if (!numbered) throw assetError(blank.name, 'missing numbered model');
-  const source = join(assets, numbered.src);
-  const target = join(assets, blank.src);
-  const gltf = JSON.parse(await readFile(source, 'utf8'));
-  for (const buffer of gltf.buffers) {
-    buffer.uri = relative(dirname(target), join(dirname(source), buffer.uri)).split('\\').join('/');
-  }
-  const material = gltf.materials[0].pbrMetallicRoughness;
-  gltf.materials = [{ pbrMetallicRoughness: {
-    baseColorFactor: [1, 1, 1, 1], metallicFactor: material.metallicFactor,
-    roughnessFactor: material.roughnessFactor,
-  } }];
-  for (const key of ['images', 'textures', 'samplers', 'extensionsUsed', 'extensionsRequired']) delete gltf[key];
-  await writeFile(target, prettyJson(gltf));
 }

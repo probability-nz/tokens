@@ -7,20 +7,23 @@
   "packageManager": "pnpm@11.18.0",
   "type": "module",
   "scripts": {
-    "prepare-assets": "node scripts/prepare-assets.mjs",
+    "prepare-assets": "pnpm generate:dice && node scripts/prepare-assets.mjs",
     "build": "tsc && node scripts/build-catalog.mjs && node scripts/build-catalog.mjs --cc0 && node scripts/build-catalog.mjs --game-pieces",
     "dev": "pnpm build && storybook dev -p 6006",
-    "build-storybook": "pnpm build && storybook build"
+    "build-storybook": "pnpm build && storybook build",
+    "dev:dice": "vite --host 127.0.0.1 --port 6102",
+    "generate:dice": "node scripts/generate-dice.mjs"
   },
   "homepage": "https://probability-nz.github.io/tokens",
   "repository": "https://github.com/probability-nz/tokens",
   "devDependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.7.0",
     "@storybook/react-vite": "^10.5.5",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@types/three": "^0.185.3",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.7.0",
+    "playwright-core": "1.65.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "storybook": "^10.5.5",

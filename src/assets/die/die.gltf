@@ -1,12 +1,11 @@
 {
   "asset": {
-    "generator": "Khronos glTF Blender I/O v3.2.43",
-    "version": "2.0"
+    "version": "2.0",
+    "generator": "tokens procedural dice"
   },
   "scene": 0,
   "scenes": [
     {
-      "name": "Scene",
       "nodes": [
         0
       ]
@@ -15,75 +14,11 @@
   "nodes": [
     {
       "mesh": 0,
-      "name": "Dice"
-    }
-  ],
-  "materials": [
-    {
-      "doubleSided": true,
-      "name": "die preferred",
-      "pbrMetallicRoughness": {
-        "baseColorTexture": {
-          "index": 0,
-          "texCoord": 0
-        },
-        "metallicFactor": 0,
-        "roughnessFactor": 0.4,
-        "baseColorFactor": [
-          1,
-          1,
-          1,
-          1
-        ]
-      },
-      "emissiveFactor": [
-        0,
-        0,
-        0
-      ],
-      "alphaMode": "OPAQUE",
-      "extensions": {
-        "MSFT_lod": {
-          "ids": [
-            1
-          ]
-        }
-      },
-      "extras": {
-        "MSFT_screencoverage": [
-          0,
-          0
-        ]
-      }
-    },
-    {
-      "doubleSided": true,
-      "name": "die preview",
-      "pbrMetallicRoughness": {
-        "baseColorTexture": {
-          "index": 1,
-          "texCoord": 0
-        },
-        "metallicFactor": 0,
-        "roughnessFactor": 0.4,
-        "baseColorFactor": [
-          1,
-          1,
-          1,
-          1
-        ]
-      },
-      "emissiveFactor": [
-        0,
-        0,
-        0
-      ],
-      "alphaMode": "OPAQUE"
+      "name": "Classic die"
     }
   ],
   "meshes": [
     {
-      "name": "Cube.003",
       "primitives": [
         {
           "attributes": {
@@ -92,50 +27,48 @@
             "TEXCOORD_0": 2
           },
           "indices": 3,
-          "material": 0,
-          "mode": 4
+          "material": 0
         }
       ]
     }
   ],
-  "textures": [
+  "buffers": [
     {
-      "sampler": 0,
-      "extensions": {
-        "EXT_texture_avif": {
-          "source": 0
-        },
-        "EXT_texture_webp": {
-          "source": 1
-        }
-      }
-    },
-    {
-      "sampler": 0,
-      "extensions": {
-        "EXT_texture_webp": {
-          "source": 1
-        }
-      }
+      "uri": "die.bin",
+      "byteLength": 9360
     }
   ],
-  "images": [
+  "bufferViews": [
     {
-      "mimeType": "image/avif",
-      "name": "die preferred",
-      "uri": "die_diffuse.avif"
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 3240,
+      "target": 34962
     },
     {
-      "mimeType": "image/webp",
-      "name": "die preview",
-      "uri": "die_preview.webp"
+      "buffer": 0,
+      "byteOffset": 3240,
+      "byteLength": 3240,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 6480,
+      "byteLength": 2160,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 8640,
+      "byteLength": 720,
+      "target": 34963
     }
   ],
   "accessors": [
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 120,
+      "count": 270,
       "type": "VEC3",
       "min": [
         -0.5,
@@ -151,112 +84,62 @@
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 120,
+      "count": 270,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 120,
+      "count": 270,
       "type": "VEC2"
     },
     {
       "bufferView": 3,
       "componentType": 5123,
-      "count": 468,
+      "count": 360,
       "type": "SCALAR"
     }
   ],
-  "bufferViews": [
+  "images": [
     {
-      "buffer": 0,
-      "byteOffset": 0,
-      "byteLength": 1440
+      "uri": "die_diffuse.avif",
+      "mimeType": "image/avif"
     },
     {
-      "buffer": 0,
-      "byteOffset": 1440,
-      "byteLength": 1440
+      "uri": "die_preview.webp",
+      "mimeType": "image/webp"
     },
     {
-      "buffer": 0,
-      "byteOffset": 2880,
-      "byteLength": 960
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 3840,
-      "byteLength": 936
+      "uri": "die_normal.webp",
+      "mimeType": "image/webp"
     }
   ],
-  "samplers": [
+  "textures": [
     {
-      "magFilter": 9729,
-      "minFilter": 9987,
-      "wrapS": 10497,
-      "wrapT": 10497
-    }
-  ],
-  "buffers": [
-    {
-      "uri": "die.bin",
-      "byteLength": 4776
-    }
-  ],
-  "extras": {
-    "probability": {
-      "faces": [
-        {
-          "name": "1",
-          "rotation": [
-            1.5707963267948966,
-            0,
-            1.5707963267948966
-          ]
+      "extensions": {
+        "EXT_texture_avif": {
+          "source": 0
         },
-        {
-          "name": "2",
-          "rotation": [
-            0,
-            0,
-            0
-          ]
-        },
-        {
-          "name": "3",
-          "rotation": [
-            0,
-            0,
-            1.5707963267948966
-          ]
-        },
-        {
-          "name": "4",
-          "rotation": [
-            -1.5707963267948966,
-            0,
-            -1.5707963267948966
-          ]
-        },
-        {
-          "name": "5",
-          "rotation": [
-            -3.141592653589793,
-            0,
-            1.5707963267948966
-          ]
-        },
-        {
-          "name": "6",
-          "rotation": [
-            0,
-            0,
-            -3.141592653589793
-          ]
+        "EXT_texture_webp": {
+          "source": 1
         }
-      ]
+      }
+    },
+    {
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 1
+        }
+      }
+    },
+    {
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 2
+        }
+      }
     }
-  },
+  ],
   "extensionsUsed": [
     "EXT_texture_avif",
     "EXT_texture_webp",
@@ -264,5 +147,53 @@
   ],
   "extensionsRequired": [
     "EXT_texture_webp"
+  ],
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.48,
+        "baseColorTexture": {
+          "index": 0
+        }
+      },
+      "normalTexture": {
+        "index": 2
+      },
+      "extensions": {
+        "MSFT_lod": {
+          "ids": [
+            1
+          ]
+        }
+      },
+      "extras": {
+        "MSFT_screencoverage": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.48,
+        "baseColorTexture": {
+          "index": 1
+        }
+      }
+    }
   ]
 }

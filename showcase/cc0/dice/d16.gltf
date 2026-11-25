@@ -1,7 +1,7 @@
 {
   "asset": {
     "version": "2.0",
-    "copyright": "CC0-1.0"
+    "generator": "tokens procedural dice"
   },
   "scene": 0,
   "scenes": [
@@ -32,23 +32,73 @@
       ]
     }
   ],
-  "materials": [
+  "buffers": [
     {
-      "pbrMetallicRoughness": {
-        "baseColorTexture": {
-          "index": 0
-        },
-        "roughnessFactor": 0.42,
-        "metallicFactor": 0
-      }
+      "uri": "d16.bin",
+      "byteLength": 18848
     }
   ],
-  "extensionsUsed": [
-    "EXT_texture_avif",
-    "EXT_texture_webp"
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 6528,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 6528,
+      "byteLength": 6528,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 13056,
+      "byteLength": 4352,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 17408,
+      "byteLength": 1440,
+      "target": 34963
+    }
   ],
-  "extensionsRequired": [
-    "EXT_texture_webp"
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 544,
+      "type": "VEC3",
+      "min": [
+        -0.01358712650835514,
+        -0.015478293411433697,
+        -0.01358712650835514
+      ],
+      "max": [
+        0.01358712650835514,
+        0.015478293411433697,
+        0.01358712650835514
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 544,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 544,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 720,
+      "type": "SCALAR"
+    }
   ],
   "images": [
     {
@@ -57,6 +107,10 @@
     },
     {
       "uri": "d16.webp",
+      "mimeType": "image/webp"
+    },
+    {
+      "uri": "d16_normal.webp",
       "mimeType": "image/webp"
     }
   ],
@@ -70,204 +124,76 @@
           "source": 1
         }
       }
+    },
+    {
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 1
+        }
+      }
+    },
+    {
+      "extensions": {
+        "EXT_texture_webp": {
+          "source": 2
+        }
+      }
     }
   ],
-  "buffers": [
-    {
-      "uri": "d16.bin",
-      "byteLength": 6696
-    }
+  "extensionsUsed": [
+    "EXT_texture_avif",
+    "EXT_texture_webp",
+    "MSFT_lod"
   ],
-  "bufferViews": [
-    {
-      "buffer": 0,
-      "byteOffset": 0,
-      "byteLength": 2304
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 2304,
-      "byteLength": 2304
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 4608,
-      "byteLength": 1536
-    },
-    {
-      "buffer": 0,
-      "byteOffset": 6144,
-      "byteLength": 552
-    }
+  "extensionsRequired": [
+    "EXT_texture_webp"
   ],
-  "accessors": [
+  "materials": [
     {
-      "bufferView": 0,
-      "componentType": 5126,
-      "count": 192,
-      "type": "VEC3",
-      "min": [
-        -0.013470158912241459,
-        -0.015338213182985783,
-        -0.013470158912241459
-      ],
-      "max": [
-        0.013470158912241459,
-        0.015338213182985783,
-        0.013470158912241459
-      ]
-    },
-    {
-      "bufferView": 1,
-      "componentType": 5126,
-      "count": 192,
-      "type": "VEC3"
-    },
-    {
-      "bufferView": 2,
-      "componentType": 5126,
-      "count": 192,
-      "type": "VEC2"
-    },
-    {
-      "bufferView": 3,
-      "componentType": 5123,
-      "count": 276,
-      "type": "SCALAR"
-    }
-  ],
-  "extras": {
-    "probability": {
-      "faces": [
-        {
-          "name": "1",
-          "rotation": [
-            0.3029466729803579,
-            -8.035871629012636e-17,
-            -0.8550527371260165
-          ]
-        },
-        {
-          "name": "2",
-          "rotation": [
-            0.949388805883102,
-            0.48249232537507775,
-            -1.0195107283623657
-          ]
-        },
-        {
-          "name": "3",
-          "rotation": [
-            1.8737429997752544,
-            0.7157435896688801,
-            -1.5707963267948966
-          ]
-        },
-        {
-          "name": "4",
-          "rotation": [
-            2.798097193667407,
-            0.48249232537507786,
-            -2.1220819252274272
-          ]
-        },
-        {
-          "name": "5",
-          "rotation": [
-            -2.838645980609435,
-            0.0,
-            -2.2865399164637767
-          ]
-        },
-        {
-          "name": "6",
-          "rotation": [
-            -1.2678496538145385,
-            0.7157435896688801,
-            1.5707963267948966
-          ]
-        },
-        {
-          "name": "7",
-          "rotation": [
-            -2.192203847706691,
-            0.4824923253750778,
-            2.1220819252274272
-          ]
-        },
-        {
-          "name": "8",
-          "rotation": [
-            -0.3434954599223862,
-            -0.4824923253750778,
-            -1.019510728362366
-          ]
-        },
-        {
-          "name": "9",
-          "rotation": [
-            -2.838645980609435,
-            -8.035871629012636e-17,
-            0.8550527371260165
-          ]
-        },
-        {
-          "name": "10",
-          "rotation": [
-            2.7980971936674073,
-            0.48249232537507775,
-            1.0195107283623657
-          ]
-        },
-        {
-          "name": "11",
-          "rotation": [
-            0.9493888058831019,
-            -0.48249232537507775,
-            -2.1220819252274277
-          ]
-        },
-        {
-          "name": "12",
-          "rotation": [
-            1.8737429997752544,
-            -0.7157435896688801,
-            -1.5707963267948968
-          ]
-        },
-        {
-          "name": "13",
-          "rotation": [
-            0.3029466729803581,
-            0.0,
-            2.2865399164637767
-          ]
-        },
-        {
-          "name": "14",
-          "rotation": [
-            -0.34349545992238617,
-            -0.48249232537507775,
-            2.1220819252274277
-          ]
-        },
-        {
-          "name": "15",
-          "rotation": [
-            -2.192203847706691,
-            0.48249232537507775,
-            -1.0195107283623657
-          ]
-        },
-        {
-          "name": "16",
-          "rotation": [
-            -1.2678496538145387,
-            0.7157435896688801,
-            -1.5707963267948966
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.48,
+        "baseColorTexture": {
+          "index": 0
+        }
+      },
+      "normalTexture": {
+        "index": 2
+      },
+      "extensions": {
+        "MSFT_lod": {
+          "ids": [
+            1
           ]
         }
-      ]
+      },
+      "extras": {
+        "MSFT_screencoverage": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.48,
+        "baseColorTexture": {
+          "index": 1
+        }
+      }
     }
-  }
+  ]
 }
