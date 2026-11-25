@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const cc0 = process.argv[2] === '--cc0';
-const collection = cc0 ? 'cc0' : '';
+const collection = cc0 ? 'cc0' : process.argv[2] === '--game-pieces' ? 'game-pieces' : '';
 const assets = join(root, 'src', 'assets', collection);
 const output = join(root, 'dist', collection);
 const catalogPath = join(assets, 'catalog.json');
@@ -62,6 +62,11 @@ const names = new Set();
 const sources = new Set();
 const files = new Set([catalogPath]);
 if (cc0) files.add(join(assets, 'LICENSE'));
+if (collection === 'game-pieces') {
+  for (const file of ['README.md', 'chess/LICENSE.md', 'checkers/LICENSE.md']) {
+    files.add(join(assets, file));
+  }
+}
 for (const [index, piece] of catalog.pieces.entries()) {
   if (
     !record(piece) ||
