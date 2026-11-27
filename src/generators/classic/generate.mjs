@@ -57,6 +57,8 @@ for (const piece of catalog.pieces.filter(piece => piece.faces.length === 0)) {
     await readFile(join(sourceDirectory, modelFile), 'utf8'),
   );
 
+  gltf.asset.copyright ??= `${catalog.attribution} (${catalog.license})`;
+
   for (const [index, buffer] of (gltf.buffers ?? []).entries()) {
     const uri = fileName(buffer, name, `buffers[${index}]`);
     await copyFile(join(sourceDirectory, uri), join(directory, uri));

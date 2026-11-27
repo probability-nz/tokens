@@ -1650,8 +1650,8 @@
     {
       "path": "cc0/dice/d100.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 11068,
-      "sha256": "0cbf5b11433976213858a54eecba7903348197e2a89ab676caae3ea87f899a4b"
+      "bytes": 11117,
+      "sha256": "d9af56e4aa8aff7ca393d06c6e1fd6cbbf0b3e187b51f7760f23129d3bac6f5a"
     },
     {
       "path": "cc0/dice/d100_normal.webp",
@@ -1680,8 +1680,8 @@
     {
       "path": "cc0/dice/d120.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 12826,
-      "sha256": "99114e7aa7007604405f07098d42e02e8fe3524d9aa579b5b207987e3c899069"
+      "bytes": 12875,
+      "sha256": "5bc2b223f1520d3f30280db997d0beea6eea1cb6b8d62e4130b2ec60f1037c5b"
     },
     {
       "path": "cc0/dice/d120.webp",
@@ -1710,8 +1710,8 @@
     {
       "path": "cc0/dice/d16.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3862,
-      "sha256": "7b6d08577e4f68b1d8166ca9b5b9f37c40480a6811bc942bc648e238b14272c8"
+      "bytes": 3911,
+      "sha256": "074a5fd22a46a0cabd419d42175a81fdb3087c232e500094a96927dcfc1aa05c"
     },
     {
       "path": "cc0/dice/d16.webp",
@@ -1740,8 +1740,8 @@
     {
       "path": "cc0/dice/d24.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 4543,
-      "sha256": "2596d681ea620221d031966bfa339b13ce509224b7eb13d2b66ca0241c385707"
+      "bytes": 4592,
+      "sha256": "f736a27da12741b40824442840670f22ec0ae284046ba26ab28ed98f3eaa7a35"
     },
     {
       "path": "cc0/dice/d24.webp",
@@ -1770,8 +1770,8 @@
     {
       "path": "cc0/dice/d3.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2742,
-      "sha256": "1fd0e858439fb390bab9bf13d1c6e8fd98d64a265ec073882bcd972fc4f8ebca"
+      "bytes": 2791,
+      "sha256": "68a285ddddb7e455b6d4555c96ff659023a3efee677717a6ef0bfeb2fa0a3117"
     },
     {
       "path": "cc0/dice/d3.webp",
@@ -1800,8 +1800,8 @@
     {
       "path": "cc0/dice/d48.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 6599,
-      "sha256": "4132ff89151db4648659141625dc110aedd510663c07e254a935e3e32ee2fee4"
+      "bytes": 6648,
+      "sha256": "63793ca897978fcb4cf48d0d02d01a59c83ebfc180236b36c0766a17767202cd"
     },
     {
       "path": "cc0/dice/d48.webp",
@@ -2388,38 +2388,38 @@
     {
       "path": "classic/blank-dice/d10-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2652,
-      "sha256": "6a37dbcaeaf6a4e17b2773438e895df88403c86891ce3d79f89c22ddadb6ad70"
+      "bytes": 2724,
+      "sha256": "768678abf93d3ceda59432c14e89f427cb033453bc71d9d1ba93e465cc6b7e17"
     },
     {
       "path": "classic/blank-dice/d12-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2861,
-      "sha256": "373a1cb47dff3a716902552366294a185334dd3454b3ac535547082b58e06172"
+      "bytes": 2933,
+      "sha256": "96123901231558e71a9a9d1bf73e649169af81f44738ccbbab4288fc9da2575f"
     },
     {
       "path": "classic/blank-dice/d20-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3513,
-      "sha256": "71cf70811c6388531da74cbec34949d0f0af63a9a6c42f8d18c7aa688045eeec"
+      "bytes": 3585,
+      "sha256": "22da199c9d4995b1858c5a2771e7e48c699dc86b722b2812ced97f0351637f81"
     },
     {
       "path": "classic/blank-dice/d4-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2662,
-      "sha256": "3c7da3045aa47861198163b3e6b0e50d144a3a986d3fa49b9a1daf543e7d5dd0"
+      "bytes": 2740,
+      "sha256": "29ba6fb5cb185ebd363678cedfddc000c2861f4985ab12d6b28b8d61301e8c2a"
     },
     {
       "path": "classic/blank-dice/d6-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2878,
-      "sha256": "460aa285b9cba0e6d2eab2340f0248e091107f8172d78eaf27dd9d199fc6c982"
+      "bytes": 2956,
+      "sha256": "a0862950a684b8d627188787a9a37e4ac2516caec39d845aab58ef4af476b64d"
     },
     {
       "path": "classic/blank-dice/d8-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3357,
-      "sha256": "99059ebe34828f516333eb1fd03737719c48344b30ea2a51af972c46a04a38e1"
+      "bytes": 3435,
+      "sha256": "e688641598b1fdccdf5457258ad2eec55352124839d7c70246a88784295ee8e7"
     },
     {
       "path": "classic/d10/d10.bin",
@@ -2430,8 +2430,8 @@
     {
       "path": "classic/d10/d10.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3332,
-      "sha256": "466ff12f5339f2c7f7bba3c4c74695568fea70ab88e62eb0a1cebbe66daeb236"
+      "bytes": 3404,
+      "sha256": "251d2d5574cf40194da3b3b105ed44e552c54a7ad5c7fc16e9f3e7228217cc6a"
     },
     {
       "path": "classic/d10/d10_diffuse.avif",
@@ -2460,8 +2460,8 @@
     {
       "path": "classic/d12/d12.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3541,
-      "sha256": "8ccadf25f05212ed762808ad9d99cac27440866b7566aa1abf8e9ed62e140151"
+      "bytes": 3613,
+      "sha256": "abbcc15ee33176ab738ada5f2cdfacc99462fc55b3ccebd4d7d7debaf331eeb4"
     },
     {
       "path": "classic/d12/d12_diffuse.avif",
@@ -2490,8 +2490,8 @@
     {
       "path": "classic/d20/d20.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 4193,
-      "sha256": "2f71f562aaa785ce3b5f000f96ad749b1b04ee41f17ede03648c3c117f61ea26"
+      "bytes": 4265,
+      "sha256": "d576adc68718858210a3b8d1785854e481b4a29889095d6fd3c3ae71414a0900"
     },
     {
       "path": "classic/d20/d20_diffuse.avif",
@@ -2520,8 +2520,8 @@
     {
       "path": "classic/d4/d4.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 4028,
-      "sha256": "6ac30538abdd108b270d4478283f2bc234389e71b1de614b41d5941886155c00"
+      "bytes": 4106,
+      "sha256": "3a58d0e84aad7f77f4eeb5b7319f3d11c9d117e5a735f90a27ec8f92ed3a28aa"
     },
     {
       "path": "classic/d4/d4_diffuse.avif",
@@ -2550,8 +2550,8 @@
     {
       "path": "classic/d6/d6.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 4244,
-      "sha256": "e8d11d6a82e24d25285bc630f5c3075daea365ff68dded1677de3c7df4d675fd"
+      "bytes": 4322,
+      "sha256": "a4831b31371301e9daa68b1a2950c6f05ab145f06f2bce7dedf99bab739a494e"
     },
     {
       "path": "classic/d6/d6_diffuse.avif",
@@ -2580,8 +2580,8 @@
     {
       "path": "classic/d8/d8.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 4723,
-      "sha256": "22a60010d707d97111c77110accad6e6768f1107961629cd42cdbdd274639cdf"
+      "bytes": 4801,
+      "sha256": "6739ae66fb68b06ae86dba669543cd299ad0e46e7356eb9a14b2045cf3a8fb50"
     },
     {
       "path": "classic/d8/d8_diffuse.avif",
@@ -2610,8 +2610,8 @@
     {
       "path": "classic/die/die.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2874,
-      "sha256": "7df63fcedd82b3d1b8d56b5cdfd704b34d5ed627e9e926bae47f29f91dfffaf8"
+      "bytes": 2946,
+      "sha256": "efdd9508b82d080c366aaab057277fbc03de71f00338f947fbecb73486e83b2b"
     },
     {
       "path": "classic/die/die_diffuse.avif",
@@ -2640,8 +2640,8 @@
     {
       "path": "classic/pawn/pawn.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1576,
-      "sha256": "121847e529c22ee9158f9b390cf972053278a508d800bc175a1144bf8dddea4d"
+      "bytes": 1648,
+      "sha256": "bd4af2eede8c8245e45f70f7b76e6b4695824ff4a4fb6c397f075c2037de72be"
     },
     {
       "path": "game-pieces/LICENSE",
@@ -2658,14 +2658,14 @@
     {
       "path": "game-pieces/checkers/black-token.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1992,
-      "sha256": "2ca024dc0551c94d48810d444c1b50da5291e1d28c25f137671266b3b264bd32"
+      "bytes": 2022,
+      "sha256": "aa454e0ce20435603ead71d100acbdca383ae4431f8aa4d905429efdf7d002bf"
     },
     {
       "path": "game-pieces/checkers/red-token.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1949,
-      "sha256": "4b1ba1402328c55e4d7d905ed892477393dec17f89064edff88aaeb5433eeff4"
+      "bytes": 1979,
+      "sha256": "ab94eb71af093ce4315bc005a3673f3004dc9d22d4deae136372a63675bda48c"
     },
     {
       "path": "game-pieces/checkers/token.bin",
@@ -2676,44 +2676,44 @@
     {
       "path": "game-pieces/checkers/white-token.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1910,
-      "sha256": "c6e9cfac94faa16c0da87b3e0ff1b2da041d049fdd44c917f7503d6556820b83"
+      "bytes": 1940,
+      "sha256": "c94f774ba6d644fad5ec22173c8ec77155b1f488097d61713c33f148a8ccbd84"
     },
     {
       "path": "game-pieces/chess/Black_Bishop.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2124,
-      "sha256": "856204244d4fd88986414b7d389cb5494095829ac2707c67f414d17a223c1301"
+      "bytes": 2154,
+      "sha256": "0ac01d4195a2ced9f407de072a8457fd1c60bd964e011ef8f62c46e20ec4bd7e"
     },
     {
       "path": "game-pieces/chess/Black_King.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2141,
-      "sha256": "b23622e0c6b230d6dcd42f3ac2d7f31f42928855d5fff747df67d6ef45f43932"
+      "bytes": 2171,
+      "sha256": "d30a10d9ec9824587c8353272c49f5a1458271e197666e838ddc1ecfca577009"
     },
     {
       "path": "game-pieces/chess/Black_Knight.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2123,
-      "sha256": "31c496da634ecd0d6049dd5c6252795da45d334d8bc09e40812779dbc41b55c4"
+      "bytes": 2153,
+      "sha256": "93bdc57465c5ccbc9a9cd2c47b3d2963110bd7aa64bea80db7f1ba96fb85bece"
     },
     {
       "path": "game-pieces/chess/Black_Pawn.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2121,
-      "sha256": "0e2fc2ea0bb83fd9d55c1b1c8aac1867bbe9381c151f89b92161beb464e17c0a"
+      "bytes": 2151,
+      "sha256": "d3e2f1a840d81d20a04f6535f2ccc05fc2f1285f57c4e8109313fd9655030bb6"
     },
     {
       "path": "game-pieces/chess/Black_Queen.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2123,
-      "sha256": "205521e82f16a0a6c35e26224804f4274879ec6b5866eb94e71e27e04f3a67c5"
+      "bytes": 2153,
+      "sha256": "27d730db96f4fa95bcc8c84edddf736de3ebe32ec5f7a4a52fa2cde783c2240c"
     },
     {
       "path": "game-pieces/chess/Black_Rook.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2120,
-      "sha256": "7fca02d83cf8ccc3e45fb1712f3c4679b864140bde401d36787942f695b79959"
+      "bytes": 2150,
+      "sha256": "0cce78d5da797f8ff8b2db3049215f82c6f6f21f94b1b8bbb40ea54899791f51"
     },
     {
       "path": "game-pieces/chess/LICENSE.md",
@@ -2724,38 +2724,38 @@
     {
       "path": "game-pieces/chess/White_Bishop.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2039,
-      "sha256": "4e77d538275af8b20e8145cff43b78e139498c5c155ddab964cb08bc7bd7aab3"
+      "bytes": 2069,
+      "sha256": "819e3d30214b1e69671f780ad69b44a4fac51988064bffc3d0b432df7f9422d2"
     },
     {
       "path": "game-pieces/chess/White_King.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2035,
-      "sha256": "b398a33df6f9a29fa3bcbe7a8e89d9ec408c63cd502cf8ba9762b31a7528921a"
+      "bytes": 2065,
+      "sha256": "442490df70e55a35d4f268396f9a424510a2c7e8cb10124480264b9765404f8f"
     },
     {
       "path": "game-pieces/chess/White_Knight.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2038,
-      "sha256": "63533789685a924ef69c2d3f65bf14b70aa63d13984bb7bda6ddcea8e182d7be"
+      "bytes": 2068,
+      "sha256": "964080e6b2a4a4f2fece087c3f68837ab1f4c4a7f554602f6bab805a2a45dad9"
     },
     {
       "path": "game-pieces/chess/White_Pawn.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2036,
-      "sha256": "6fa841631c5923d663474042e4f4f6e397533c974f363749c9299499264b4c98"
+      "bytes": 2066,
+      "sha256": "ade0eeebe180b95eaa0a44e5c46eafea26c805f0d761d9eaa6224ab233d2c314"
     },
     {
       "path": "game-pieces/chess/White_Queen.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2038,
-      "sha256": "244f3e872e0fb72a22b192f5ea71764afca745824ca19addd3d40d08b065af71"
+      "bytes": 2068,
+      "sha256": "9aca46f7b8f3094d1ac9b084f3286df81c9688036ab9ed34766922f9a10a944b"
     },
     {
       "path": "game-pieces/chess/White_Rook.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2035,
-      "sha256": "bfce67785d7721983e5ca370353c393d62f82e0e82e2e509464211159c7905ef"
+      "bytes": 2065,
+      "sha256": "28eba2c4a2cd214f9266e72ef71147547c41feab623f82ee3c6efe3724768ce2"
     },
     {
       "path": "game-pieces/chess/bishop.bin",

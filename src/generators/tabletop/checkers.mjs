@@ -96,7 +96,7 @@ export function generateCheckers(directory) {
         generator: "Checkers rounded token generator",
         version: "2.0",
         copyright:
-          "Wood Checkboard by Jarlan Perez, CC BY 3.0. See LICENSE.md for the original source and license.",
+          "Wood Checkboard by Jarlan Perez (https://poly.pizza/m/cFejdg3fa2P), CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/).",
       },
       scene: 0,
       scenes: [{ nodes: [0] }],

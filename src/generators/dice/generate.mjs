@@ -196,7 +196,11 @@ async function generate(page, kind) {
     roughnessFactor: 0.48,
   };
   const base = {
-    asset: { version: '2.0', generator: 'tokens procedural dice' },
+    asset: {
+      version: '2.0',
+      generator: 'tokens procedural dice',
+      copyright: `${collection.catalog.attribution} (${collection.catalog.license})`,
+    },
     extras: { probability: { faces: mesh.faces } },
     scene: 0,
     scenes: [{ nodes: [0] }],

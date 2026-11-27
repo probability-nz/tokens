@@ -31,6 +31,14 @@ test("showcase models load from verified external resources", async () => {
   for (const { src } of catalog.pieces) {
     assert(src.endsWith(".gltf"), src);
     const model = JSON.parse(resources.get(src));
+    const notice = model.asset.copyright;
+    if (src.startsWith("classic/")) {
+      assert.match(notice, /Garbo Succus.*Misha Tsyatsko.*CC-BY-4\.0/, src);
+    } else if (src.startsWith("game-pieces/")) {
+      assert.match(notice, /Jarlan Perez.*CC BY 3\.0/, src);
+    } else {
+      assert.match(notice, /CC0[- ]1\.0/, src);
+    }
     const resource = (uri) => {
       assert(uri && !uri.startsWith("data:"), src);
       const bytes = resources.get(posix.join(posix.dirname(src), uri));

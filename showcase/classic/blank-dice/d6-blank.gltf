@@ -1,7 +1,8 @@
 {
   "asset": {
     "version": "2.0",
-    "generator": "tokens procedural dice"
+    "generator": "tokens procedural dice",
+    "copyright": "Garbo Succus; source assets by Misha Tsyatsko (CC-BY-4.0)"
   },
   "extras": {
     "probability": {
