@@ -1,3 +1,10 @@
 CC0-1.0: 53 tabletop models, including the showcase cube and sphere, Probability contributors. See CC0-LICENSE.txt.
+Meeple silhouette: adapted from character.svg by Kenney.nl, Board Game Icons (CC0 1.0). https://opengameart.org/content/board-game-icons
 CC BY 4.0: legacy tokens and D10 variants, Garbo Succus; source assets by Misha Tsyatsko. https://creativecommons.org/licenses/by/4.0/
 https://github.com/probability-nz/tokens
+CC BY 3.0: chessmen and checker discs adapted from the Probability chess and checkers games, with original credits to Jarlan Perez. See game-pieces/chess/LICENSE.md and game-pieces/checkers/LICENSE.md.
+Board faces adapted from the CC0 Go, Nine Men’s Morris and backgammon SVGs by Probability contributors. Playing positions follow the Tabletop Playground templates.
+Full CC BY license texts accompany the models in classic/LICENSE (4.0) and game-pieces/LICENSE (3.0). The classic dice use regenerated meshes and markings. The red checker adapts the original checker colors.
+Comfortaa by The Comfortaa Project Authors supplies the printed die numerals. Its SIL Open Font License 1.1 is in licenses/Comfortaa-OFL.txt.
+DejaVu Serif Bold supplies the poker chip numerals. The Bitstream Vera license and DejaVu public-domain changes notice are in licenses/DejaVu-Serif.txt.
+Kenney’s original notice for the adapted meeple silhouette is in licenses/Kenney-Board-Game-Icons.txt.

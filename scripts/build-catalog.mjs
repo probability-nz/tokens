@@ -1,5 +1,6 @@
 import { copyFile, mkdir, readFile, rm } from 'node:fs/promises';
 import { dirname, isAbsolute, join, normalize, relative, sep } from 'node:path';
+import { notices } from './asset-notices.mjs';
 import { fileURLToPath } from 'node:url';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -61,11 +62,8 @@ if (
 const names = new Set();
 const sources = new Set();
 const files = new Set([catalogPath]);
-if (cc0) files.add(join(assets, 'LICENSE'));
 if (collection === 'game-pieces') {
-  for (const file of ['README.md', 'chess/LICENSE.md', 'checkers/LICENSE.md']) {
-    files.add(join(assets, file));
-  }
+  files.add(join(assets, 'README.md'));
 }
 for (const [index, piece] of catalog.pieces.entries()) {
   if (
@@ -139,4 +137,10 @@ for (const source of files) {
   const destination = join(output, relative(assets, source));
   await mkdir(dirname(destination), { recursive: true });
   await copyFile(source, destination);
+}
+
+for (const notice of notices.filter((entry) => entry.catalogs.includes(collection || 'classic'))) {
+  const destination = join(output, notice.output);
+  await mkdir(dirname(destination), { recursive: true });
+  await copyFile(join(root, 'src/assets', notice.source), destination);
 }

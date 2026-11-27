@@ -11,7 +11,7 @@
     "title": "Tokens · Complete collection",
     "surfaceSize": [
       1.7,
-      1
+      1.4
     ],
     "children": [
       {
@@ -163,7 +163,7 @@
         "size": [
           0.02994898520410061,
           0.02929999865591526,
-          0.029829276725649834
+          0.029821230098605156
         ]
       },
       {
@@ -999,7 +999,7 @@
         "size": [
           0.028213590621948243,
           0.0314096794128418,
-          0.02691600799560547
+          0.026832719802856446
         ]
       },
       {
@@ -1113,7 +1113,7 @@
         "size": [
           0.028213590621948243,
           0.0314096794128418,
-          0.02691600799560547
+          0.026832719802856446
         ]
       },
       {
@@ -1286,6 +1286,291 @@
           0.02880324050784111,
           0.02880324050784111
         ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.38,
+          null,
+          0.53
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "src": "game-pieces/chess/Black_Bishop.gltf",
+        "size": [
+          0.03767115091522444,
+          0.08489177342908984,
+          0.03767115844193887
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.55,
+          null,
+          0.53
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "src": "game-pieces/chess/Black_King.gltf",
+        "size": [
+          0.03767114644487618,
+          0.13358517354404606,
+          0.03767116498432756
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.295,
+          null,
+          0.53
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "src": "game-pieces/chess/Black_Knight.gltf",
+        "size": [
+          0.03923556493441241,
+          0.08301046734497619,
+          0.037671158189168774
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.125,
+          null,
+          0.53
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "src": "game-pieces/chess/Black_Pawn.gltf",
+        "size": [
+          0.037671159855920955,
+          0.06450001335879399,
+          0.037671155702125675
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.465,
+          null,
+          0.53
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "src": "game-pieces/chess/Black_Queen.gltf",
+        "size": [
+          0.03952872366766502,
+          0.11999999818827195,
+          0.039528664635479334
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.21,
+          null,
+          0.53
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "src": "game-pieces/chess/Black_Rook.gltf",
+        "size": [
+          0.037671159855920955,
+          0.07200010092362,
+          0.0376711924726196
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.38,
+          null,
+          0.62
+        ],
+        "rotation": [
+          0,
+          3.141592653589793,
+          0
+        ],
+        "src": "game-pieces/chess/White_Bishop.gltf",
+        "size": [
+          0.03767115091522444,
+          0.08489182260292728,
+          0.03767115844194548
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.55,
+          null,
+          0.62
+        ],
+        "rotation": [
+          0,
+          3.141592653589793,
+          0
+        ],
+        "src": "game-pieces/chess/White_King.gltf",
+        "size": [
+          0.03767114868005031,
+          0.13358517354404606,
+          0.03767116498432755
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.295,
+          null,
+          0.62
+        ],
+        "rotation": [
+          0,
+          3.141592653589793,
+          0
+        ],
+        "src": "game-pieces/chess/White_Knight.gltf",
+        "size": [
+          0.03923555822889002,
+          0.08301050310776707,
+          0.037671158189173576
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.125,
+          null,
+          0.62
+        ],
+        "rotation": [
+          0,
+          3.141592653589793,
+          0
+        ],
+        "src": "game-pieces/chess/White_Pawn.gltf",
+        "size": [
+          0.03767117773731399,
+          0.06450003571053828,
+          0.037671155702128686
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.465,
+          null,
+          0.62
+        ],
+        "rotation": [
+          0,
+          3.141592653589793,
+          0
+        ],
+        "src": "game-pieces/chess/White_Queen.gltf",
+        "size": [
+          0.03952872590283915,
+          0.12000003842140929,
+          0.0395286467540893
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          -0.21,
+          null,
+          0.62
+        ],
+        "rotation": [
+          0,
+          3.141592653589793,
+          0
+        ],
+        "src": "game-pieces/chess/White_Rook.gltf",
+        "size": [
+          0.03767114197452792,
+          0.0720000472794289,
+          0.03767115670982152
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          0.12,
+          null,
+          0.56
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "src": "game-pieces/checkers/black-token.gltf",
+        "size": [
+          0.039,
+          0.01,
+          0.039
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          0.2,
+          null,
+          0.56
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "src": "game-pieces/checkers/red-token.gltf",
+        "size": [
+          0.039,
+          0.01,
+          0.039
+        ]
+      },
+      {
+        "children": [],
+        "position": [
+          0.28,
+          null,
+          0.56
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "src": "game-pieces/checkers/white-token.gltf",
+        "size": [
+          0.039,
+          0.01,
+          0.039
+        ]
       }
     ]
   },
@@ -1293,14 +1578,14 @@
     {
       "path": "catalog.json",
       "mediaType": "application/json",
-      "bytes": 93842,
-      "sha256": "ef3da0be0391a340cd75266f86c325e55f577d202a5b4b536fa57b0a226177fa"
+      "bytes": 97389,
+      "sha256": "9480cdf3569d60704de76e81d0f278cdac85d1b204c08cd26bfc54b283c9194e"
     },
     {
-      "path": "cc0/boards/1d36c97b7dee3991dd77.avif",
+      "path": "cc0/boards/3c7b5bda8a91c24abcc0.avif",
       "mediaType": "image/avif",
-      "bytes": 42729,
-      "sha256": "1d36c97b7dee3991dd773d78fd61ae5ee5a0d100c582282e3d0f214a96f8942c"
+      "bytes": 9894,
+      "sha256": "3c7b5bda8a91c24abcc092032881b57ab324e21bda5dd9deb1cf0754e63068b1"
     },
     {
       "path": "cc0/boards/3f553d4b7a573d06e198.bin",
@@ -1315,22 +1600,22 @@
       "sha256": "679aeffaf11b60bc0af72969116cd1b8e0a948c6db52c647810ecda552e4ec58"
     },
     {
-      "path": "cc0/boards/9ee6c7972dea93625c92.avif",
-      "mediaType": "image/avif",
-      "bytes": 10657,
-      "sha256": "9ee6c7972dea93625c929d924f5c69fa1b43b036872697061d4a8f1c637a58fb"
-    },
-    {
       "path": "cc0/boards/backgammon.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 5250,
-      "sha256": "9d3594023857edb01ee56aa729ca9a846ba1c90ee9146d06815a74c7b9e108cc"
+      "sha256": "3c6a8c65164db5abb869887777e661564c089d758f8796e6f70d4b8ce2f84d35"
     },
     {
-      "path": "cc0/boards/d79282320386f67a73d6.avif",
+      "path": "cc0/boards/c4136f83af49063c5f9f.avif",
       "mediaType": "image/avif",
-      "bytes": 15690,
-      "sha256": "d79282320386f67a73d65809fd8f7d06bde7307f71c16162dbcd2e6ae180d6b5"
+      "bytes": 32677,
+      "sha256": "c4136f83af49063c5f9f4acbaffd3f70263a548cb6ea162a078d7d2b7a350c7e"
+    },
+    {
+      "path": "cc0/boards/c86bd34164d28427d5f1.avif",
+      "mediaType": "image/avif",
+      "bytes": 12551,
+      "sha256": "c86bd34164d28427d5f17ca58c8c88eec9eb219db5af42f021581c0a8cee1bd1"
     },
     {
       "path": "cc0/boards/da21969a1e13b9a409a7.bin",
@@ -1342,73 +1627,73 @@
       "path": "cc0/boards/go.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 5258,
-      "sha256": "f478229c0597574773f7dd238100eb71a4c52acdec98910908072dfd4e30ec5d"
+      "sha256": "58e1d81e8364fb08fde863795db8911f524d3e5662c243877c8d64a2f28676ce"
     },
     {
       "path": "cc0/boards/nine-mens-morris.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 5254,
-      "sha256": "f0a2b7bca4cc4fd11ec6ee36eba7fb6cb6b59e1d9eb6ba71654aa8a98ed6eb7a"
+      "sha256": "0ca95c5f7ec01a717bc4ba36a078ad296b524d70850873958ce341373feb039b"
     },
     {
       "path": "cc0/dice/d100-color.avif",
       "mediaType": "image/avif",
-      "bytes": 87941,
-      "sha256": "5ecf8129de459c572d8bd3d289b41fba280934742912a19bc6292a574931a9da"
+      "bytes": 88190,
+      "sha256": "a0a86f393afdf03093d42076256c7104e0e3d66de66dcd39ac160a738d1f6585"
     },
     {
       "path": "cc0/dice/d100-rounded.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 226288,
-      "sha256": "6d30bd5b80df7294ec2d4fab4acadc52682fd5ed6cbfec8c475d398853b18e8a"
+      "bytes": 38142,
+      "sha256": "ca10621a67d6df8d51558a78ad128fbfcad9c5e0d87a63ff01da678e604337fe"
     },
     {
       "path": "cc0/dice/d100.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 21084,
-      "sha256": "198ab31bc047aee909eb8b216147d04ea4619435b86aed5e7e6b9d510dda3549"
+      "bytes": 11068,
+      "sha256": "0cbf5b11433976213858a54eecba7903348197e2a89ab676caae3ea87f899a4b"
     },
     {
       "path": "cc0/dice/d100_normal.webp",
       "mediaType": "image/webp",
-      "bytes": 239176,
-      "sha256": "3f8e837cdb00e0c724cce9a72c59ca90251f70c9fea972cfa7916f53c4827b48"
+      "bytes": 239162,
+      "sha256": "73d017aed2c95bb17e49ea0816d110ad03663236e218210d0ddd5a63f29484fd"
     },
     {
       "path": "cc0/dice/d100_preview.webp",
       "mediaType": "image/webp",
-      "bytes": 2886,
-      "sha256": "75189a8d42343b5ff5451d06727c20138d3953bf0b5b642482660e54abfb0c80"
+      "bytes": 2982,
+      "sha256": "d1414d2eff544a036d65e7ef860d7a46e8d5d990c573a8af4929748ad29183dd"
     },
     {
       "path": "cc0/dice/d120.avif",
       "mediaType": "image/avif",
-      "bytes": 38515,
-      "sha256": "eeda9bdd9f1307325716c5b3f03d9b4e88601d1ecd9f811c7dbe907e41d18ed1"
+      "bytes": 38488,
+      "sha256": "3793a33713de9559d90ac3808389024de8cc3c76703368ff30952012a2ccaa20"
     },
     {
       "path": "cc0/dice/d120.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 141360,
-      "sha256": "852380a7047d48a981dbb0f827dc80e48ecb01809a52b9e7598c932b51d38fb8"
+      "bytes": 24988,
+      "sha256": "7c90a8798d3239559a266fea8bb889dd33ea4fbb7a28f98b8af4bdd2cba96e73"
     },
     {
       "path": "cc0/dice/d120.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 24692,
-      "sha256": "fa6580ead341e29427a4765d7cbb0973bc5862144f3dcdbe8616152bfc602ee8"
+      "bytes": 12826,
+      "sha256": "99114e7aa7007604405f07098d42e02e8fe3524d9aa579b5b207987e3c899069"
     },
     {
       "path": "cc0/dice/d120.webp",
       "mediaType": "image/webp",
-      "bytes": 986,
-      "sha256": "2259cb709858b4adc1fff8ee364578ca966449b9993cccf7bb541bdf57e38e06"
+      "bytes": 948,
+      "sha256": "726493e9f3cc933cf078b0282821a9ee87e7133b9f16d26d17de0eda808e7563"
     },
     {
       "path": "cc0/dice/d120_normal.webp",
       "mediaType": "image/webp",
-      "bytes": 79166,
-      "sha256": "9a5a8b84f0bcf27340830d2681c350c618ee1df369ef4bb78080067a03d1df9c"
+      "bytes": 79156,
+      "sha256": "9ab7a879c0cab287af5c390f62c099ede8b433401342dbb506c5a01bfa838cc9"
     },
     {
       "path": "cc0/dice/d16.avif",
@@ -1419,14 +1704,14 @@
     {
       "path": "cc0/dice/d16.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 18848,
-      "sha256": "06861c8de5224b32248e34b6e9083f2d472968cba28755eabae69948daf47e47"
+      "bytes": 4195,
+      "sha256": "30054a3221067e11431e81214e4e928408124234ad33941ab6c0c3aa44c83e37"
     },
     {
       "path": "cc0/dice/d16.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 6162,
-      "sha256": "9b920c9194a302b752916d5a167f9a27cca27227fd8c7a82581d577a722c853c"
+      "bytes": 3862,
+      "sha256": "7b6d08577e4f68b1d8166ca9b5b9f37c40480a6811bc942bc648e238b14272c8"
     },
     {
       "path": "cc0/dice/d16.webp",
@@ -1443,134 +1728,134 @@
     {
       "path": "cc0/dice/d24.avif",
       "mediaType": "image/avif",
-      "bytes": 9613,
-      "sha256": "07b3a62830956c093307d44a59f61ed07e90afef4de58421e936fbd8d88595c4"
+      "bytes": 9595,
+      "sha256": "9a267b4e05d437536e8dd79b20fef5be381b0857565117bb85133538b77cce40"
     },
     {
       "path": "cc0/dice/d24.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 28272,
-      "sha256": "afb9b2a5e51017b3a4f1ced6afccf59b2f377cf228e96af3d5493eae28668911"
+      "bytes": 5288,
+      "sha256": "471bfaaf7523430277f0f421c3e9e1d8cd9d0925cff5ce4f138ff9bc0963d33e"
     },
     {
       "path": "cc0/dice/d24.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 7580,
-      "sha256": "dc265df39a59e687460be9d0c6ba7cb4c4d792019e464223587e9fb2ee34b565"
+      "bytes": 4543,
+      "sha256": "2596d681ea620221d031966bfa339b13ce509224b7eb13d2b66ca0241c385707"
     },
     {
       "path": "cc0/dice/d24.webp",
       "mediaType": "image/webp",
-      "bytes": 420,
-      "sha256": "4a04de5e0265fa9e969ee4015823f385d352865cbb083722bf027c604699ddec"
+      "bytes": 432,
+      "sha256": "a89ada22f6b30234ebfd0d6a44a51768b4359e99092ff28cd76082714308ef92"
     },
     {
       "path": "cc0/dice/d24_normal.webp",
       "mediaType": "image/webp",
-      "bytes": 24504,
-      "sha256": "a9fb4a88e5fbbc66665e460c63c742054d1df0f32e3fbf617843453233acbf06"
+      "bytes": 24500,
+      "sha256": "17563aefc847185ee15fa1f7daa1ee4f7d92bca52c10d2ede06ea7419af1a688"
     },
     {
       "path": "cc0/dice/d3.avif",
       "mediaType": "image/avif",
-      "bytes": 2785,
-      "sha256": "660dfa329197e599efc5f0e757fd5336d9f20fc188783d9b273b2f9e4aff56fc"
+      "bytes": 2784,
+      "sha256": "f3ce373b44d55e185c4a68b461bdff4c6f6995686ef8ffe8ab66df7916b20bc3"
     },
     {
       "path": "cc0/dice/d3.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 97176,
-      "sha256": "d5db137486ae8e77801bdb54fdb4148bc75c240279a780e9982fa2aecd6efd4d"
+      "bytes": 28592,
+      "sha256": "c29b5de9e38f77a2532d82a34671db4fc691e650e5f29a62a02f91060d8541b8"
     },
     {
       "path": "cc0/dice/d3.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3832,
-      "sha256": "28f6bcb64d3439ef887807e99741496163371a00aae82b21185e9e22ad6a680c"
+      "bytes": 2742,
+      "sha256": "1fd0e858439fb390bab9bf13d1c6e8fd98d64a265ec073882bcd972fc4f8ebca"
     },
     {
       "path": "cc0/dice/d3.webp",
       "mediaType": "image/webp",
-      "bytes": 494,
-      "sha256": "462ef73949670259f4d2fad350aa4d4879ec7f4629982e3d0070c1f3f56fc2dc"
+      "bytes": 542,
+      "sha256": "dd6b6942a62e46df9df393aad9aa03a1c2c08ad67ebd3a018f289ed7a7e8f541"
     },
     {
       "path": "cc0/dice/d3_normal.webp",
       "mediaType": "image/webp",
-      "bytes": 22734,
-      "sha256": "5e6918a4d0ed2d1e57853e294a5a812fa3067b7e10dec18fc895aa735990f6a4"
+      "bytes": 22712,
+      "sha256": "d7c5692aa766df4a837917672b7ce46f4af208a58d67493c91c714c22a836f14"
     },
     {
       "path": "cc0/dice/d48.avif",
       "mediaType": "image/avif",
-      "bytes": 30171,
-      "sha256": "3b5f6f8e0c233333cfe29991fc660dd7d20d734a7340a737f8913af004f04d44"
+      "bytes": 30154,
+      "sha256": "2d9fd6ebb072b381e6b7ea16f4f78ebc1ec03ebfa07b0c3be44c4a7866c576b3"
     },
     {
       "path": "cc0/dice/d48.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 56544,
-      "sha256": "e06b984978d2ed3a28f7fa3df7121b48f4ec8b591125cdde41a2f7d063f1bb1a"
+      "bytes": 10339,
+      "sha256": "fe697197ff216684a2292eab0f0b9e4387319325d372e8510d2046b752297ade"
     },
     {
       "path": "cc0/dice/d48.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 11844,
-      "sha256": "cdddb0b3f2ffff45969fbc67449672c7ed5c51bd6f004601c1e081843fa72503"
+      "bytes": 6599,
+      "sha256": "4132ff89151db4648659141625dc110aedd510663c07e254a935e3e32ee2fee4"
     },
     {
       "path": "cc0/dice/d48.webp",
       "mediaType": "image/webp",
-      "bytes": 1008,
-      "sha256": "a9c6a90cc7d9a1cbab383c1d0f5e8eab112f0d2d9aeb48526dd7ff4acc540879"
+      "bytes": 968,
+      "sha256": "0509c7b326f951217b18cf09721cc3720f4c489d38c20b2c6f0604fcb5cba9cb"
     },
     {
       "path": "cc0/dice/d48_normal.webp",
       "mediaType": "image/webp",
       "bytes": 91522,
-      "sha256": "237bf13901911e92f555b3fa857d2ca7b9f9799c8a6a6785d0c6b45c9612e9da"
+      "sha256": "511f3bc52006e49f7daa1a1ccffc9c2f5ed164b1a78a05bc096dcd566fafc601"
     },
     {
       "path": "cc0/dominoes/0-0.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "86f5764033ab43a41b7f1e6f92f9ab0528d92686e55a7eb3a85a274f5a78bab5"
+      "sha256": "e6dbb1847d275027f0f3e5792a5b7a44bfedd5448238ff6f6353d5826ed6a61e"
     },
     {
       "path": "cc0/dominoes/0-1.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "ff195f8f85d74c46bff281d5632c8b1e51f924871598902e58acbf372116eeb2"
+      "sha256": "0a9b01853a4125b744fbfc63604ade3c50f710a18b4dc0de99ca0072f3690ea0"
     },
     {
       "path": "cc0/dominoes/0-2.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "56a0e4304bda5bb76f3844fdb66fe165a3498d63d4ee84c679b6d0900691afe4"
+      "sha256": "08a24407adc865e973d98599279f0a3de12eb861820f223749f8d10d3740440d"
     },
     {
       "path": "cc0/dominoes/0-3.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "8b1085b0f0108f294bfbd0700449b37834d9ba94d0f847afd6583be966677705"
+      "sha256": "ed9d818e2dae7a4503aa3f5ea08b61057c026edbef5c4a3cd6548324fcb66719"
     },
     {
       "path": "cc0/dominoes/0-4.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "d01c7c9f2430f93abad8c88d9ce32264a147901acdf27c3cb9c1fbc4a3be46bf"
+      "sha256": "3af7cf0a210b21d57c4e66460af0a8aa7e4377bd41731691e308cde2fb1d39f0"
     },
     {
       "path": "cc0/dominoes/0-5.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "eaf422fffbc8fccd8c9f2fbc9575cc8bb12b190b48efcb40bc17994f9f83907a"
+      "sha256": "f40a5a908ced807fed9c65d1c24f1c914e5ebd910342b1519c4468727a7ae389"
     },
     {
       "path": "cc0/dominoes/0-6.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "95f95555343912228f42b9bc608c8b6b9675c436c3fb3166a6020d8fcfd39994"
+      "sha256": "c49591f956f12d4f6ae36c9af4b7956333206155ed894c3b220f9398c48c854d"
     },
     {
       "path": "cc0/dominoes/08dd33d48ed6d52adfbc.bin",
@@ -1582,37 +1867,43 @@
       "path": "cc0/dominoes/1-1.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "f55393e708453ef27848005e3216794d972d8a1f94f487613934a957a33e4bbb"
+      "sha256": "40f79fe6e5faac16c48e72c9eead72bf1fb6a709703c3c8bbc7178c49d24d3b9"
     },
     {
       "path": "cc0/dominoes/1-2.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "ae838a046861bfb9a52f340bd2fb5c2a469655a618f75a8b7ff504dd8f890bbd"
+      "sha256": "b1b66697cc9c651a8d761ef25b06dd056f20fe7d6d264c4ffd9234456f1aa409"
     },
     {
       "path": "cc0/dominoes/1-3.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "2a8778c3b2569db310f38a81857bfc2cfda0de59acad25b427b9906fbc1e9ead"
+      "sha256": "b5d09fd7830235695928d00475761091787cc48d896d1b9a94b45129d8da8d6f"
     },
     {
       "path": "cc0/dominoes/1-4.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "be4127e86ec1aa0e98d4ad57088de06f6bb03d033ee64e76a975acbb71c787c5"
+      "sha256": "c11236916984b0d109b9fbe54c11a4caf0b1b7ddb3a019b94cf5cb07896c061f"
     },
     {
       "path": "cc0/dominoes/1-5.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "f4c676a65f4b5bf0de9049d1a119bd4c5ee1d6ee71a97c8c54401784ae28c041"
+      "sha256": "b130ef8e66f09040a590afc4c57a0dbfb5a934c59e09544d08bb8d9521651754"
     },
     {
       "path": "cc0/dominoes/1-6.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "175306412fb1b44a20f30dcf9124ac6c0a5c454c59a348709ff6c010159154a7"
+      "sha256": "cf18bcaf5fb7c4341a65aa2c78b396c7e9fbbcdfddcc161398a36bc8f38aa736"
+    },
+    {
+      "path": "cc0/dominoes/16fb1af250e524f4d568.avif",
+      "mediaType": "image/avif",
+      "bytes": 15853,
+      "sha256": "16fb1af250e524f4d568e33c7cb258fc1db46bb26585f355f250310f337461eb"
     },
     {
       "path": "cc0/dominoes/1d43f7fea67f1eaae0f3.bin",
@@ -1636,31 +1927,31 @@
       "path": "cc0/dominoes/2-2.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "7d59b16d73c705ff432a7439e033c1106de30172eeaf50861403589eb12b410c"
+      "sha256": "5da601bec5f4da4ff859cdadfcca55af81e67ec950231f506f8bf64e7802f39f"
     },
     {
       "path": "cc0/dominoes/2-3.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "937a788d6b5a3dd820cf002926552d6af49546f471cc95105a4aaaa2e0fd595d"
+      "sha256": "fbe2c57a79e31927bcedbb98faa78b3bb33013832fcc456f3534075d93463696"
     },
     {
       "path": "cc0/dominoes/2-4.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "7a8d55c802705b4a370c772cb3cca4509831f585ba6b490f8297af162140c495"
+      "sha256": "854108cd672d595fa7e913cfab4e517c563811608c392bdc94a20370c7091133"
     },
     {
       "path": "cc0/dominoes/2-5.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "ec8f78e67a3457af43b7873d06f5cdaf77f0ae962a6bf87b7c578e52957bc24c"
+      "sha256": "425c8198b3283d0f1c92c171319365568281304d997f7b11b04fee863c5bcedc"
     },
     {
       "path": "cc0/dominoes/2-6.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "6bbea9941bbf0c5dada6e84d1472491a118e55645812f8ef39174dddfbd3dc1d"
+      "sha256": "2058548113ef7e55c78c1771d77080fc351e6dfa2b7b72e6664c3eb32491a5b1"
     },
     {
       "path": "cc0/dominoes/2a7f1bf43e0585023c5c.bin",
@@ -1672,25 +1963,25 @@
       "path": "cc0/dominoes/3-3.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "d4d331295bf8225b2b4c077c1a048f51651936990ca3483e42ba78bface8d699"
+      "sha256": "7f86758e86ac019d44fb421492d60953848f4a5cd6fb651836f55ad1cc0319b0"
     },
     {
       "path": "cc0/dominoes/3-4.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "a92024e8242e992b810180759448421fbd7c0a9625dc101d2f867247e1fe718f"
+      "sha256": "951fe467d724811b334ee3b80b0d27d57fb5767d368426f8b0fc08b4ded1d219"
     },
     {
       "path": "cc0/dominoes/3-5.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "d443cd70077239f759a668e16899706e68b9b05439873e906c612b0ef79fff0c"
+      "sha256": "a6b282c7191581de113cdad8294ff46a1f6c74fa523ad5d5b8e8f38e925cc2a7"
     },
     {
       "path": "cc0/dominoes/3-6.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "a29a5acb50946918d71e415701b60a871f67658f32d71467dc17c494926e9a67"
+      "sha256": "a78ca4b4a1fc87ab63d0ce35d7e820b8c9fd5865d70639de879211f5a8e8ca19"
     },
     {
       "path": "cc0/dominoes/37bcbb2866a62e5f94a2.bin",
@@ -1714,19 +2005,19 @@
       "path": "cc0/dominoes/4-4.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "41d3e1ff62a740d458e79f783eaad2257e1dc2c1eae2b1ac0dad06413e000ab7"
+      "sha256": "a556caa0d601b882ff3d66eec5525fe20e7cbc1ad7c8a9f99834f3570b9b094f"
     },
     {
       "path": "cc0/dominoes/4-5.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "2dea2de70582be8185a7ad505ff83a234799e361cad792bbb35975d8bfa10f9c"
+      "sha256": "8338213f81ff6f134da2f84878d6108b1198ab5745d39b2cdcdf7bfd7dceddeb"
     },
     {
       "path": "cc0/dominoes/4-6.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "394d301d28faf0ca053bb70a147c34e38c24fef1102b97944d820f38be1ea7ed"
+      "sha256": "ef0fce1ee7275d7000db579d844df1175938edf8f52b7008331a4f2fab41aa46"
     },
     {
       "path": "cc0/dominoes/46dc1288ce4e08d71ed4.bin",
@@ -1738,13 +2029,13 @@
       "path": "cc0/dominoes/5-5.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "cf9e44825ff405be4fb819310f3d0d6af68cbd0a09c08f6311003d56833a5854"
+      "sha256": "2941abe9474143967c4fb099dd857e51c965c8644c85aaa0ac18e9852a4ae015"
     },
     {
       "path": "cc0/dominoes/5-6.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "cb86ea6c9f0ca1bcefcf5ff5355f5bde570f413b87c94050d51b0c236e8ef56e"
+      "sha256": "aeebe916b9f5670e43b29c56572d304d35975de0474c247e1a25a3592499432c"
     },
     {
       "path": "cc0/dominoes/55ee1d2c9d6dd4267cd3.bin",
@@ -1762,7 +2053,7 @@
       "path": "cc0/dominoes/6-6.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2407,
-      "sha256": "a7554a044827f53f30b8eed7daeec85903315f7cf01f3c27026ca89eb7c2e705"
+      "sha256": "9db40c28ccb1ffe775664f4d16ef6580567121f0ae337cfb70cf18f8425c19cc"
     },
     {
       "path": "cc0/dominoes/67092cb1d3c3d514147b.bin",
@@ -1825,12 +2116,6 @@
       "sha256": "933a927938b2a580eeecdd7780f1fe32a0c783e81ece492279fc531744f50f8a"
     },
     {
-      "path": "cc0/dominoes/a296891d2ac2d20c77f6.avif",
-      "mediaType": "image/avif",
-      "bytes": 18960,
-      "sha256": "a296891d2ac2d20c77f65444f5bf10370d9fff436c31604bcdade0131ea75827"
-    },
-    {
       "path": "cc0/dominoes/b40a9752f7d6f0771d0a.bin",
       "mediaType": "application/octet-stream",
       "bytes": 139,
@@ -1885,22 +2170,28 @@
       "sha256": "fd87ee79d7ea32a8889c0ac2d31a263e014662d2f8726213762e282a7fe08b3a"
     },
     {
+      "path": "cc0/poker-chips/0bc6ee9f9f87773ad9ac.avif",
+      "mediaType": "image/avif",
+      "bytes": 3499,
+      "sha256": "0bc6ee9f9f87773ad9accdbb171ac9cbc5f66be5b85b34b7c0b1fe32a96e0871"
+    },
+    {
       "path": "cc0/poker-chips/10.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2412,
-      "sha256": "c7592b19e365cc11d8cc4fac119c407f6d39e774bacf7d5683476430cca7bb43"
+      "sha256": "c17f40c463dee39b553ad29fd9c17384fb7d83870eb0a4917b0eb9b0243d3295"
     },
     {
       "path": "cc0/poker-chips/100.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2413,
-      "sha256": "3647a3825ada31ea03b63e3bf6a8cd247f441d734af315ebfc5e4bc29c05c998"
+      "sha256": "ca4a68c7a471083adb8fe63f04f5721dc174162b66db0c7657b4767177f4487a"
     },
     {
       "path": "cc0/poker-chips/25.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2412,
-      "sha256": "6f21a6f6221e51a1f5828e7c2763d83bf20b8e7388dff808155d0ff9ae745738"
+      "sha256": "5c4a4b7b82781b56a638e333d83db3379e7c692b5dbbfc4a91564ea08d1ef571"
     },
     {
       "path": "cc0/poker-chips/25d021d6b9940882f652.webp",
@@ -1915,18 +2206,6 @@
       "sha256": "29cc6f19c732d020aafb3af6c16d7994f7e31c26714501ada75d236f7eb23b7f"
     },
     {
-      "path": "cc0/poker-chips/38e22eeda54356c9fd97.avif",
-      "mediaType": "image/avif",
-      "bytes": 4465,
-      "sha256": "38e22eeda54356c9fd97cf03559deccee1cb58ee3df3c1d6e2da4c029916b891"
-    },
-    {
-      "path": "cc0/poker-chips/411848c49cff9c1538f4.avif",
-      "mediaType": "image/avif",
-      "bytes": 3461,
-      "sha256": "411848c49cff9c1538f4cbdbcf8f999183d682b75afce3d24ae748f9ea01165e"
-    },
-    {
       "path": "cc0/poker-chips/4b5d29b6c85189b19b7b.webp",
       "mediaType": "image/webp",
       "bytes": 40444,
@@ -1936,25 +2215,43 @@
       "path": "cc0/poker-chips/5.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2411,
-      "sha256": "346b29ff46ea2a219a07176be8b267e8effc0f59560815f406dffd63bdd341f1"
+      "sha256": "9ac466c244f3a3c57c7ddd5e876cd5c0ecb661044302063382fcf71ef43c9fce"
     },
     {
       "path": "cc0/poker-chips/50.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2412,
-      "sha256": "aeb3afae6709fe6da7ab64a33b31ec705ba7e7094f65649a2b646a1b488c7eaf"
+      "sha256": "d4acb07ab3f7c090333abaa11ad55e351ec763372162e7e12c90decff8a1371c"
     },
     {
-      "path": "cc0/poker-chips/5bf41b2f6ffbdbd995b6.avif",
+      "path": "cc0/poker-chips/6456985cf7f140fb59d9.avif",
       "mediaType": "image/avif",
-      "bytes": 5958,
-      "sha256": "5bf41b2f6ffbdbd995b683529f03ecd4b196d12340b69ba7abf6fa5e1ba06a2f"
+      "bytes": 2735,
+      "sha256": "6456985cf7f140fb59d9d3a04e89ad9be7b2449dc0775dda8538c7c129c7f56e"
     },
     {
-      "path": "cc0/poker-chips/78696f4ab32a1a319dad.avif",
+      "path": "cc0/poker-chips/679d0007c72042e58d8b.avif",
       "mediaType": "image/avif",
-      "bytes": 4612,
-      "sha256": "78696f4ab32a1a319dad9a913ec259424f96d0af65f3a6753c9e7ea239ecac91"
+      "bytes": 3578,
+      "sha256": "679d0007c72042e58d8b3f94a09475cc9221fedf3356f914e07411bfa9f8baeb"
+    },
+    {
+      "path": "cc0/poker-chips/7f9a2bced5d637165c32.avif",
+      "mediaType": "image/avif",
+      "bytes": 3712,
+      "sha256": "7f9a2bced5d637165c324a6d6cd7c82d975cf4975327c161adf5cf2672775363"
+    },
+    {
+      "path": "cc0/poker-chips/86129449ff4909f56fda.avif",
+      "mediaType": "image/avif",
+      "bytes": 3977,
+      "sha256": "86129449ff4909f56fdaf84623a16cd2d9315153a39699ef0e213bfdad7755ed"
+    },
+    {
+      "path": "cc0/poker-chips/9b66c30180e1bdf407e3.avif",
+      "mediaType": "image/avif",
+      "bytes": 4665,
+      "sha256": "9b66c30180e1bdf407e3a01484c7a878b0b18a8924a74bd34a214f24e323e75e"
     },
     {
       "path": "cc0/poker-chips/abe4cc5d23a90501df86.webp",
@@ -1978,13 +2275,7 @@
       "path": "cc0/poker-chips/basic.gltf",
       "mediaType": "model/gltf+json",
       "bytes": 2415,
-      "sha256": "e8a665e53000dae5b35ca5281bb4c01893a92bc2997154e3d736b69723772dc0"
-    },
-    {
-      "path": "cc0/poker-chips/ce66e838827e03e24bfd.avif",
-      "mediaType": "image/avif",
-      "bytes": 4660,
-      "sha256": "ce66e838827e03e24bfde740f9cad3b01bb145cc6abe27a9a73b671a5d117fc3"
+      "sha256": "4ff379296c36525b2445fab2d91653db6af57c42843136d811aedbc421fae304"
     },
     {
       "path": "cc0/poker-chips/ce75200026c64cc83c83.webp",
@@ -1993,148 +2284,154 @@
       "sha256": "ce75200026c64cc83c838ac74ef3ac6ddf200449ef9cfd1848a24dc2a284e45d"
     },
     {
-      "path": "cc0/poker-chips/f30bf3c4b91ee36138a0.avif",
-      "mediaType": "image/avif",
-      "bytes": 5044,
-      "sha256": "f30bf3c4b91ee36138a09c5961132e7fa4bd44771cb15816f1acd8ce3932c8b3"
-    },
-    {
-      "path": "cc0/shapes/407fd5c3d281eda7df52.bin",
+      "path": "cc0/shapes/cylinder.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 480,
-      "sha256": "407fd5c3d281eda7df520de907fb816b1e5d1fba477c00cbe6d5046e7e567371"
-    },
-    {
-      "path": "cc0/shapes/653d5471fde0dfd01b9a.bin",
-      "mediaType": "application/octet-stream",
-      "bytes": 480,
-      "sha256": "653d5471fde0dfd01b9a6802f171d3b63aeb2ff25040108b1ee597271c0bee09"
-    },
-    {
-      "path": "cc0/shapes/72be4ee3e9278b5ac2e1.bin",
-      "mediaType": "application/octet-stream",
-      "bytes": 816,
-      "sha256": "72be4ee3e9278b5ac2e1d3a2721b143f40cbebcc3fbd9e331b2bb8c86ae944d4"
-    },
-    {
-      "path": "cc0/shapes/889d3a1bf27fbbf98b7a.bin",
-      "mediaType": "application/octet-stream",
-      "bytes": 420,
-      "sha256": "889d3a1bf27fbbf98b7ab88bd8b44f39bfcc5dc0002e198f4bca154e4cd21a01"
+      "bytes": 2224,
+      "sha256": "267d4ac5046187679229dea2452b17e2c2694d19333db0fc0a4c6c7380660ef8"
     },
     {
       "path": "cc0/shapes/cylinder.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1523,
-      "sha256": "3a8eee60de92618480a3cf6c2b2b87f79f3223b1d656ca87e582f8d2a051cec9"
+      "bytes": 1548,
+      "sha256": "6ea71b195437a14a6efd283cea445b2247704b97684fc11a404684adc0b7ad86"
     },
     {
-      "path": "cc0/shapes/d8ba05a8643166324e4d.bin",
+      "path": "cc0/shapes/house.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 1682,
-      "sha256": "d8ba05a8643166324e4d471460d99715251c9c995cd761c299d07b298866bf4b"
-    },
-    {
-      "path": "cc0/shapes/e763242723464569865d.bin",
-      "mediaType": "application/octet-stream",
-      "bytes": 1896,
-      "sha256": "e763242723464569865db6229ea41745152f1cd3ae652470468ebeaaf991a21b"
+      "bytes": 816,
+      "sha256": "6f68fefc2f22f7e1765ac867563fefe3567f5a7692d251de0c258461423950f0"
     },
     {
       "path": "cc0/shapes/house.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1117,
-      "sha256": "04aba92e61ee12b4172e39b8c4f8724bbe048658bb95df9643840e32cbf0d771"
+      "bytes": 1015,
+      "sha256": "073f6341f714b9e24b3a8be5023a5d741948f90cdc536c863bd57864d2fc95f2"
+    },
+    {
+      "path": "cc0/shapes/meeple.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 6369,
+      "sha256": "be01c6b4bf08bd6ad5895de67de87da1ccaecc3731628e52b7d12d97d7bddf9f"
     },
     {
       "path": "cc0/shapes/meeple.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1696,
-      "sha256": "b191ea1865f557d24310d99f37ec6b6e6820ab99441ec63bbaa7a98e10eaade6"
+      "bytes": 2780,
+      "sha256": "7e116bc33650bd693982252bf1467920d883f2cdf77d754234457f4c6c7ca578"
+    },
+    {
+      "path": "cc0/shapes/pyramid.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 420,
+      "sha256": "ec10eece063a9e8e834d6d8c93bf3006283f5a89ee9b54fc5b36972bdeec33ac"
     },
     {
       "path": "cc0/shapes/pyramid.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 939,
-      "sha256": "ea81905447a8774ac0da4e0a53a4c722003e6be1bc370898135757fae5687104"
+      "bytes": 963,
+      "sha256": "84f6a3a2cdb108779ee6371313e4282d3766f2ac728d5e5370e3faa39a17b940"
+    },
+    {
+      "path": "cc0/shapes/right-angle-prism.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 480,
+      "sha256": "c4445f6e24e2da533923a9e709058250c176f4f849ad274330f5b725aa608787"
     },
     {
       "path": "cc0/shapes/right-angle-prism.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1069,
-      "sha256": "a78c8eec72c3375d3645f39d758eadae88c3e95e4702e0681dc9fe9f254b95b2"
+      "bytes": 979,
+      "sha256": "b7a1c39016388353f8ea95656219d340f8978562b0b54d5c2b3d0ab2f881fb82"
+    },
+    {
+      "path": "cc0/shapes/triangular-prism.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 480,
+      "sha256": "3d597e8845743cc4eb0f67d5395f78bf77ec741b85eca56297efced17e4a2f35"
     },
     {
       "path": "cc0/shapes/triangular-prism.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1084,
-      "sha256": "161781e1f678eda314a1d824f72bbd8386c0baf47853de9afecc8e2cfc8d7bc5"
+      "bytes": 993,
+      "sha256": "34f5d47a2e329770c027d30c65101ab5815ac318e250bdb3f4925319e218ab14"
     },
     {
-      "path": "cc0/stones/1c206cfcc218094bcd8e.bin",
-      "mediaType": "application/octet-stream",
-      "bytes": 3013,
-      "sha256": "1c206cfcc218094bcd8e8c4ce595992fbca200a805eed0941eaeaa4f80af757c"
+      "path": "cc0/shapes/wood-top-edge-normal.png",
+      "mediaType": "image/png",
+      "bytes": 337,
+      "sha256": "092e29ff59acdae22950f36489e7cc67f9154d6975ab14294d77d8f3f3eb056b"
     },
     {
       "path": "cc0/stones/stone-black.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1548,
-      "sha256": "ac89dd2647a18ac2e759dd9b4a7a54a01f97e258019df859fd65a01cf9d9f650"
+      "bytes": 1570,
+      "sha256": "a93d8699c36d1577dd073feaf85ca2f2ebe2e4cc1feb2e2530e2177f48978aad"
     },
     {
       "path": "cc0/stones/stone-white.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1545,
-      "sha256": "d7429ba1cd7afa1440e382c9513115e3de6c56956f5c176214d0db33e4723d16"
+      "bytes": 1567,
+      "sha256": "3e0ed673cbeeb07d8ccd1b107e079ba0270e4ed91149c821fa4fd248f2ae19d4"
+    },
+    {
+      "path": "cc0/stones/stone.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 2755,
+      "sha256": "d70ccca2619d4d155d5cc0e8d06571eb4e6de763b3d552c4c2883c5357b4eedf"
+    },
+    {
+      "path": "classic/LICENSE",
+      "mediaType": "text/plain",
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
     },
     {
       "path": "classic/blank-dice/d10-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3712,
-      "sha256": "b62985641f4431d7515534bd1084d133e57f36c68a8d3dc180e7db0956ebc9d8"
+      "bytes": 2652,
+      "sha256": "6a37dbcaeaf6a4e17b2773438e895df88403c86891ce3d79f89c22ddadb6ad70"
     },
     {
       "path": "classic/blank-dice/d12-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 4105,
-      "sha256": "f1c5e7c74171c9a8f8adeb964a514219e7518e4f066404ce527b9b829b2e2bef"
+      "bytes": 2861,
+      "sha256": "373a1cb47dff3a716902552366294a185334dd3454b3ac535547082b58e06172"
     },
     {
       "path": "classic/blank-dice/d20-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 5493,
-      "sha256": "b3b047042a0f99052da670e8653ec95a954962950deec2af21249a0e13e9d6c0"
+      "bytes": 3513,
+      "sha256": "71cf70811c6388531da74cbec34949d0f0af63a9a6c42f8d18c7aa688045eeec"
     },
     {
       "path": "classic/blank-dice/d4-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2669,
-      "sha256": "8420d1d95e760c84f66210ffd3b86289a42b7e4e192a8524ea56849a89225899"
+      "bytes": 2662,
+      "sha256": "3c7da3045aa47861198163b3e6b0e50d144a3a986d3fa49b9a1daf543e7d5dd0"
     },
     {
       "path": "classic/blank-dice/d6-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 2882,
-      "sha256": "7bed6a9d97e95ed42734bbbd78168829ce5a917e30fc853d980710f25b0606fa"
+      "bytes": 2878,
+      "sha256": "460aa285b9cba0e6d2eab2340f0248e091107f8172d78eaf27dd9d199fc6c982"
     },
     {
       "path": "classic/blank-dice/d8-blank.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 3361,
-      "sha256": "0256568f05c1739bc7e446d529c0a17c9369d7df83dbd1bca1207d77cd504d41"
+      "bytes": 3357,
+      "sha256": "99059ebe34828f516333eb1fd03737719c48344b30ea2a51af972c46a04a38e1"
     },
     {
       "path": "classic/d10/d10.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 15600,
-      "sha256": "a56f48ab12942daf0c9e4543cb7339381779b0af7995e3a438446282fee27ca3"
+      "bytes": 4430,
+      "sha256": "bc7d2c6294652c324defd4d4f6bd3b86e0717b6c465b4427ad7fa817f0ffa392"
     },
     {
       "path": "classic/d10/d10.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 5080,
-      "sha256": "07d0be8ea61822b70b4bf32ae88bceea7df80047de37e349ed6dea8e4e5143a9"
+      "bytes": 3332,
+      "sha256": "466ff12f5339f2c7f7bba3c4c74695568fea70ab88e62eb0a1cebbe66daeb236"
     },
     {
       "path": "classic/d10/d10_diffuse.avif",
@@ -2157,44 +2454,44 @@
     {
       "path": "classic/d12/d12.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 23304,
-      "sha256": "54754e053dc29e3c9bc447f2cd110b6fcc4b915bf6828ee83bb423b59ca46237"
+      "bytes": 6509,
+      "sha256": "8f459ba90ad15a0bef6b9778ac6dc285098dc3fcd1d72771a2ad2e9b539fa0fc"
     },
     {
       "path": "classic/d12/d12.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 5473,
-      "sha256": "7817a469aa9de66328bb294e402035e20eee1171529f99d939a17dbc4cf864fe"
+      "bytes": 3541,
+      "sha256": "8ccadf25f05212ed762808ad9d99cac27440866b7566aa1abf8e9ed62e140151"
     },
     {
       "path": "classic/d12/d12_diffuse.avif",
       "mediaType": "image/avif",
-      "bytes": 10561,
-      "sha256": "d889806d8ce9c101b221490ae4a98a1e13f4b91dee2531361dcff8c297af22a8"
+      "bytes": 10546,
+      "sha256": "905e9ede2aa0f599b53d8dbc1c4af2fc841083c9ec2851000aacdff916e07508"
     },
     {
       "path": "classic/d12/d12_normal.webp",
       "mediaType": "image/webp",
-      "bytes": 97926,
-      "sha256": "bca3e28a86a266ec5943580f0d880b2007d2e80b6eb2ac154dc5d20fc8dcf28d"
+      "bytes": 97920,
+      "sha256": "f6d3ca8b410716ae21d6b2ebbaf4380335163219cf383356eb16db86cb7a33f7"
     },
     {
       "path": "classic/d12/d12_preview.webp",
       "mediaType": "image/webp",
-      "bytes": 1176,
-      "sha256": "609dafadae4bd6c4afc6fd338097ab0fe5f51c8fa7d80967968ed118323f4be7"
+      "bytes": 1186,
+      "sha256": "861c88c305b65681cea823cac3fd16a5f5d5d3a98238bd1a258e73954064912d"
     },
     {
       "path": "classic/d20/d20.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 23560,
-      "sha256": "f376841d3e84ded2b205f65292f6409a60e6b97b99cf831c40ac16b879c9e292"
+      "bytes": 4446,
+      "sha256": "17ad4752044a8275dd61786d2d69ea86fca22c8cc94db94b8dc7daa400766662"
     },
     {
       "path": "classic/d20/d20.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 6861,
-      "sha256": "352b3c13ff26232a1da9794d90481d4121cb97f0a573ff77651e99111a547444"
+      "bytes": 4193,
+      "sha256": "2f71f562aaa785ce3b5f000f96ad749b1b04ee41f17ede03648c3c117f61ea26"
     },
     {
       "path": "classic/d20/d20_diffuse.avif",
@@ -2217,14 +2514,14 @@
     {
       "path": "classic/d4/d4.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 4712,
-      "sha256": "0f19d099cd6f42953ce4ef29e8e7f91be45e75697048807b8db492681a236c9b"
+      "bytes": 1768,
+      "sha256": "4394176d9c3449a05abc1aacc4347afc36173f4f6b1eb71eb1ead24f36243b2f"
     },
     {
       "path": "classic/d4/d4.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 4035,
-      "sha256": "5f115615c9fb05748ba4ff9ae57dd335008563148945b321442979e1425bec94"
+      "bytes": 4028,
+      "sha256": "6ac30538abdd108b270d4478283f2bc234389e71b1de614b41d5941886155c00"
     },
     {
       "path": "classic/d4/d4_diffuse.avif",
@@ -2247,14 +2544,14 @@
     {
       "path": "classic/d6/d6.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 9360,
-      "sha256": "15d0662759e9afc824e7ef1a5f1eebe334a718c5c03d12fcc9b86bf431c4f5ac"
+      "bytes": 3472,
+      "sha256": "287b704a56d01283e4c871f1298e803fd11e2e814e296892c7abc98d2898395d"
     },
     {
       "path": "classic/d6/d6.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 4248,
-      "sha256": "743be9be79416ed178eb478ad446f1b8e361047b047cb7e0f1a75e305ac79881"
+      "bytes": 4244,
+      "sha256": "e8d11d6a82e24d25285bc630f5c3075daea365ff68dded1677de3c7df4d675fd"
     },
     {
       "path": "classic/d6/d6_diffuse.avif",
@@ -2277,14 +2574,14 @@
     {
       "path": "classic/d8/d8.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 9424,
-      "sha256": "55b018940d4a1a1ee4a7417bb34132c8bcc2191f598cb4114742a513dd673fe9"
+      "bytes": 3824,
+      "sha256": "60a31bf827a47619767df32ed2aa07ced6ee7a09ebc2e868ad4f6d415abd4e8e"
     },
     {
       "path": "classic/d8/d8.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 4727,
-      "sha256": "5e3f864193ca21e9a9d5a9376b22b755cd24c2ac2b9a66dede7abf8ec1715d60"
+      "bytes": 4723,
+      "sha256": "22a60010d707d97111c77110accad6e6768f1107961629cd42cdbdd274639cdf"
     },
     {
       "path": "classic/d8/d8_diffuse.avif",
@@ -2307,14 +2604,14 @@
     {
       "path": "classic/die/die.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 9360,
-      "sha256": "0be5e53a95e385c35d14c71978bc14a10c330f759943272d362839026edb5238"
+      "bytes": 2162,
+      "sha256": "24021b9137292aef084338fc1fc611cf4529b0c40203a900a2c47d7552057a09"
     },
     {
       "path": "classic/die/die.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 4261,
-      "sha256": "dce57b5cbd0a2176cc055768031f40658066a779d4a0702cedfb3c7ed19fea11"
+      "bytes": 2874,
+      "sha256": "7df63fcedd82b3d1b8d56b5cdfd704b34d5ed627e9e926bae47f29f91dfffaf8"
     },
     {
       "path": "classic/die/die_diffuse.avif",
@@ -2347,28 +2644,196 @@
       "sha256": "121847e529c22ee9158f9b390cf972053278a508d800bc175a1144bf8dddea4d"
     },
     {
-      "path": "showcase/shapes/6f975970f38ae26e1a58.bin",
+      "path": "game-pieces/LICENSE",
+      "mediaType": "text/plain",
+      "bytes": 19467,
+      "sha256": "e6bc9e9c474700b708f568bac9e5a8a9bcb2b1dad53442f5ba449fcb848b8e76"
+    },
+    {
+      "path": "game-pieces/checkers/LICENSE.md",
+      "mediaType": "text/plain",
+      "bytes": 124,
+      "sha256": "fb845b3b34e72deb97a3f73dcda9348228a2014c67849a948898d9fc3161cb56"
+    },
+    {
+      "path": "game-pieces/checkers/black-token.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 1992,
+      "sha256": "2ca024dc0551c94d48810d444c1b50da5291e1d28c25f137671266b3b264bd32"
+    },
+    {
+      "path": "game-pieces/checkers/red-token.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 1949,
+      "sha256": "4b1ba1402328c55e4d7d905ed892477393dec17f89064edff88aaeb5433eeff4"
+    },
+    {
+      "path": "game-pieces/checkers/token.bin",
       "mediaType": "application/octet-stream",
-      "bytes": 5086,
-      "sha256": "6f975970f38ae26e1a584c6143048fa85ea9da91fc0e2edbc1f6bdfb32172a0d"
+      "bytes": 28095,
+      "sha256": "947f070b308cae26b18918b686811202dc857a04ea9f50e6e125b4277b77424c"
+    },
+    {
+      "path": "game-pieces/checkers/white-token.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 1910,
+      "sha256": "c6e9cfac94faa16c0da87b3e0ff1b2da041d049fdd44c917f7503d6556820b83"
+    },
+    {
+      "path": "game-pieces/chess/Black_Bishop.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2124,
+      "sha256": "856204244d4fd88986414b7d389cb5494095829ac2707c67f414d17a223c1301"
+    },
+    {
+      "path": "game-pieces/chess/Black_King.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2141,
+      "sha256": "b23622e0c6b230d6dcd42f3ac2d7f31f42928855d5fff747df67d6ef45f43932"
+    },
+    {
+      "path": "game-pieces/chess/Black_Knight.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2123,
+      "sha256": "31c496da634ecd0d6049dd5c6252795da45d334d8bc09e40812779dbc41b55c4"
+    },
+    {
+      "path": "game-pieces/chess/Black_Pawn.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2121,
+      "sha256": "0e2fc2ea0bb83fd9d55c1b1c8aac1867bbe9381c151f89b92161beb464e17c0a"
+    },
+    {
+      "path": "game-pieces/chess/Black_Queen.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2123,
+      "sha256": "205521e82f16a0a6c35e26224804f4274879ec6b5866eb94e71e27e04f3a67c5"
+    },
+    {
+      "path": "game-pieces/chess/Black_Rook.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2120,
+      "sha256": "7fca02d83cf8ccc3e45fb1712f3c4679b864140bde401d36787942f695b79959"
+    },
+    {
+      "path": "game-pieces/chess/LICENSE.md",
+      "mediaType": "text/plain",
+      "bytes": 118,
+      "sha256": "f05c6ce56afc6e97c29ce18f18b0ba023f68c76bb566b7d261e8eda395642cd6"
+    },
+    {
+      "path": "game-pieces/chess/White_Bishop.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2039,
+      "sha256": "4e77d538275af8b20e8145cff43b78e139498c5c155ddab964cb08bc7bd7aab3"
+    },
+    {
+      "path": "game-pieces/chess/White_King.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2035,
+      "sha256": "b398a33df6f9a29fa3bcbe7a8e89d9ec408c63cd502cf8ba9762b31a7528921a"
+    },
+    {
+      "path": "game-pieces/chess/White_Knight.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2038,
+      "sha256": "63533789685a924ef69c2d3f65bf14b70aa63d13984bb7bda6ddcea8e182d7be"
+    },
+    {
+      "path": "game-pieces/chess/White_Pawn.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2036,
+      "sha256": "6fa841631c5923d663474042e4f4f6e397533c974f363749c9299499264b4c98"
+    },
+    {
+      "path": "game-pieces/chess/White_Queen.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2038,
+      "sha256": "244f3e872e0fb72a22b192f5ea71764afca745824ca19addd3d40d08b065af71"
+    },
+    {
+      "path": "game-pieces/chess/White_Rook.gltf",
+      "mediaType": "model/gltf+json",
+      "bytes": 2035,
+      "sha256": "bfce67785d7721983e5ca370353c393d62f82e0e82e2e509464211159c7905ef"
+    },
+    {
+      "path": "game-pieces/chess/bishop.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 9009,
+      "sha256": "63e1c4b7b1fbd2f4d3fe6ced371a4e22dfd5e8d63748b631c25ecc5a30d82f4a"
+    },
+    {
+      "path": "game-pieces/chess/king.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 10274,
+      "sha256": "02b0ca31c2225b1bf86fe4f1e92808a89315e7bc7692ce5af2d8dd7975f7dd12"
+    },
+    {
+      "path": "game-pieces/chess/knight.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 8321,
+      "sha256": "72062b50a65db4627afe34b5436a06a95b303a36d6e92cdda0283e936a256465"
+    },
+    {
+      "path": "game-pieces/chess/pawn.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 8017,
+      "sha256": "f54d758e9a3ac751d10c54a7ec5b4af04e27887635a0d558ef5f05f13d9bd153"
+    },
+    {
+      "path": "game-pieces/chess/queen.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 16571,
+      "sha256": "c659d92d6887e4d16d88ac621cf6b315dc469d97db4bfe6212086c9042921eb6"
+    },
+    {
+      "path": "game-pieces/chess/rook.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 8748,
+      "sha256": "6bbc314e34ce807dc4f4b9149bf2e189bf9e737891a132e614dddf1e853957ae"
+    },
+    {
+      "path": "licenses/Comfortaa-OFL.txt",
+      "mediaType": "text/plain",
+      "bytes": 4519,
+      "sha256": "bc85bae0b512b799bbfb2b916e4d0a34cfd963d09778cd783e248b479e67760a"
+    },
+    {
+      "path": "licenses/DejaVu-Serif.txt",
+      "mediaType": "text/plain",
+      "bytes": 2734,
+      "sha256": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0"
+    },
+    {
+      "path": "licenses/Kenney-Board-Game-Icons.txt",
+      "mediaType": "text/plain",
+      "bytes": 574,
+      "sha256": "ee984bc143c380c108199620d18bfdf55001a566951bbda485c2a5d94254350a"
     },
     {
       "path": "showcase/shapes/cube.bin",
       "mediaType": "application/octet-stream",
       "bytes": 648,
-      "sha256": "29288f1112ab4879606db86fcf43ee362292ebe991a134b1949bff9788c258f5"
+      "sha256": "93fe863cdece2fcae1e6b163967de73512109d1a8e956c302152dc76cc6de8fa"
     },
     {
       "path": "showcase/shapes/cube.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 919,
-      "sha256": "a4639c89bc137087d15619cee0c557b5f0275162d6d1d84e179fe9e89a884a91"
+      "bytes": 934,
+      "sha256": "943d24ee4a0c91a7c010ca772dfd5c1ce4bc42d9e1f82ed20422eb899a35bd8a"
+    },
+    {
+      "path": "showcase/shapes/sphere.bin",
+      "mediaType": "application/octet-stream",
+      "bytes": 5218,
+      "sha256": "1498078fb13a19bc9c48dada8f8c308f58d6ae1f2671b6527c6679e5da67621a"
     },
     {
       "path": "showcase/shapes/sphere.gltf",
       "mediaType": "model/gltf+json",
-      "bytes": 1529,
-      "sha256": "64cef2eb9c9d61920951c5849dfad5bf53b0f9ad440b158e347f9fea5e821d37"
+      "bytes": 1530,
+      "sha256": "3c76e3bcdf14000604de0872a4af484afa79e5b4697fbb63342300f6a5bf869c"
     }
   ]
 }

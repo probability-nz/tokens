@@ -89,31 +89,31 @@
   "buffers": [
     {
       "uri": "d6.bin",
-      "byteLength": 9360
+      "byteLength": 3472
     }
   ],
   "bufferViews": [
     {
       "buffer": 0,
       "byteOffset": 0,
-      "byteLength": 3240,
+      "byteLength": 1032,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 3240,
-      "byteLength": 3240,
+      "byteOffset": 1032,
+      "byteLength": 1032,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 6480,
-      "byteLength": 2160,
+      "byteOffset": 2064,
+      "byteLength": 688,
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteOffset": 8640,
+      "byteOffset": 2752,
       "byteLength": 720,
       "target": 34963
     }
@@ -122,7 +122,7 @@
     {
       "bufferView": 0,
       "componentType": 5126,
-      "count": 270,
+      "count": 86,
       "type": "VEC3",
       "min": [
         -0.5,
@@ -138,13 +138,13 @@
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 270,
+      "count": 86,
       "type": "VEC3"
     },
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 270,
+      "count": 86,
       "type": "VEC2"
     },
     {

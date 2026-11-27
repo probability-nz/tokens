@@ -39,6 +39,10 @@ for (const collection of ['classic', 'cc0']) {
           gltf,
         );
         for (const asset of [...gltf.buffers, ...(gltf.images ?? [])]) {
+          if (!asset.uri) {
+            assert.equal(asset.extensions?.EXT_meshopt_compression?.fallback, true);
+            continue;
+          }
           const data = await readFile(join(dirname(file), asset.uri));
           assert.deepEqual(
             await readFile(

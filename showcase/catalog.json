@@ -4588,6 +4588,231 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Black Bishop",
+      "src": "game-pieces/chess/Black_Bishop.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "Black King",
+      "src": "game-pieces/chess/Black_King.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "Black Knight",
+      "src": "game-pieces/chess/Black_Knight.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "Black Pawn",
+      "src": "game-pieces/chess/Black_Pawn.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "Black Queen",
+      "src": "game-pieces/chess/Black_Queen.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "Black Rook",
+      "src": "game-pieces/chess/Black_Rook.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "White Bishop",
+      "src": "game-pieces/chess/White_Bishop.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "White King",
+      "src": "game-pieces/chess/White_King.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "White Knight",
+      "src": "game-pieces/chess/White_Knight.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "White Pawn",
+      "src": "game-pieces/chess/White_Pawn.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "White Queen",
+      "src": "game-pieces/chess/White_Queen.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "White Rook",
+      "src": "game-pieces/chess/White_Rook.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        3.141592653589793,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "Token Black",
+      "src": "game-pieces/checkers/black-token.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "Token Red",
+      "src": "game-pieces/checkers/red-token.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "faces": []
+    },
+    {
+      "name": "Token White",
+      "src": "game-pieces/checkers/white-token.gltf",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "faces": []
     }
   ]
 }

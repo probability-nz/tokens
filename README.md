@@ -1,20 +1,46 @@
 # Tokens
 
-Reusable glTF pieces. Dice are authored in [src/generators/dice](src/generators/dice) and share their geometry and artwork with the React preview. The published catalogs and showcase contain ready-to-load assets.
+Reusable glTF game pieces for Probability Play. The [complete showcase](showcase/release.json) contains 82 pieces. Every model is a JSON `.gltf` with external buffers and textures.
 
-`src/assets/catalog.json` lists the published pieces.
+## Local development
 
-The [complete Play showcase](showcase/release.json) contains all 67 pieces and their published glTF resources.
+Run `pnpm install --frozen-lockfile`, then `pnpm studio` to open all 82 published pieces in one text-free Vite / React Three Fiber view. Drag to pan and scroll or pinch to zoom. The procedural dice motion study is at `/dice.html`.
+
+| Command | Purpose |
+| --- | --- |
+| `pnpm generate` | Rebuild all procedural families and board artwork, prepare the classic assets, then optimize the catalogs. |
+| `pnpm generate poker-chips` | Rebuild one family. Available targets are `dice`, `shapes` (including Go stones), `boards`, `dominoes`, `poker-chips`, `checkers` and `classic`. |
+| `pnpm optimize` | Compare eligible raw buffers against lossless Meshopt, accounting for shared files and glTF extension overhead. |
+| `pnpm audit:textures` | Compare actual AVIF file sizes with native ASTC and ETC2 block payloads at the same resolution. |
+| `pnpm test` / `pnpm build` | Check published resources and build the three distribution catalogs and `dist/tokens-showcase.zip`. |
+| `pnpm dev` | Start the existing Storybook preview. |
+
+Generators live in [src/generators](src/generators/). The [CLI](scripts/generate.mjs) runs each family in sequence. Dice share their Three.js authoring code with the browser. The tabletop generators use Node for publishing, Python 3 with NumPy and Pillow for chip and domino artwork, and Inkscape for the board SVGs. Texture export requires ImageMagick 7 with AVIF and WebP support. For dice export, install Chromium once with `pnpm exec playwright-core install chromium`.
+
+[Source catalogs and artwork](src/assets/) contain the licensed inputs and loadable models. The [Play game](showcase/) contains its own resource manifest. A normal build packages existing models without running the authoring tools.
+
+## Mesh and texture delivery
+
+The release uses lossless Meshopt for 71 models. The other 11 are smaller raw once the glTF extension overhead is included. The optimizer decodes each new stream and checks its bytes before publishing. Shared geometry is counted once across variants.
+
+Dice use analytical shading normals. Unprinted surfaces share a neutral point in the texture atlas. On polyhedral dice, the bevel gets an intermediate segment only where its midpoint departs from the chord by more than 0.05 mm. The D100 uses 1,752 triangles and a 38,142-byte Meshopt buffer. The D120 uses 1,080 triangles and 24,988 bytes. Play’s tabletop renderer accepts both Meshopt and Draco. These models use Meshopt throughout the studio and Play.
+
+Color maps use AVIF at quality 75. Normal maps keep their lossless WebP or PNG encoding. All 23 unique color maps exceed the +15% size limit with native ASTC or ETC2, even before container and mipmap costs. The audit uses 16 bytes per 12×12 ASTC block and 8 bytes per 4×4 ETC2 RGB block. [Arm ASTC guide](https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/astc-does-it) · [Khronos data format specification](https://registry.khronos.org/DataFormat/specs/1.4/dataformat.1.4.html)
+
+## Sources and credits
+
+The [showcase credits](showcase/CREDITS.txt) identify each collection and its contributors. Every distribution catalog includes its full license text and the relevant artist and font notices. The showcase ZIP includes all of them.
 
 The original CC BY 4.0 catalog assets were created by Misha Tsyatsko under contract for Garbo Succus.
 
 The [CC0 catalog](src/assets/cc0/catalog.json) contains the tabletop shapes, boards, dominoes, poker chips, Go stones and D3/D16/D24/D48/D100/D120 dice. Models use metres. Copy each glTF with the buffers and textures it references. Variants share resources within their family. Higher-cost meshes use lossless Meshopt compression where it reduces delivery size. Generated dice use AVIF at quality 75, a small WebP preview and a lossless WebP engraving normal map. Numbered dice use printed Comfortaa Bold numerals (weight 700), consecutive face ordering and rounded edge shading from vertex normals. The variable font and its SIL Open Font License are in [src/assets/fonts/comfortaa](src/assets/fonts/comfortaa/). The chips use raised DejaVu Serif Bold numerals. The chip lettering and domino markings use lossless WebP normal maps. The catalog and models are also built under `dist/cc0/`. The [CC0 dedication](src/assets/cc0/LICENSE) covers this collection.
 
-The [chessmen and checker discs](src/assets/game-pieces/README.md) form a separate CC BY 3.0 catalog under `dist/game-pieces/`. It includes both original attribution notices.
+The shape and Go stone meshes are generated by the repository’s CC0 source code. AI assisted in writing the generator. The meeple silhouette is adapted from Kenney’s *Board Game Icons* (CC0 1.0). The generator scales the original `Vector/Icons/character.svg` to 16 mm and extrudes it to 10 mm thick. It simplifies the outline with a 0.045 mm tolerance and extrudes it with flat faces and straight walls. The upper 0.3 mm of the wall uses Probability Play’s painted-wood edge normal texture so stacked pieces remain distinguishable. [Original SVG](src/assets/cc0/shapes/source/kenney/character.svg) · [Tabletop preview](src/assets/cc0/shapes/source/meeple.svg) · [Artist’s notice](src/assets/cc0/shapes/source/kenney/License.txt) · [Kenney’s release](https://opengameart.org/content/board-game-icons)
 
-- `pnpm dev:dice` serves the interactive preview at `/dice.html`.
-- `pnpm generate:dice` rebuilds the published dice, blank variants, face rotations and showcase records. Install Chromium once with `pnpm exec playwright-core install chromium`. ImageMagick with AVIF and WebP support is required for export.
-- `pnpm prepare-assets` rebuilds dice and prepares the other classic assets.
-- `pnpm build` validates the catalog and writes `dist`.
-- `pnpm dev` builds and starts the catalog preview.
-- `pnpm build-storybook` builds the deployable preview.
+The Go, Nine Men’s Morris and backgammon board faces are adapted from Probability contributors’ CC0 SVGs. Their grid intersections and playing points follow snap positions from the corresponding Tabletop Playground templates. The SVGs document the face artwork. [Go](src/assets/cc0/boards/source/go.svg) · [Nine Men’s Morris](src/assets/cc0/boards/source/nine-mens-morris.svg) · [Backgammon](src/assets/cc0/boards/source/backgammon.svg)
+
+The 28 CC0 double-six dominoes use one rounded tile mesh. The generator lays out the divider and pips for every unordered pair from 0–0 through 6–6 and builds the SVG designs, color atlas and engraved normal map. [Generator](src/generators/tabletop/dominoes.py) · [Design SVGs](src/assets/cc0/dominoes/source/)
+
+The six CC0 poker chips were generated for Probability and published in tokens commit `a3ee47e`. They share a 39 mm × 3.3 mm mesh with 36 segments around the rim. The [chip generator](src/generators/tabletop/poker_chips.py) reproduces the face and edge markings and renders the numbered variants with the [bundled DejaVu Serif Bold font](src/assets/fonts/dejavu-serif/). Rebuilding the original mesh yields the same 12,384 decoded bytes as every published variant (SHA-256 `1863ce3c7b611fd1ce9f8028b3a6d098c24febc2c88931cdaa8515f4f5496b56`). The six design SVGs are in [poker-chips/source](src/assets/cc0/poker-chips/source/). The Probability importer records the generated chips, Go stones and basic shapes in its [stock coverage table](https://github.com/garbo-succus/probability/blob/f76ee41875319827b137c6e0f72e5615212e9739/scripts/tabletop-playground/stock-coverage.md).
+
+The [chessmen and checker discs](src/assets/game-pieces/README.md) form a separate CC BY 3.0 catalog under `dist/game-pieces/`. It includes both original attribution notices.

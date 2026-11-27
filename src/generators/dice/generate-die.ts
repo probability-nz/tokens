@@ -81,17 +81,12 @@ export function generateDie(
 ) {
   const cols = Math.ceil(Math.sqrt(faces.length)),
     rows = Math.ceil(faces.length / cols);
-  const small = 8,
-    extra = patches.filter((p) => p.face === undefined).length;
-  let side = Math.min(288, Math.floor(1920 / cols));
-  while (
-    rows * side + Math.ceil(extra / Math.floor((cols * side) / small)) * small >
-    2048
-  )
-    side--;
+  const side = Math.min(288, Math.floor(1920 / cols));
   const width = cols * side;
-  const height =
-    rows * side + Math.ceil(extra / Math.floor(width / small)) * small;
+  // Unprinted bevels all sample the same neutral texel below the face charts.
+  const gutter = 8;
+  const height = rows * side + gutter;
+  const unprinted = new Vector2(width / 2, height - gutter / 2);
   const markings: Marking[] = [];
   const borders = printBorders(patches, faces.length);
   const charts: Chart[] = faces.map((f, i) => {
@@ -175,7 +170,6 @@ export function generateDie(
   const pos: number[] = [],
     norm: number[] = [],
     uv: number[] = [];
-  let smallIndex = 0;
   for (const patch of patches) {
     const samples = patch.samples;
     let chart: Vector2[];
@@ -185,35 +179,7 @@ export function generateDie(
         project(s.point).multiplyScalar(pixels).add(center),
       );
     } else {
-      const t = samples[1].point.clone().sub(samples[0].point).normalize();
-      const plane = t
-        .clone()
-        .cross(samples[2].point.clone().sub(samples[0].point))
-        .normalize();
-      const b = t.clone().cross(plane);
-      const xy = samples.map(
-        (s) => new Vector2(s.point.dot(t), s.point.dot(b)),
-      );
-      const min = new Vector2(
-        Math.min(...xy.map((p) => p.x)),
-        Math.min(...xy.map((p) => p.y)),
-      );
-      const span = Math.max(
-        ...xy.flatMap((p) => [p.x - min.x, p.y - min.y]),
-        1e-10,
-      );
-      const perRow = Math.floor(width / small);
-      const base = new Vector2(
-        small * (smallIndex % perRow) + 1,
-        rows * side + small * Math.floor(smallIndex / perRow) + 1,
-      );
-      chart = xy.map((p) =>
-        p
-          .sub(min)
-          .multiplyScalar((small - 2) / span)
-          .add(base),
-      );
-      smallIndex++;
+      chart = samples.map(() => unprinted);
     }
     for (let j = 1; j < samples.length - 1; j++) {
       const a = samples[0],

@@ -1,21 +1,14 @@
-import { Center, Gltf, OrbitControls } from '@react-three/drei';
-import { Canvas, useThree } from '@react-three/fiber';
-import { Suspense, use, useLayoutEffect } from 'react';
+import { Center, Clone, Gltf, OrbitControls } from '@react-three/drei';
+import { Canvas, useLoader, useThree } from '@react-three/fiber';
+import { Suspense, useLayoutEffect } from 'react';
 import type { CatalogPiece } from '../catalog';
-import { preferredGltfSource } from './preferred-gltf';
+import { preferredModelLoader } from '../preview/shared-textures';
 
 export type PreviewQuality = 'High' | 'Preview';
 
-function PreviewModel({
-  piece,
-  quality,
-}: {
-  piece: CatalogPiece;
-  quality: PreviewQuality;
-}) {
-  const source =
-    quality === 'High' ? use(preferredGltfSource(piece.src)) : piece.src;
-  return <Gltf src={source} castShadow />;
+function HighQualityModel({ src }: { src: string }) {
+  const { scene } = useLoader(preferredModelLoader, src);
+  return <Clone object={scene} castShadow />;
 }
 
 function CameraController({ view }: { view: 'Perspective' | 'Top' }) {
@@ -70,7 +63,7 @@ export function PiecePreview({
           <directionalLight position={[3, 5, 2]} intensity={3} castShadow />
           <Center top cacheKey={piece.src}>
             <group rotation={[rotationX, rotationY, rotationZ]}>
-              <PreviewModel piece={piece} quality={quality} />
+              {quality === 'High' ? <HighQualityModel src={piece.src} /> : <Gltf src={piece.src} castShadow />}
             </group>
           </Center>
           <gridHelper

@@ -292,18 +292,21 @@ function polyhedron(kind: Kind) {
       return sample(s.point.clone().multiplyScalar(1 - bend + b), normal);
     };
 
+  // Split a bevel only when its arc rises more than 0.05 mm above the chord.
+  // The edge strip and its two corner caps must use identical subdivisions.
+  function bevelSegments(n: Vector3, m: Vector3) {
+    const mid = unitSum([n, m]);
+    return bevel * (1 - n.dot(mid)) > 0.05 ? [[n, mid], [mid, m]] : [[n, m]];
+  }
+
   for (const edge of edges.values()) {
     if (edge.normals.length !== 2) throw Error('Open procedural edge: ' + kind);
-    const [n, m] = edge.normals,
-      mid = unitSum([n, m]);
+    const [n, m] = edge.normals;
     const first = faceIndex.get(n)!,
       second = faceIndex.get(m)!;
     neighbors[first].push(second);
     neighbors[second].push(first);
-    for (const [u, v] of [
-      [n, mid],
-      [mid, m],
-    ])
+    for (const [u, v] of bevelSegments(n, m))
       patches.push({
         samples: [
           rounded(edge.a, u),
@@ -321,12 +324,8 @@ function polyhedron(kind: Kind) {
     c.normals.sort((a, b) => angle(a) - angle(b));
     for (let i = 0; i < c.normals.length; i++) {
       const n = c.normals[i],
-        m = c.normals[(i + 1) % c.normals.length],
-        mid = unitSum([n, m]);
-      for (const [u, v] of [
-        [n, mid],
-        [mid, m],
-      ])
+        m = c.normals[(i + 1) % c.normals.length];
+      for (const [u, v] of bevelSegments(n, m))
         patches.push({
           samples: [rounded(c.p, axis), rounded(c.p, u), rounded(c.p, v)],
         });
